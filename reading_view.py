@@ -61,8 +61,10 @@ def table_of_contents(entry):
                      f'<span class="reader-toc-number">{index:02d}</span><span class="reader-toc-copy">'
                      f'<strong>{html.escape(title)}{badge}</strong><small>{html.escape(item.get("venue",""))}</small>'
                      '</span><span class="reader-toc-arrow" aria-hidden="true">'+('→' if entry.get('page_links') else '↗')+'</span></a>')
-    label='论文分类目录' if entry.get('collection') else '本期论文目录'
-    return (f'<nav class="reader-toc" aria-label="{label}">'
+    label=('今日论文目录' if entry.get('view')=='today' else
+           '论文分类目录' if entry.get('collection') else '本期论文目录')
+    classes='reader-toc reader-today-toc' if entry.get('view')=='today' else 'reader-toc'
+    return (f'<nav class="{classes}" aria-label="{label}">'
             f'<div class="reader-section-label"><span>论文目录</span><span>{len(cards):02d} PAPERS</span></div>'
             '<div class="reader-toc-grid">'+''.join(cards)+'</div></nav>')
 

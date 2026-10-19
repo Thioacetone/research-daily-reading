@@ -10,7 +10,7 @@ from app_branding import ARTWORK,choose_artwork,palette_from_rgb
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
 from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper
-from reading_view import article_cards,hero,navigation_script,page_css
+from reading_view import article_cards,hero,navigation_script,page_css,table_of_contents
 
 ROOT=Path(__file__).resolve().parent
 ensure_bundled_files(ROOT)
@@ -141,6 +141,7 @@ if view=='archive':
             st.caption(item.get('venue','')+' · '+TYPE_LABELS.get(record['type'],'类型待核实')
                        +' · '+DIRECTION_LABELS[record['direction']])
 else:
+    st.html(table_of_contents(entry))
     for article in article_cards(entry):
         st.html(article)
 st.html('<footer class="reader-footer">每日论文精读 · '+('往期论文' if view=='archive' else '今日精读')+'<br>英文原文与中文对照 · 相同 DOI 合并展示</footer>')
