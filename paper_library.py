@@ -4,6 +4,7 @@ import unicodedata
 import hashlib
 from datetime import datetime, timedelta, timezone, date
 from urllib.parse import unquote
+from reading_policy import DIRECTIONS as BROAD_DIRECTIONS,identity_keys
 
 TYPE_LABELS={'all':'全部类型','review':'综述','research':'非综述'}
 DIRECTION_LABELS={
@@ -16,6 +17,7 @@ DIRECTION_LABELS={
     'chemical-biology':'化学生物学',
     'other':'其他／待分类',
 }
+DIRECTION_LABELS.update({key:value for key,value in BROAD_DIRECTIONS.items() if key not in DIRECTION_LABELS})
 
 
 def saved_cards(entry):
@@ -97,19 +99,26 @@ def newest_first(records, today=None):
 
 
 def build_paper_library(reports, history=None):
-    records=[];seen=set()
+    records=[];by_identity={}
     for entry in sorted(reports,key=lambda entry:(entry['day'],str(entry.get('file',''))),reverse=True):
         items=[item for section in entry['report']['sections'].values() for item in section['items']]
         for item,content in zip(items,saved_cards(entry)):
             key=paper_key(item)
-            if key in seen:
+            identities=identity_keys(item)
+            matched=next((by_identity[k] for k in identities if k in by_identity),None)
+            if matched is not None:
+                # Keep the newest corrected copy, but never promote an old paper
+                # into a new day's recommendations by publishing it again.
+                matched['day']=min(matched['day'],entry['day'])
+                for alias in identities:by_identity[alias]=matched
                 continue
-            seen.add(key)
             updated_on=(history or {}).get(key,{}).get('updated_on','')
             if updated_on:
                 date.fromisoformat(updated_on)
-            records.append({'key':key,'item':item,'content':content,'day':entry['day'],'updated_on':updated_on,
-                            'type':paper_type(item),'direction':paper_direction(item)})
+            record={'key':key,'item':item,'content':content,'day':entry['day'],'updated_on':updated_on,
+                    'type':paper_type(item),'direction':paper_direction(item)}
+            records.append(record)
+            for alias in identities:by_identity[alias]=record
     return newest_first(records)
 
 

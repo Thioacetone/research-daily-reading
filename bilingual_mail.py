@@ -22,6 +22,14 @@ DIRECTIONS={
  'neuropharmacology':'Neuroplasticity and antidepressant pharmacology','chemical-probes':'Chemical probes and covalent ligands',
  'protein-degradation':'Targeted protein degradation','drug-discovery':'Drug design and mechanisms of action',
 }
+DIRECTIONS.update({'chemical-biology':'Chemical biology','interdisciplinary':'Chemistry across disciplines',
+ 'organic':'Organic chemistry','inorganic':'Inorganic and coordination chemistry',
+ 'physical':'Physical chemistry','analytical':'Analytical chemistry','polymer':'Polymer chemistry',
+ 'materials':'Materials chemistry','catalysis':'Catalysis','electrochemistry':'Electrochemistry',
+ 'energy':'Energy chemistry','environmental':'Environmental and green chemistry',
+ 'theoretical':'Theoretical and computational chemistry','supramolecular':'Supramolecular chemistry',
+ 'chemical-engineering':'Chemical engineering and separations','geochemistry':'Geochemistry and astrochemistry',
+ 'nuclear':'Nuclear chemistry and radiochemistry'})
 FIXED_ENGLISH={'来源未单独列明':'Not individually named in the source','来源未提供':'Not provided by the source'}
 CRITERIA={1:'Pioneering contribution to a field',2:'Strong innovation',3:'Interesting research logic',4:'Substantive scientific significance'}
 TRANSLATE_ZH_LABELS={'Study overview','What happened','Research logic and evidence','Editorial synthesis',

@@ -115,8 +115,6 @@ if view=='archive':
                      on_change=apply_filters,
                      format_func=lambda key:('全部方向' if key=='all' else DIRECTION_LABELS[key])+f" · {len(filter_papers(period,kind,key))} 篇")
     st.caption(f'往期共 {len(period)} 篇不重复论文 · 当前显示 {len(filtered)} 篇 · 点击标题进入单篇阅读')
-else:
-    st.caption(f'{today} · 今日精读 {len(filtered)} 篇 · 点击标题进入单篇阅读')
 scroll_to_top()
 if unavailable:
     st.caption('部分历史报告暂不可读，其他论文可以正常阅读。')
@@ -139,4 +137,3 @@ for index,record in enumerate(filtered,1):
                   on_click=open_paper,args=(record['key'],view,kind,direction))
         st.caption(item.get('venue','')+' · '+TYPE_LABELS.get(record['type'],'类型待核实')
                    +' · '+DIRECTION_LABELS[record['direction']])
-st.html('<footer class="reader-footer">每日论文精读 · '+('往期论文' if view=='archive' else '今日精读')+'<br>英文原文与中文对照 · 相同 DOI 合并展示</footer>')

@@ -31,13 +31,9 @@ def hero(entry,image):
         weekday=('周一','周二','周三','周四','周五','周六','周日')[day.weekday()]
         eyebrow=f'DAILY READING <span> / </span> {day:%Y.%m.%d} · {weekday}'
     heading='往期论文' if entry.get('view')=='archive' else '每日论文精读'
-    intro='按论文类型与研究方向，找到值得重读的研究。' if entry.get('view')=='archive' else '把值得读的论文，读得更深一点。'
     return (f'<header class="reader-hero" id="reading-top"><div class="reader-hero-copy">'
             f'<p class="reader-eyebrow">{eyebrow}</p>'
             f'<h1>{heading}<span class="reader-heading-dot">.</span></h1>'
-            f'<p class="reader-intro">{intro}</p>'
-            '<div class="reader-topics"><span>化学生物学</span><span>药物发现</span>'
-            '<span>CADD / AIDD</span><span>生物正交</span></div>'
             '</div><figure class="reader-hero-art">'
             f'<img src="{image_data(image)}" alt="本次阅读配图"></figure></header>')
 
