@@ -2,6 +2,7 @@
 from pathlib import Path
 import importlib
 import json
+import hashlib
 import streamlit as st
 
 importlib.invalidate_caches()
@@ -9,7 +10,7 @@ from app_branding import ARTWORK,choose_artwork,palette_from_rgb
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
 from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper
-from reading_view import article_cards,hero,navigation_script,page_css,table_of_contents
+from reading_view import article_cards,hero,navigation_script,page_css
 
 ROOT=Path(__file__).resolve().parent
 ensure_bundled_files(ROOT)
@@ -42,6 +43,11 @@ def open_view(view, kind='all', direction='all'):
 
 def apply_filters():
     open_view('archive',st.session_state.paper_type_filter,st.session_state.paper_direction_filter)
+
+
+def open_paper(key, view, kind, direction):
+    st.query_params.from_dict(page_parameters(view,kind,direction,key))
+    st.session_state.reading_scroll_top=True
 
 
 def scroll_to_top():
@@ -123,8 +129,17 @@ if not filtered:
         st.info('暂时没有同时符合这两个分类的论文，可以选择“全部方向”或“全部类型”查看其他内容。')
     st.stop()
 if view=='archive':
-    entry.update(page_links=True,kind=kind,direction=direction)
-    st.html(table_of_contents(entry))
+    st.html('<div class="reader-section-label"><span>论文目录</span><span>'+str(len(filtered))+' PAPERS</span></div>')
+    for index,record in enumerate(filtered,1):
+        item=record['item']
+        title=(item.get('bilingual',{}).get('title_zh') or item.get('title_zh')
+               or item.get('paper_title') or item['title'])
+        key='paper-open-'+hashlib.sha256(record['key'].encode('utf-8')).hexdigest()[:16]
+        with st.container(key=key):
+            st.button(f'{index:02d}　{title} →',key=key+'-button',use_container_width=True,
+                      on_click=open_paper,args=(record['key'],view,kind,direction))
+            st.caption(item.get('venue','')+' · '+TYPE_LABELS.get(record['type'],'类型待核实')
+                       +' · '+DIRECTION_LABELS[record['direction']])
 else:
     for article in article_cards(entry):
         st.html(article)

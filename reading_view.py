@@ -51,9 +51,9 @@ def table_of_contents(entry):
         badge=('<span class="reader-today">今日更新</span>'
                if index<=len(updates) and updates[index-1]==entry.get('today') else '')
         if entry.get('page_links'):
-            href='/?'+urlencode(page_parameters(entry.get('view','archive'),entry.get('kind','all'),
+            href='?'+urlencode(page_parameters(entry.get('view','archive'),entry.get('kind','all'),
                                                 entry.get('direction','all'),paper_key(item)))
-            target='_top'
+            target='_self'
         else:
             href=f'#reading-paper-{index}'
             target='_self'
