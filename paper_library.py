@@ -1,6 +1,8 @@
 """Classify and deduplicate published papers without changing their content."""
 import re
 import unicodedata
+import hashlib
+from datetime import datetime, timedelta, timezone, date
 from urllib.parse import unquote
 
 TYPE_LABELS={'all':'全部类型','review':'综述','research':'非综述'}
@@ -70,7 +72,31 @@ def paper_key(item):
     return 'title:'+title
 
 
-def build_paper_library(reports):
+def beijing_today():
+    return datetime.now(timezone(timedelta(hours=8))).date().isoformat()
+
+
+def publication_history(records, previous, published_on=None):
+    """Persist website dates at publication, never on a reader's page refresh."""
+    published_on=published_on or beijing_today()
+    date.fromisoformat(published_on)
+    history={}
+    for record in records:
+        fingerprint=hashlib.sha256(record['content'].encode('utf-8')).hexdigest()
+        old=previous.get(record['key'],{})
+        updated_on=old.get('updated_on') if old.get('content_sha256')==fingerprint else published_on
+        date.fromisoformat(updated_on)
+        history[record['key']]={'updated_on':updated_on,'content_sha256':fingerprint}
+    return history
+
+
+def newest_first(records, today=None):
+    today=today or beijing_today()
+    return sorted(records,key=lambda r:(r.get('updated_on')==today,
+                  r.get('updated_on',''),r['day']),reverse=True)
+
+
+def build_paper_library(reports, history=None):
     records=[];seen=set()
     for entry in sorted(reports,key=lambda entry:(entry['day'],str(entry.get('file',''))),reverse=True):
         items=[item for section in entry['report']['sections'].values() for item in section['items']]
@@ -79,9 +105,12 @@ def build_paper_library(reports):
             if key in seen:
                 continue
             seen.add(key)
-            records.append({'key':key,'item':item,'content':content,'day':entry['day'],
+            updated_on=(history or {}).get(key,{}).get('updated_on','')
+            if updated_on:
+                date.fromisoformat(updated_on)
+            records.append({'key':key,'item':item,'content':content,'day':entry['day'],'updated_on':updated_on,
                             'type':paper_type(item),'direction':paper_direction(item)})
-    return records
+    return newest_first(records)
 
 
 def filter_papers(records,kind='all',direction='all'):
@@ -91,6 +120,8 @@ def filter_papers(records,kind='all',direction='all'):
 
 
 def as_collection(records):
+    records=newest_first(records)
     return {'collection':True,'count':len(records),'day':max((r['day'] for r in records),default=''),
+            'today':beijing_today(),'paper_updates':[r.get('updated_on','') for r in records],
             'saved_cards':[record['content'] for record in records],
             'report':{'edition':'paper-recommendation','sections':{'library':{'items':[r['item'] for r in records]}}}}

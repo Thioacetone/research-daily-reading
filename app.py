@@ -1,6 +1,7 @@
 """A classified, deduplicated Streamlit library of published deep readings."""
 from pathlib import Path
 import importlib
+import json
 import streamlit as st
 
 importlib.invalidate_caches()
@@ -27,8 +28,10 @@ if not reports:
     st.info('暂时没有可阅读的论文。报告发布后，刷新页面即可查看。')
     st.stop()
 try:
-    records=build_paper_library(reports)
-except ValueError:
+    history_path=ROOT/'site-publication.json'
+    history=json.loads(history_path.read_text(encoding='utf-8')) if history_path.is_file() else {}
+    records=build_paper_library(reports,history)
+except (ValueError,OSError):
     st.error('论文库暂时无法完整读取，请稍后刷新。')
     st.stop()
 
@@ -59,7 +62,7 @@ with download_column:
     st.download_button('保存阅读页',data=standalone(entry,image,css),file_name='reading-library.html',
                        mime='text/html',disabled=not filtered,use_container_width=True)
 
-st.caption(f"论文库共 {len(records)} 篇不重复论文 · 综述 {len(filter_papers(records,'review'))} 篇 · 非综述 {len(filter_papers(records,'research'))} 篇 · 当前显示 {len(filtered)} 篇")
+st.caption(f"论文库共 {len(records)} 篇不重复论文 · 综述 {len(filter_papers(records,'review'))} 篇 · 非综述 {len(filter_papers(records,'research'))} 篇 · 当前显示 {len(filtered)} 篇 · 当天更新优先")
 if unavailable:
     st.caption('部分历史报告暂不可读，其他论文可以正常阅读。')
 if not filtered:

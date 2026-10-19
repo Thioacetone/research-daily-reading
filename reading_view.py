@@ -5,7 +5,7 @@ import html
 import mimetypes
 from pathlib import Path
 import re
-from paper_library import DIRECTION_LABELS,TYPE_LABELS,paper_direction,paper_type,saved_cards
+from paper_library import DIRECTION_LABELS,TYPE_LABELS,paper_direction,paper_type,paper_key,saved_cards
 
 
 def image_data(path):
@@ -40,9 +40,12 @@ def table_of_contents(entry):
     for index,item in enumerate(issue_items(entry),1):
         value=item.get('bilingual',{})
         title=value.get('title_zh') or item.get('title_zh') or item.get('paper_title') or item['title']
+        updates=entry.get('paper_updates',[])
+        badge=('<span class="reader-today">今日更新</span>'
+               if index<=len(updates) and updates[index-1]==entry.get('today') else '')
         cards.append(f'<a class="reader-toc-item" href="#reading-paper-{index}" target="_self">'
                      f'<span class="reader-toc-number">{index:02d}</span><span class="reader-toc-copy">'
-                     f'<strong>{html.escape(title)}</strong><small>{html.escape(item.get("venue",""))}</small>'
+                     f'<strong>{html.escape(title)}{badge}</strong><small>{html.escape(item.get("venue",""))}</small>'
                      '</span><span class="reader-toc-arrow" aria-hidden="true">↗</span></a>')
     label='论文分类目录' if entry.get('collection') else '本期论文目录'
     return (f'<nav class="reader-toc" aria-label="{label}">'
@@ -71,14 +74,23 @@ def article_cards(entry):
                            content,count=1,flags=re.S)
             for label in ('内容概括','研究思路与证据链','我的综合解读','推荐理由与创新点（详细）','应用前景（潜在）','未来可能方向（展望）'):
                 content=content.replace('<p>'+label+'</p>','<h4>'+label+'</h4>')
-        content=re.sub(r'(<a\b)(?![^>]*\btarget=)',r'\1 target="_blank" rel="noopener noreferrer"',content)
+        # Replace the old original/supporting-source buttons with a plain DOI.
+        content=re.sub(r'<p\b[^>]*>\s*(?:<a\b[^>]*>.*?</a>\s*)+</p>','',content,flags=re.S|re.I)
+        content=re.sub(r'<a\b[^>]*>(.*?)</a>',r'\1',content,flags=re.S|re.I)
+        key=paper_key(item)
+        doi=key[4:] if key.startswith('doi:') else '未提供 / Not provided'
+        updates=entry.get('paper_updates',[])
+        updated_on=updates[index-1] if index<=len(updates) else ''
+        publication=(f'<footer class="reader-publication"><p>DOI: <span class="reader-doi">{html.escape(doi)}</span></p>'
+                     +('<p>更新到网站 / Website updated: <time datetime="'+updated_on+'">'+updated_on+'</time>（北京时间）</p>'
+                       if updated_on else '<p>更新到网站：日期待记录</p>')+'</footer>')
         kind=TYPE_LABELS.get(paper_type(item),'类型待核实')
         direction=DIRECTION_LABELS[paper_direction(item)]
         result.append(f'<article class="reading-paper" id="reading-paper-{index}">'
                       f'<div class="reader-paper-meta"><span>{html.escape(item.get("venue",""))}</span>'
                       f'<div class="reader-classification"><span>{html.escape(kind)}</span>'
                       f'<span>{html.escape(direction)}</span></div></div>'+content
-                      +'<a class="reader-back-top" href="#reading-top" target="_self">返回目录 ↑</a></article>')
+                      +publication+'<a class="reader-back-top" href="#reading-top" target="_self">返回目录 ↑</a></article>')
     return result
 
 
