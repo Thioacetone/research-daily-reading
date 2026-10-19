@@ -80,9 +80,13 @@ def page_css(root,theme):
     return ':root{'+variables+'}'+(Path(root)/'assets/streamlit-reader.css').read_text(encoding='utf-8')
 
 
+def navigation_script(root):
+    return (Path(root)/'assets/reading-navigation.js').read_text(encoding='utf-8')
+
+
 def standalone(entry,image,css):
     return ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>每日论文精读 · '+entry['day']+'</title><style>'+css+'</style></head>'
             '<body class="reader-export"><main>'+hero(entry,image)+table_of_contents(entry)
-            +''.join(article_cards(entry))+'</main></body></html>')
+            +''.join(article_cards(entry))+'</main><script>'+navigation_script(Path(__file__).parent)+'</script></body></html>')

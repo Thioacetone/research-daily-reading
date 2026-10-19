@@ -4,7 +4,7 @@ import streamlit as st
 from app_branding import ARTWORK,choose_artwork,palette_from_rgb,brand_preview
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
-from reading_view import article_cards,hero,page_css,standalone,table_of_contents
+from reading_view import article_cards,hero,navigation_script,page_css,standalone,table_of_contents
 
 ROOT=Path(__file__).resolve().parent
 ensure_bundled_files(ROOT)
@@ -53,3 +53,4 @@ st.html(table_of_contents(entry))
 for article in articles:
     st.html(article)
 st.html('<footer class="reader-footer">每日论文精读 · 英文原文与中文对照<br>化学生物学 / 药物发现 / CADD · AIDD / 生物正交</footer>')
+st.html('<script>'+navigation_script(ROOT)+'</script>',unsafe_allow_javascript=True)
