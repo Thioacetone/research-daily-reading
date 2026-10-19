@@ -19,16 +19,22 @@ def issue_items(entry):
 
 
 def hero(entry,image):
-    if entry.get('collection'):
+    if entry.get('view')=='today':
+        eyebrow=f'TODAY’S READING <span> / </span> {entry["today"]} · {entry["count"]:02d} PAPERS'
+    elif entry.get('view')=='archive':
+        eyebrow=f'READING ARCHIVE <span> / </span> {entry["count"]:02d} PAPERS'
+    elif entry.get('collection'):
         eyebrow=f'PAPER LIBRARY <span> / </span> {entry["count"]:02d} PAPERS'
     else:
         day=date.fromisoformat(entry['day'])
         weekday=('周一','周二','周三','周四','周五','周六','周日')[day.weekday()]
         eyebrow=f'DAILY READING <span> / </span> {day:%Y.%m.%d} · {weekday}'
+    heading='往期论文' if entry.get('view')=='archive' else '每日论文精读'
+    intro='按论文类型与研究方向，找到值得重读的研究。' if entry.get('view')=='archive' else '把值得读的论文，读得更深一点。'
     return (f'<header class="reader-hero" id="reading-top"><div class="reader-hero-copy">'
             f'<p class="reader-eyebrow">{eyebrow}</p>'
-            '<h1>每日论文精读<span class="reader-heading-dot">.</span></h1>'
-            '<p class="reader-intro">把值得读的论文，读得更深一点。</p>'
+            f'<h1>{heading}<span class="reader-heading-dot">.</span></h1>'
+            f'<p class="reader-intro">{intro}</p>'
             '<div class="reader-topics"><span>化学生物学</span><span>药物发现</span>'
             '<span>CADD / AIDD</span><span>生物正交</span></div>'
             '</div><figure class="reader-hero-art">'
@@ -90,7 +96,8 @@ def article_cards(entry):
                       f'<div class="reader-paper-meta"><span>{html.escape(item.get("venue",""))}</span>'
                       f'<div class="reader-classification"><span>{html.escape(kind)}</span>'
                       f'<span>{html.escape(direction)}</span></div></div>'+content
-                      +publication+'<a class="reader-back-top" href="#reading-top" target="_self">返回目录 ↑</a></article>')
+                      +publication+'<a class="reader-back-top" href="#reading-top" target="_self">'
+                      +('返回顶部 ↑' if entry.get('view')=='today' else '返回目录 ↑')+'</a></article>')
     return result
 
 
@@ -108,5 +115,5 @@ def standalone(entry,image,css):
     return ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>'+title+'</title><style>'+css+'</style></head>'
-            '<body class="reader-export"><main>'+hero(entry,image)+table_of_contents(entry)
+            '<body class="reader-export"><main>'+hero(entry,image)+(table_of_contents(entry) if entry.get('view')!='today' else '')
             +''.join(article_cards(entry))+'</main><script>'+navigation_script(Path(__file__).parent)+'</script></body></html>')

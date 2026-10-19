@@ -119,9 +119,20 @@ def filter_papers(records,kind='all',direction='all'):
             and (direction=='all' or record['direction']==direction)]
 
 
-def as_collection(records):
+def reading_period(records, view='today', today=None):
+    """Use edition dates, so a bulk website migration is not a new reading issue."""
+    today=today or beijing_today()
+    date.fromisoformat(today)
+    if view=='today':
+        return [record for record in records if record['day']==today]
+    if view=='archive':
+        return [record for record in records if record['day']<today]
+    raise ValueError('Unknown reading period')
+
+
+def as_collection(records, view='library', today=None):
     records=newest_first(records)
     return {'collection':True,'count':len(records),'day':max((r['day'] for r in records),default=''),
-            'today':beijing_today(),'paper_updates':[r.get('updated_on','') for r in records],
+            'view':view,'today':today or beijing_today(),'paper_updates':[r.get('updated_on','') for r in records],
             'saved_cards':[record['content'] for record in records],
             'report':{'edition':'paper-recommendation','sections':{'library':{'items':[r['item'] for r in records]}}}}
