@@ -49,10 +49,10 @@ st.html(hero(entry,image))
 
 type_column,direction_column,art_column,download_column=st.columns([1.1,1.8,1,1],vertical_alignment='bottom')
 with type_column:
-    st.selectbox('论文类型',type_options,key='paper_type_filter',
+    st.selectbox('论文类型',type_options,key='paper_type_filter',filter_mode=None,accept_new_options=False,
                  format_func=lambda key:TYPE_LABELS[key]+f" · {len(filter_papers(records,key))} 篇")
 with direction_column:
-    st.selectbox('研究方向',direction_options,key='paper_direction_filter',
+    st.selectbox('研究方向',direction_options,key='paper_direction_filter',filter_mode=None,accept_new_options=False,
                  format_func=lambda key:('全部方向' if key=='all' else DIRECTION_LABELS[key])+f" · {len(filter_papers(records,kind,key))} 篇")
 with art_column:
     if st.button('换一张配图',use_container_width=True):
