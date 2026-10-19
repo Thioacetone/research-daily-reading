@@ -5,6 +5,7 @@ import html
 import mimetypes
 from pathlib import Path
 import re
+from paper_library import DIRECTION_LABELS,TYPE_LABELS,paper_direction,paper_type,saved_cards
 
 
 def image_data(path):
@@ -18,10 +19,14 @@ def issue_items(entry):
 
 
 def hero(entry,image):
-    day=date.fromisoformat(entry['day'])
-    weekday=('周一','周二','周三','周四','周五','周六','周日')[day.weekday()]
+    if entry.get('collection'):
+        eyebrow=f'PAPER LIBRARY <span> / </span> {entry["count"]:02d} PAPERS'
+    else:
+        day=date.fromisoformat(entry['day'])
+        weekday=('周一','周二','周三','周四','周五','周六','周日')[day.weekday()]
+        eyebrow=f'DAILY READING <span> / </span> {day:%Y.%m.%d} · {weekday}'
     return (f'<header class="reader-hero" id="reading-top"><div class="reader-hero-copy">'
-            f'<p class="reader-eyebrow">DAILY READING <span> / </span> {day:%Y.%m.%d} · {weekday}</p>'
+            f'<p class="reader-eyebrow">{eyebrow}</p>'
             '<h1>每日论文精读<span class="reader-heading-dot">.</span></h1>'
             '<p class="reader-intro">把值得读的论文，读得更深一点。</p>'
             '<div class="reader-topics"><span>化学生物学</span><span>药物发现</span>'
@@ -39,17 +44,15 @@ def table_of_contents(entry):
                      f'<span class="reader-toc-number">{index:02d}</span><span class="reader-toc-copy">'
                      f'<strong>{html.escape(title)}</strong><small>{html.escape(item.get("venue",""))}</small>'
                      '</span><span class="reader-toc-arrow" aria-hidden="true">↗</span></a>')
-    return ('<nav class="reader-toc" aria-label="本期论文目录">'
-            f'<div class="reader-section-label"><span>本期阅读</span><span>{len(cards):02d} PAPERS</span></div>'
+    label='论文分类目录' if entry.get('collection') else '本期论文目录'
+    return (f'<nav class="reader-toc" aria-label="{label}">'
+            f'<div class="reader-section-label"><span>论文目录</span><span>{len(cards):02d} PAPERS</span></div>'
             '<div class="reader-toc-grid">'+''.join(cards)+'</div></nav>')
 
 
 def article_cards(entry):
     # Saved HTML is the publication record; preserve the scientific copy verbatim.
-    cards=re.findall(r'<div\b[^>]*class=[\'"]reading-copy[\'"][^>]*>(.*?)</div></td></tr></table>',
-                     entry['document'],flags=re.S)
-    if len(cards)!=entry['count']:
-        raise ValueError('Saved reading page does not contain every article')
+    cards=saved_cards(entry)
     result=[]
     for index,(content,item) in enumerate(zip(cards,issue_items(entry)),1):
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
@@ -57,7 +60,8 @@ def article_cards(entry):
                        r'<h2 class="english-copy title-copy"\1>\2</h2>',content,count=1,flags=re.S)
         # These old nested tables contain layout cells, not scientific data tables.
         content=re.sub(r'</?(?:table|tbody|thead|tr|td)\b[^>]*>','',content,flags=re.I)
-        content=re.sub(r'(<p>)PAPER (\d+)(</p>)',r'<p class="reader-paper-number">PAPER \2</p>',content,count=1)
+        content=re.sub(r'<p>PAPER \d+</p>',f'<p class="reader-paper-number">PAPER {index:02d}</p>',content,count=1)
+        content=re.sub(r'^论文\s*\d+',f'论文 {index:02d}',content,count=1)
         content=re.sub(r'(<h4>Authors\s.*?)(?=<h4>Study overview\s)',
                        r'<details class="reader-metadata"><summary>论文信息与作者 <span>Paper details & affiliations</span></summary><div>\1</div></details>',
                        content,count=1,flags=re.S)
@@ -68,10 +72,13 @@ def article_cards(entry):
             for label in ('内容概括','研究思路与证据链','我的综合解读','推荐理由与创新点（详细）','应用前景（潜在）','未来可能方向（展望）'):
                 content=content.replace('<p>'+label+'</p>','<h4>'+label+'</h4>')
         content=re.sub(r'(<a\b)(?![^>]*\btarget=)',r'\1 target="_blank" rel="noopener noreferrer"',content)
+        kind=TYPE_LABELS.get(paper_type(item),'类型待核实')
+        direction=DIRECTION_LABELS[paper_direction(item)]
         result.append(f'<article class="reading-paper" id="reading-paper-{index}">'
                       f'<div class="reader-paper-meta"><span>{html.escape(item.get("venue",""))}</span>'
-                      f'<span>{html.escape(item.get("kind",""))}</span></div>'+content
-                      +'<a class="reader-back-top" href="#reading-top" target="_self">返回本期目录 ↑</a></article>')
+                      f'<div class="reader-classification"><span>{html.escape(kind)}</span>'
+                      f'<span>{html.escape(direction)}</span></div></div>'+content
+                      +'<a class="reader-back-top" href="#reading-top" target="_self">返回目录 ↑</a></article>')
     return result
 
 
@@ -85,8 +92,9 @@ def navigation_script(root):
 
 
 def standalone(entry,image,css):
+    title='论文分类精读库' if entry.get('collection') else '每日论文精读 · '+entry['day']
     return ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
-            '<title>每日论文精读 · '+entry['day']+'</title><style>'+css+'</style></head>'
+            '<title>'+title+'</title><style>'+css+'</style></head>'
             '<body class="reader-export"><main>'+hero(entry,image)+table_of_contents(entry)
             +''.join(article_cards(entry))+'</main><script>'+navigation_script(Path(__file__).parent)+'</script></body></html>')
