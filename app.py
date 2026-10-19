@@ -8,8 +8,8 @@ importlib.invalidate_caches()
 from app_branding import ARTWORK,choose_artwork,palette_from_rgb
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
-from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today
-from reading_view import article_cards,hero,navigation_script,page_css,standalone,table_of_contents
+from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper
+from reading_view import article_cards,hero,navigation_script,page_css,table_of_contents
 
 ROOT=Path(__file__).resolve().parent
 ensure_bundled_files(ROOT)
@@ -35,32 +35,59 @@ except (ValueError,OSError):
     st.error('论文库暂时无法完整读取，请稍后刷新。')
     st.stop()
 
-def open_view(view):
-    st.session_state.reading_view=view
+def open_view(view, kind='all', direction='all'):
+    st.query_params.from_dict(page_parameters(view,kind,direction))
     st.session_state.reading_scroll_top=True
 
 
+def apply_filters():
+    open_view('archive',st.session_state.paper_type_filter,st.session_state.paper_direction_filter)
+
+
+def scroll_to_top():
+    script=navigation_script(ROOT)
+    if st.session_state.pop('reading_scroll_top',False):
+        script+="\ndocument.getElementById('reading-top')?.scrollIntoView({block:'start',behavior:'instant'});"
+    st.html('<script>'+script+'</script>',unsafe_allow_javascript=True)
+
+
 today=beijing_today()
-view=st.session_state.get('reading_view','today')
-if view not in ('today','archive'):
-    view='today'
+route=page_parameters(st.query_params.get('view','today'),st.query_params.get('kind','all'),
+                      st.query_params.get('direction','all'))
+view=route['view']
+kind=route.get('kind','all')
+direction=route.get('direction','all')
+paper=st.query_params.get('paper')
+if paper:
+    label='返回往期目录' if view=='archive' else '返回今日论文'
+    st.html('<div id="reading-top"><p class="reader-eyebrow">PAPER READING / 单篇精读</p></div>')
+    st.button(label,key='paper-back-top',on_click=open_view,args=(view,kind,direction))
+    selected=selected_paper(records,paper,view,today)
+    if selected is None:
+        st.info('这篇论文暂不可用，请返回目录选择其他论文。')
+    else:
+        detail=as_collection([selected],'paper',today)
+        for article in article_cards(detail):
+            st.html(article)
+        st.button(label,key='paper-back-bottom',on_click=open_view,args=(view,kind,direction))
+    scroll_to_top()
+    st.stop()
+
 period=reading_period(records,view,today)
 if view=='archive':
     type_options=['all','review','research']
     direction_options=['all']+[key for key in DIRECTION_LABELS if any(r['direction']==key for r in period)]
-    if st.session_state.get('paper_type_filter','all') not in type_options:
-        st.session_state.paper_type_filter='all'
-    if st.session_state.get('paper_direction_filter','all') not in direction_options:
-        st.session_state.paper_direction_filter='all'
-    kind=st.session_state.get('paper_type_filter','all')
-    direction=st.session_state.get('paper_direction_filter','all')
+    if direction not in direction_options:
+        direction='all'
+    st.session_state.paper_type_filter=kind
+    st.session_state.paper_direction_filter=direction
     filtered=filter_papers(period,kind,direction)
 else:
     filtered=period
 entry=as_collection(filtered,view,today)
 st.html(hero(entry,image))
 
-navigation_column,art_column,download_column=st.columns([2,1,1],vertical_alignment='bottom')
+navigation_column,art_column=st.columns([3,1],vertical_alignment='bottom')
 with navigation_column:
     if view=='today':
         st.button('查看往期论文',on_click=open_view,args=('archive',),use_container_width=True)
@@ -70,25 +97,21 @@ with art_column:
     if st.button('换一张配图',use_container_width=True):
         st.session_state.reading_artwork=choose_artwork()
         st.rerun()
-with download_column:
-    st.download_button('保存阅读页',data=standalone(entry,image,css),file_name=f'reading-{view}.html',
-                       mime='text/html',disabled=not filtered,use_container_width=True)
 
 if view=='archive':
     type_column,direction_column=st.columns([1,2],vertical_alignment='bottom')
     with type_column:
         st.selectbox('论文类型',type_options,key='paper_type_filter',filter_mode=None,accept_new_options=False,
+                     on_change=apply_filters,
                      format_func=lambda key:TYPE_LABELS[key]+f" · {len(filter_papers(period,key))} 篇")
     with direction_column:
         st.selectbox('研究方向',direction_options,key='paper_direction_filter',filter_mode=None,accept_new_options=False,
+                     on_change=apply_filters,
                      format_func=lambda key:('全部方向' if key=='all' else DIRECTION_LABELS[key])+f" · {len(filter_papers(period,kind,key))} 篇")
-    st.caption(f'往期共 {len(period)} 篇不重复论文 · 当前显示 {len(filtered)} 篇')
+    st.caption(f'往期共 {len(period)} 篇不重复论文 · 当前显示 {len(filtered)} 篇 · 点击标题进入单篇阅读')
 else:
     st.caption(f'{today} · 今日精读 {len(filtered)} 篇')
-script=navigation_script(ROOT)
-if st.session_state.pop('reading_scroll_top',False):
-    script+="\ndocument.getElementById('reading-top')?.scrollIntoView({block:'start',behavior:'instant'});"
-st.html('<script>'+script+'</script>',unsafe_allow_javascript=True)
+scroll_to_top()
 if unavailable:
     st.caption('部分历史报告暂不可读，其他论文可以正常阅读。')
 if not filtered:
@@ -100,7 +123,9 @@ if not filtered:
         st.info('暂时没有同时符合这两个分类的论文，可以选择“全部方向”或“全部类型”查看其他内容。')
     st.stop()
 if view=='archive':
+    entry.update(page_links=True,kind=kind,direction=direction)
     st.html(table_of_contents(entry))
-for article in article_cards(entry):
-    st.html(article)
+else:
+    for article in article_cards(entry):
+        st.html(article)
 st.html('<footer class="reader-footer">每日论文精读 · '+('往期论文' if view=='archive' else '今日精读')+'<br>英文原文与中文对照 · 相同 DOI 合并展示</footer>')

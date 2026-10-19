@@ -5,7 +5,8 @@ import html
 import mimetypes
 from pathlib import Path
 import re
-from paper_library import DIRECTION_LABELS,TYPE_LABELS,paper_direction,paper_type,paper_key,saved_cards
+from urllib.parse import urlencode
+from paper_library import DIRECTION_LABELS,TYPE_LABELS,paper_direction,paper_type,paper_key,saved_cards,page_parameters
 
 
 def image_data(path):
@@ -49,10 +50,17 @@ def table_of_contents(entry):
         updates=entry.get('paper_updates',[])
         badge=('<span class="reader-today">今日更新</span>'
                if index<=len(updates) and updates[index-1]==entry.get('today') else '')
-        cards.append(f'<a class="reader-toc-item" href="#reading-paper-{index}" target="_self">'
+        if entry.get('page_links'):
+            href='/?'+urlencode(page_parameters(entry.get('view','archive'),entry.get('kind','all'),
+                                                entry.get('direction','all'),paper_key(item)))
+            target='_top'
+        else:
+            href=f'#reading-paper-{index}'
+            target='_self'
+        cards.append(f'<a class="reader-toc-item" href="{html.escape(href,quote=True)}" target="{target}">'
                      f'<span class="reader-toc-number">{index:02d}</span><span class="reader-toc-copy">'
                      f'<strong>{html.escape(title)}{badge}</strong><small>{html.escape(item.get("venue",""))}</small>'
-                     '</span><span class="reader-toc-arrow" aria-hidden="true">↗</span></a>')
+                     '</span><span class="reader-toc-arrow" aria-hidden="true">'+('→' if entry.get('page_links') else '↗')+'</span></a>')
     label='论文分类目录' if entry.get('collection') else '本期论文目录'
     return (f'<nav class="reader-toc" aria-label="{label}">'
             f'<div class="reader-section-label"><span>论文目录</span><span>{len(cards):02d} PAPERS</span></div>'
@@ -92,12 +100,14 @@ def article_cards(entry):
                        if updated_on else '<p>更新到网站：日期待记录</p>')+'</footer>')
         kind=TYPE_LABELS.get(paper_type(item),'类型待核实')
         direction=DIRECTION_LABELS[paper_direction(item)]
+        back_link=('' if entry.get('view')=='paper' else
+                   '<a class="reader-back-top" href="#reading-top" target="_self">'
+                   +('返回顶部 ↑' if entry.get('view')=='today' else '返回目录 ↑')+'</a>')
         result.append(f'<article class="reading-paper" id="reading-paper-{index}">'
                       f'<div class="reader-paper-meta"><span>{html.escape(item.get("venue",""))}</span>'
                       f'<div class="reader-classification"><span>{html.escape(kind)}</span>'
                       f'<span>{html.escape(direction)}</span></div></div>'+content
-                      +publication+'<a class="reader-back-top" href="#reading-top" target="_self">'
-                      +('返回顶部 ↑' if entry.get('view')=='today' else '返回目录 ↑')+'</a></article>')
+                      +publication+back_link+'</article>')
     return result
 
 

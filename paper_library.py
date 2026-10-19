@@ -130,6 +130,22 @@ def reading_period(records, view='today', today=None):
     raise ValueError('Unknown reading period')
 
 
+def page_parameters(view='today', kind='all', direction='all', paper=None):
+    """Only the reading route and validated filters belong in navigation URLs."""
+    view=view if view in ('today','archive') else 'today'
+    values={'view':view}
+    if view=='archive':
+        values['kind']=kind if kind in TYPE_LABELS else 'all'
+        values['direction']=direction if direction in DIRECTION_LABELS or direction=='all' else 'all'
+    if paper:
+        values['paper']=paper
+    return values
+
+
+def selected_paper(records, key, view='today', today=None):
+    return next((record for record in reading_period(records,view,today) if record['key']==key),None)
+
+
 def as_collection(records, view='library', today=None):
     records=newest_first(records)
     return {'collection':True,'count':len(records),'day':max((r['day'] for r in records),default=''),
