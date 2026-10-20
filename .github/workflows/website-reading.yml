@@ -2,9 +2,15 @@ name: Update daily chemistry reading
 
 on:
   schedule:
+    # Start the full-text build early in the Beijing day; retry only if not ready.
     - cron: '17 16 * * *'
     - cron: '17 22 * * *'
   workflow_dispatch:
+    inputs:
+      reading_date:
+        description: 'Optional Beijing reading date (YYYY-MM-DD), today or tomorrow'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -27,12 +33,22 @@ jobs:
           python-version: '3.12'
       - run: unzip -o reading-generator.zip
       - id: state
-        run: python -X utf8 website_daily.py preflight
+        env:
+          REQUESTED_DATE: ${{ inputs.reading_date }}
+        run: |
+          if [ -n "$REQUESTED_DATE" ]; then
+            python -X utf8 website_daily.py preflight --date "$REQUESTED_DATE"
+          else
+            python -X utf8 website_daily.py preflight
+          fi
       - name: Check quotas and persistent history without models
         run: |
           python -X utf8 -m unittest discover -s tests -p test_reading_policy.py -v
           python -X utf8 -m unittest discover -s tests -p test_paper_library.py -v
           python -X utf8 -m unittest discover -s tests -p test_website_daily.py -v
+          python -X utf8 -m unittest tests.test_recommendation_sources.SourceTests.test_query_scope_keeps_boolean_logic_out_of_fulltext_references -v
+          python -X utf8 -m unittest discover -s tests -p test_recommendation_writer.py -v
+          python -X utf8 -m unittest discover -s tests -p test_author_roles.py -v
 
   review:
     needs: preflight
@@ -102,18 +118,33 @@ jobs:
           pattern: reading-pool-*
           path: pool
           merge-multiple: true
+      - name: Preserve completed full-text reviews even when another lane failed
+        run: python -X utf8 website_daily.py collect --pools pool
       - name: Require 10 new papers, at least 5 priority, at most 3 per direction
+        id: assemble
+        continue-on-error: true
         run: python -X utf8 website_daily.py combine --date "$READING_DAY" --pools pool
       - name: Package only validated reports
+        if: steps.assemble.outcome == 'success'
         run: python -X utf8 package_streamlit.py
       - name: Publish website data and identity history together
+        env:
+          ASSEMBLED: ${{ steps.assemble.outcome }}
         run: |
-          cp dist/streamlit-reader/reading-content.zip reading-content.zip
-          cp dist/streamlit-reader/site-publication.json site-publication.json
+          if [ "$ASSEMBLED" = 'success' ]; then
+            cp dist/streamlit-reader/reading-content.zip reading-content.zip
+            cp dist/streamlit-reader/site-publication.json site-publication.json
+            git add reading-content.zip site-publication.json reading-history.json
+          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading-content.zip site-publication.json reading-history.json
+          git add reading-candidates.json
           if ! git diff --cached --quiet; then
-            git commit -m "Publish validated daily chemistry reading $READING_DAY"
+            git commit -m "Save completed chemistry reviews and validated issue $READING_DAY"
             git push origin HEAD:main
           fi
+      - name: Report an incomplete issue honestly
+        if: steps.assemble.outcome != 'success'
+        run: |
+          echo 'Completed reviews were retained; the 10-paper issue has not passed all quotas.'
+          exit 1
