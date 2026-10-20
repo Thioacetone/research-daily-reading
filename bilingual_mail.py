@@ -159,8 +159,8 @@ class LocalTranslator:
             if (isinstance(entry,dict) and entry.get('source')==source and entry.get('language')==language
                     and valid_translation(source,entry.get('translation'),language)):
                 return entry['translation']
-        if len(source)>700 or (len(source)>100 and len(re.findall(r'[。！？]',source))>1):
-            parts=translation_parts(source,maximum=1)
+        if len(source)>700:
+            parts=translation_parts(source,maximum=650)
             if len(parts)>1:
                 value='\n\n'.join(self.translate(p,language) for p in parts)
                 issues=translation_issues(source,value,language)

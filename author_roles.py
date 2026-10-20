@@ -315,6 +315,11 @@ def jats_roles(data):
     for group in meta:
         if tag(group) != 'contrib-group':
             continue
+        shared=[node for node in group if tag(node)=='aff' and node.get('id') in units]
+        # One unnumbered address printed for one group applies to that group.
+        # Never use this fallback when any author has a numbered affiliation.
+        shared_unit=(units[shared[0].get('id')] if len(shared)==1
+                     and not any(tag(n)=='xref' and n.get('ref-type')=='aff' for n in group.iter()) else '')
         for contrib in group:
             if tag(contrib) != 'contrib' or not (contrib.get('contrib-type') == 'author'
                     or (contrib.get('contrib-type') is None and group.get('content-type') == 'author')):
@@ -340,6 +345,7 @@ def jats_roles(data):
                         is_corresp = True
                 elif tag(node) == 'aff' and text(node):
                     affiliations.append(text(node))
+            if not affiliations and shared_unit:affiliations=[shared_unit]
             if affiliations:
                 pairs.append({'name': name, 'institutions': affiliations})
             if is_corresp:
