@@ -1,5 +1,6 @@
 """Unpack data-only bundles uploaded through the GitHub web interface."""
 import json
+import re
 from pathlib import Path, PurePosixPath
 import threading
 from zipfile import ZipFile
@@ -9,7 +10,10 @@ _lock=threading.Lock()
 
 def ensure_bundled_files(root):
     root=Path(root).resolve()
-    archives=sorted(root.glob('reading-*.zip'))
+    # Executable source is installed only by the workflow's explicit step.
+    # The web reader must unpack exclusively the named data/image archives.
+    archives=sorted(p for p in root.glob('reading-*.zip')
+                    if p.name=='reading-content.zip' or re.fullmatch(r'reading-graphics-\d+\.zip',p.name))
     if not archives:
         return
     state_path=root/'.streamlit-cache'/'bundles.json'
