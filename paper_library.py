@@ -2,6 +2,7 @@
 import re
 import unicodedata
 import hashlib
+from pathlib import Path
 from datetime import datetime, timedelta, timezone, date
 from urllib.parse import unquote
 from reading_policy import DIRECTIONS as BROAD_DIRECTIONS,identity_keys
@@ -76,6 +77,15 @@ def paper_key(item):
 
 def beijing_today():
     return datetime.now(timezone(timedelta(hours=8))).date().isoformat()
+
+
+def published_signature(root,today=None):
+    stamps=[]
+    for name in ('reading-content.zip','site-publication.json'):
+        try:
+            info=(Path(root)/name).stat();stamps.append((info.st_mtime_ns,info.st_size))
+        except OSError:stamps.append((0,0))
+    return (today or beijing_today(),tuple(stamps))
 
 
 def publication_history(records, previous, published_on=None):

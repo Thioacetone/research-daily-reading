@@ -15,6 +15,6 @@ site-publication.json 持久记录正文更新到网站的日期，刷新或仅�
 
 ## 云端更新
 
-独立 GitHub Actions 工作流 .github/workflows/website-reading.yml 在北京时间 00:17、06:17 触发，分 20 个化学方向检索公开文献，并使用开源模型在云端 CPU 上分析可合法读取的全文。无需电脑开机、邮箱凭据或 AI 服务密钥。调度和分析可能延迟，这不是准点发布保证。
+独立 GitHub Actions 工作流 .github/workflows/website-reading.yml 在北京时间 12:17、18:17 准备次日内容，00:17、06:17 补救当天内容。网站按北京时间日期展示，提前准备的论文不会混入今天目录。分 20 个化学方向检索公开文献，并使用开源模型在云端 CPU 上分析可合法读取的全文。无需电脑开机、邮箱凭据或 AI 服务密钥。调度和分析可能延迟，这不是准点发布保证。
 
-reading-generator.zip 是受控的生成程序源码包，由工作流显式展开；cloud_bundle.py 只自动展开数据与配图包，避免源码包被误当成报告。合格报告与 reading-history.json 一并提交后，Streamlit 随仓库自动更新。
+reading-generator.zip 是受控的生成程序源码包，由工作流显式展开；cloud_bundle.py 只自动展开数据与配图包，避免源码包被误当成报告。reading-candidates.json 保存已通过全文与双语检查、尚未发布的解读；数量和方向配额足够时直接组稿，无需重新调用模型。未完成整期时也保留合格候选；只有正式发布才写入已读历史。合格报告与 reading-history.json 一并提交后，Streamlit 随仓库自动更新。

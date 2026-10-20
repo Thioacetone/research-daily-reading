@@ -9,7 +9,7 @@ importlib.invalidate_caches()
 from app_branding import ARTWORK,choose_artwork,palette_from_rgb
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
-from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper
+from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper,published_signature
 from reading_view import article_cards,hero,navigation_script,page_css
 
 ROOT=Path(__file__).resolve().parent
@@ -20,6 +20,18 @@ if (not st.session_state.get('reading_artwork')
 artwork=st.session_state.reading_artwork
 image=artwork['path'] if artwork else ARTWORK
 st.set_page_config(page_title='每日论文精读',page_icon=str(image),layout='wide',initial_sidebar_state='collapsed')
+
+
+@st.fragment(run_every='60s')
+def follow_published_updates():
+    current=published_signature(ROOT)
+    previous=st.session_state.get('reading_published_signature',current)
+    st.session_state.reading_published_signature=current
+    if previous!=current and not st.query_params.get('paper'):
+        st.rerun()
+
+
+follow_published_updates()
 theme=artwork['theme'] if artwork else palette_from_rgb((126,145,156))
 css=page_css(ROOT,theme)
 st.html('<style>'+css+'</style>')

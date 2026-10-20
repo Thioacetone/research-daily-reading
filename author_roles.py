@@ -87,6 +87,33 @@ def unit_translation_valid(original, translated):
                for source, target in labels)
 
 
+def academic_unit_text(original):
+    """Keep deposited academic components; postal addresses need no translation."""
+    parts=[p.strip() for p in re.split(r'[,;，；]',original) if p.strip()]
+    academic=re.compile(r'\b(?:Universi\w*|School|College|Faculty|Department|Dept|Division|Institutes?|Institut\w*|Laborator\w*|Center|Centre|Academy|Hospital|Clinic|Council|Campus|RIKEN)\b|大学|学院|系|研究[所院]|实验室|中心|校区',re.I)
+    selected={i for i,p in enumerate(parts) if academic.search(p)}
+    if not selected:return original
+    selected.add(0)
+    try:
+        aliases={name_key(k) for k in json.loads(INSTITUTIONS_PATH.read_text(encoding='utf-8'))}
+        for width in (2,3):
+            for start in range(len(parts)-width+1):
+                if name_key(', '.join(parts[start:start+width])) in aliases:selected.update(range(start,start+width))
+    except (OSError,ValueError):pass
+    # These university systems deposit the campus as a separate component.
+    for index,part in enumerate(parts[:-1]):
+        if re.fullmatch(r'(?:the )?University of (?:California|Texas)|State University of New York',part,re.I):
+            following=parts[index+1]
+            if not re.search(r'\d|\b(?:USA|United States|China|UK|Road|Street)\b',following,re.I):selected.add(index+1)
+    kept=[]
+    for index in sorted(selected):
+        part=parts[index]
+        if re.search(r'\b(?:Road|Street|Avenue|Blvd|Suite)\b',part,re.I) and not re.search(r'\b(?:University|School|Faculty|Department)\b',part,re.I):continue
+        part=re.sub(r'\s+\d{4,6}(?:-\d{4})?\s*$','',part).strip()
+        if part:kept.append(part)
+    return ', '.join(kept) or original
+
+
 def merge_author_affiliations(existing, incoming):
     """Prefer an explicitly mapped, more specific unit without pooling authors."""
     result = [{'name': p['name'], 'institutions': list(p.get('institutions', []))} for p in existing]
