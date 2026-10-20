@@ -78,7 +78,7 @@ def unit_translation_valid(original, translated):
     """A university-only translation cannot stand in for a deposited school."""
     if not isinstance(translated, str) or not re.search(r'[\u4e00-\u9fff]', translated):
         return False
-    if re.search(r'\b\d{3,6}\b|\b(?:Street|Road|Avenue|Blvd|Suite|Kagamiyama|Qianjin|Xueyuan)\b',translated,re.I):
+    if re.search(r'(?<!\d)\d{3,6}(?!\d)|\b(?:Street|Road|Avenue|Blvd|Suite|Kagamiyama|Qianjin|Xueyuan)\b',translated,re.I):
         return False
     labels = [(r'\b(?:School|College|Faculty)\s+of\b', r'学院|研究生院|研究科|学部'),
               (r'\bDepartment\s+of\b', r'系'),
