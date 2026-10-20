@@ -1,4 +1,44 @@
 {
+  "doi:10.1038/nature18002": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "0d4d42c9afdf1301d6433c4d45f3842321192f3fdeb03920da42730c054ddd13"
+  },
+  "doi:10.1038/nature10879": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "b4e233312f872f04b50bad0787eb69458c10a3205094d1c9f33145aefec8efce"
+  },
+  "doi:10.1021/acscentsci.0c00229": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "0a7c61e3f7bea9c43d09d17f9c983dc56f90ef08dc7be128890bef094da09c2a"
+  },
+  "doi:10.1038/s41586-024-07487-w": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "ce58e1d6e015002b628a03473eb96accbd60e22c438ee04c210536329d50f7bf"
+  },
+  "doi:10.1016/j.celrep.2018.05.022": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "8b94726ffb8c9225954fbe8fb7425b77c3b49838e50e8840c633dd7d4fcc0e7f"
+  },
+  "doi:10.1073/pnas.2416106122": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "d74cbce1a0eb6adc2b0bf796ffefd6058b15434373f5773d4c58b4f8c7c505dd"
+  },
+  "doi:10.1021/acs.chemrev.6b00512": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "cc63393da397f9360a78fd3e39689463c758d05191ec038b6c636cd18ae89474"
+  },
+  "doi:10.1021/acs.chemrev.6b00018": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "30002aa36636f899a5479f4afe12e7c392d4759451ffd90a465a875d642b2877"
+  },
+  "doi:10.1038/ncomms8497": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "a68694b9e5bedbbbde793b7b1b5f9f90dd555b5c0b01d0c2c6e9a839bcddacd0"
+  },
+  "doi:10.1021/acs.chemrev.5b00146": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "d603d33f7479a4004fb4f1aec73f8dbbebf43a206d8a09c6a830b09ad5268078"
+  },
   "doi:10.1038/s41573-020-00114-z": {
     "updated_on": "2026-10-19",
     "content_sha256": "6800f8da484c0aff0944e62449f7e762e37d2c49baf9e3295873a6e360f1bc76"
