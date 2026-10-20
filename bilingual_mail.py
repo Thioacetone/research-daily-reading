@@ -465,7 +465,7 @@ def render(report):
                 body.append(f"<a style='display:inline-block;margin:0 8px 5px 0;padding:3px 12px;border-radius:5px;background:{accent if primary else '#edf1f3'};color:{'white' if primary else '#415c69'};text-decoration:none;font-size:12px' href='{html.escape(source['url'],quote=True)}'>{label}</a>")
             body.append('</p></div></td></tr></table>')
         if section['items'] and section.get('note'):body.append(pair(section['note_en'],section['note_zh'],size=12,segments=note_pairs(section)))
-    if edition=='paper-recommendation':
+    if edition=='paper-recommendation' and not report.get('reading_policy_version'):
         body.append(pair('','',size=12,segments=[
             {'en':'Tuesday and Wednesday: one paper each day.','zh':'周二、周三每天推荐一篇论文。'},
             {'en':'Other days: one review and two research articles across three different main directions.','zh':'其余日期每天推荐一篇综述和两篇研究论文，三篇的主要研究方向不同。'},
