@@ -42,7 +42,11 @@ COUNTRIES={'美国':'United States','英国':'United Kingdom','日本':'Japan','
  '澳大利亚':'Australia','以色列':'Israel','新加坡':'Singapore','瑞士':'Switzerland','瑞典':'Sweden','丹麦':'Denmark',
  '荷兰':'Netherlands','西班牙':'Spain','奥地利':'Austria','芬兰':'Finland','挪威':'Norway','比利时':'Belgium',
  '新西兰':'New Zealand','韩国':'South Korea','印度':'India','沙特阿拉伯':'Saudi Arabia','俄罗斯':'Russia',
- '巴西':'Brazil','墨西哥':'Mexico','南非':'South Africa','波兰':'Poland','保加利亚':'Bulgaria'}
+ '巴西':'Brazil','墨西哥':'Mexico','南非':'South Africa','波兰':'Poland','保加利亚':'Bulgaria',
+ '马来西亚':'Malaysia','泰国':'Thailand','印度尼西亚':'Indonesia','越南':'Vietnam',
+ '葡萄牙':'Portugal','希腊':'Greece','捷克':'Czechia','匈牙利':'Hungary','罗马尼亚':'Romania',
+ '土耳其':'Türkiye','伊朗':'Iran','巴基斯坦':'Pakistan','埃及':'Egypt','阿根廷':'Argentina',
+ '智利':'Chile','爱尔兰':'Ireland','冰岛':'Iceland','卢森堡':'Luxembourg','斯洛文尼亚':'Slovenia'}
 
 def enabled(config=None):
     return (config or {}).get('MAIL_LANGUAGE',os.environ.get('MAIL_LANGUAGE','zh'))=='en-zh'

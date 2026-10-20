@@ -31,7 +31,7 @@ def unit_has_detail(value):
         except (OSError,ValueError,TypeError):pass
     if not university:
         return bool(value.strip())  # An independent institute/company is a unit.
-    return bool(re.search(r'\b(?:School|College|Faculty|Department|Dept|Division|Institute|Institut|Laboratory|Center|Centre|Program|Programme)\b|学院|学系|研究科|学部|研究[所院]|中心|医院|实验室',detail_value,re.I))
+    return bool(re.search(r'\b(?:School|College|Faculty|Department|Dept|Division|Institute|Institut|Instituto|Laboratory|Center|Centre|Program|Programme|Chair|Fakultät|Facultad|Departamento|Département)\b|学院|学系|研究科|学部|研究[所院]|中心|医院|实验室',detail_value,re.I))
 
 
 def affiliation_country(original):
@@ -42,7 +42,12 @@ def affiliation_country(original):
         'Japan':'日本','India':'印度','Germany':'德国','France':'法国','Italy':'意大利',
         'Canada':'加拿大','Australia':'澳大利亚','Israel':'以色列','Singapore':'新加坡',
         'Switzerland':'瑞士','Sweden':'瑞典','Denmark':'丹麦','Netherlands':'荷兰',
-        'Spain':'西班牙','Austria':'奥地利','Finland':'芬兰','Norway':'挪威','Belgium':'比利时',
+        'Spain':'西班牙','España':'西班牙','Austria':'奥地利','Finland':'芬兰','Norway':'挪威','Belgium':'比利时',
+        'Malaysia':'马来西亚','Thailand':'泰国','Indonesia':'印度尼西亚','Vietnam':'越南',
+        'Portugal':'葡萄牙','Greece':'希腊','Czech Republic':'捷克','Czechia':'捷克',
+        'Hungary':'匈牙利','Romania':'罗马尼亚','Türkiye':'土耳其','Turkey':'土耳其',
+        'Iran':'伊朗','Pakistan':'巴基斯坦','Egypt':'埃及','Argentina':'阿根廷','Chile':'智利',
+        'Ireland':'爱尔兰','Iceland':'冰岛','Luxembourg':'卢森堡','Slovenia':'斯洛文尼亚',
         'New Zealand':'新西兰','South Korea':'韩国','Republic of Korea':'韩国',
         'Saudi Arabia':'沙特阿拉伯','Russia':'俄罗斯','Russian Federation':'俄罗斯',
         'Brazil':'巴西','Mexico':'墨西哥','South Africa':'南非','Poland':'波兰','Bulgaria':'保加利亚',
@@ -302,6 +307,8 @@ def jats_roles(data):
             parts = [node.text or '']
             for child in node:
                 if tag(child) not in ('label','institution-id','email'):
+                    if tag(child)=='country' and ''.join(parts).strip().rstrip().endswith(',') is False:
+                        parts.append(', ')
                     parts.append(text(child))
                 parts.append(child.tail or '')
             units[node.get('id')] = ' '.join(' '.join(parts).split())
