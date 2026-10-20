@@ -1,4 +1,44 @@
 {
+  "doi:10.1038/nature09472": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "e5aaa9f9a0d5119fadf38864adc700682092076a843fa7f9070c864de22ee83c"
+  },
+  "doi:10.1080/19490976.2026.2740921": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "da33ab3fba07791400e8643f3e3c8ee0b1d19ecc56cf09969433dba454f83662"
+  },
+  "doi:10.1080/10717544.2026.2679844": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "0a69721090c489874bae4d98b5bc9dc22bcd2377b81c0dc24f71e552e702a83a"
+  },
+  "doi:10.1093/nar/gkl999": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "0213699a3f805d9ba541f0426c79dac18896cbb111cd6dfa68332392e14f1ecc"
+  },
+  "doi:10.7150/thno.18068": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "70e985aed01f5fcae90f1243bac0c3f6122fae7dba5adbbf346bab98b49d94ba"
+  },
+  "doi:10.1002/advs.78164": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "02549b75994c5199cb3c2d2c8fc0372fb246da1557e1c0446ee8876311782585"
+  },
+  "doi:10.1039/d6ra07599a": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "de413a8b636b673dae31fe5564ab26b8cf8f533ee3fbaa10a77f6d4819bf09eb"
+  },
+  "doi:10.1002/gch2.70145": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "91f2fa1b40c11e0503d288914508073220988e2e1fee772a71a94a7f91b2fd7a"
+  },
+  "doi:10.1186/2049-2618-1-28": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "b0958bd57a083fdc8a22e5677dc6db8b3db2e95e7b766275f8aa7b0250c840a0"
+  },
+  "doi:10.1038/s42004-025-01883-7": {
+    "updated_on": "2026-10-20",
+    "content_sha256": "86b96c923ec1b0bbff5c60601aee966fcb6412ea5e4a5a4c80a3f5bb43910230"
+  },
   "doi:10.1038/nature18002": {
     "updated_on": "2026-10-20",
     "content_sha256": "0d4d42c9afdf1301d6433c4d45f3842321192f3fdeb03920da42730c054ddd13"
