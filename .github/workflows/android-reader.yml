@@ -71,6 +71,8 @@ jobs:
       - name: Verify signature and publish versioned APK with update manifest
         if: steps.signing.outputs.ready == 'true'
         run: |
+          set -o pipefail
+          bash -e -o pipefail <<'PUBLISH' 2>&1 | tee android-publish.log
           python android-reader/publish_update.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -80,6 +82,16 @@ jobs:
           git push origin HEAD:main
           echo '## Signed Android update published' >> "$GITHUB_STEP_SUMMARY"
           cat android-update.json >> "$GITHUB_STEP_SUMMARY"
+          PUBLISH
+      - name: Preserve publication diagnostics without signing secrets
+        if: failure()
+        run: |
+          if [ -f android-publish.log ]; then
+            echo '## Android publication diagnostics' >> "$GITHUB_STEP_SUMMARY"
+            echo '~~~text' >> "$GITHUB_STEP_SUMMARY"
+            tail -120 android-publish.log >> "$GITHUB_STEP_SUMMARY"
+            echo '~~~' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Describe unsigned validation without replacing the current download
         if: steps.signing.outputs.ready != 'true'
         run: |
