@@ -18,13 +18,15 @@ def ensure_bundled_files(root):
         return
     state_path=root/'.streamlit-cache'/'bundles.json'
     with _lock:
+        content_changed=False
         try:
             state=json.loads(state_path.read_text(encoding='utf-8'))
         except (OSError,ValueError):
             state={}
         for archive in archives:
             stamp=[archive.stat().st_mtime_ns,archive.stat().st_size]
-            if state.get(archive.name)==stamp and (root/'data/paper-recommendation').is_dir() and (root/'graphics').is_dir():
+            if (state.get(archive.name)==stamp and (root/'data/paper-recommendation').is_dir()
+                    and (root/'graphics').is_dir() and not (archive.name=='reading-ui.zip' and content_changed)):
                 continue
             with ZipFile(archive) as bundle:
                 entries=bundle.infolist()
@@ -45,5 +47,6 @@ def ensure_bundled_files(root):
                     target.parent.mkdir(parents=True,exist_ok=True)
                     target.write_bytes(bundle.read(entry))
             state[archive.name]=stamp
+            if archive.name=='reading-content.zip':content_changed=True
         state_path.parent.mkdir(parents=True,exist_ok=True)
         state_path.write_text(json.dumps(state),encoding='utf-8')
