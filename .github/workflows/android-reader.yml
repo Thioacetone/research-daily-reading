@@ -23,40 +23,68 @@ jobs:
           gradle-version: '8.13'
       - name: Expand reviewed Android source
         run: unzip -o android-reader-source.zip
-      - name: Build installable APK
+      - name: Restore stable signing key from encrypted repository secrets
+        id: signing
+        env:
+          STORE_B64: ${{ secrets.ANDROID_SIGNING_KEYSTORE_B64 }}
+          SIGNING_PASSWORD: ${{ secrets.ANDROID_SIGNING_PASSWORD }}
+        run: |
+          python - <<'PY'
+          import base64,os,pathlib
+          ready=bool(os.environ.get('STORE_B64') and os.environ.get('SIGNING_PASSWORD'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('ready='+str(ready).lower()+'\n')
+          if ready:
+              target=pathlib.Path(os.environ['RUNNER_TEMP'])/'reader-signing.p12'
+              target.write_bytes(base64.b64decode(os.environ['STORE_B64'],validate=True))
+              target.chmod(0o600)
+              with open(os.environ['GITHUB_ENV'],'a') as out:out.write('ANDROID_KEYSTORE='+str(target)+'\n')
+          PY
+      - name: Build, test and check Android release
+        env:
+          ANDROID_SIGNING_PASSWORD: ${{ secrets.ANDROID_SIGNING_PASSWORD }}
         run: |
           set -o pipefail
-          gradle -p android-reader --no-daemon assembleDebug lintDebug 2>&1 | tee android-build.log
+          VERSION_CODE=$((100000 + GITHUB_RUN_NUMBER * 100 + GITHUB_RUN_ATTEMPT))
+          gradle -p android-reader --no-daemon -PappVersionCode="$VERSION_CODE" -PappVersionName="1.1.$GITHUB_RUN_NUMBER" assembleRelease lintRelease testDebugUnitTest 2>&1 | tee android-build.log
       - name: Keep readable diagnostics if building failed
         if: failure()
         run: |
           echo '## Android build diagnostics' >> "$GITHUB_STEP_SUMMARY"
-          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          echo '~~~text' >> "$GITHUB_STEP_SUMMARY"
           tail -150 android-build.log >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo '~~~' >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: android-build-diagnostics
           path: |
             android-build.log
-            android-reader/app/build/reports/lint-results-debug.*
+            android-reader/app/build/reports/lint-results-release.*
+            android-reader/app/build/test-results/testDebugUnitTest/*.xml
           retention-days: 7
       - uses: actions/upload-artifact@v4
         with:
-          name: daily-reading-android
-          path: android-reader/app/build/outputs/apk/debug/app-debug.apk
+          name: android-release-build
+          path: android-reader/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
           retention-days: 30
-      - name: Publish a permanent APK download alongside the reader
+      - name: Verify signature and publish versioned APK with update manifest
+        if: steps.signing.outputs.ready == 'true'
         run: |
-          cp android-reader/app/build/outputs/apk/debug/app-debug.apk daily-reading-android.apk
-          sha256sum daily-reading-android.apk > daily-reading-android.apk.sha256
+          python android-reader/publish_update.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add daily-reading-android.apk daily-reading-android.apk.sha256
-          if ! git diff --cached --quiet; then
-            git commit -m 'Publish validated Android reader APK'
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+          git add android/releases android-update.json daily-reading-android.apk daily-reading-android.apk.sha256
+          git commit -m 'Publish signed Android reader update and version manifest'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo '## Signed Android update published' >> "$GITHUB_STEP_SUMMARY"
+          cat android-update.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Describe unsigned validation without replacing the current download
+        if: steps.signing.outputs.ready != 'true'
+        run: |
+          echo '## Source checks passed; signing setup still required' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No signed update or public version manifest has been published. Existing APK download was preserved.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Remove runner signing material
+        if: always()
+        run: rm -f "$RUNNER_TEMP/reader-signing.p12"
