@@ -20,6 +20,7 @@ if (not st.session_state.get('reading_artwork')
 artwork=st.session_state.reading_artwork
 image=artwork['path'] if artwork else ARTWORK
 st.set_page_config(page_title='每日论文精读',page_icon=str(image),layout='wide',initial_sidebar_state='collapsed')
+st.html('<style>'+(ROOT/'assets/streamlit-chrome.css').read_text(encoding='utf-8')+'</style>')
 
 
 @st.fragment(run_every='60s')

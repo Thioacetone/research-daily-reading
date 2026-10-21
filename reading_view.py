@@ -111,11 +111,13 @@ def article_cards(entry):
 
 def page_css(root,theme):
     variables=';'.join('--reading-'+key+':'+value for key,value in theme.items())
-    return ':root{'+variables+'}'+(Path(root)/'assets/streamlit-reader.css').read_text(encoding='utf-8')
+    return (':root{'+variables+'}'+(Path(root)/'assets/streamlit-reader.css').read_text(encoding='utf-8')
+            +(Path(root)/'assets/streamlit-chrome.css').read_text(encoding='utf-8'))
 
 
 def navigation_script(root):
-    return (Path(root)/'assets/reading-navigation.js').read_text(encoding='utf-8')
+    return ((Path(root)/'assets/reading-clock.js').read_text(encoding='utf-8')+'\n'
+            +(Path(root)/'assets/reading-navigation.js').read_text(encoding='utf-8'))
 
 
 def standalone(entry,image,css):

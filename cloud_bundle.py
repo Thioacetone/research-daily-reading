@@ -13,7 +13,7 @@ def ensure_bundled_files(root):
     # Executable source is installed only by the workflow's explicit step.
     # The web reader must unpack exclusively the named data/image archives.
     archives=sorted(p for p in root.glob('reading-*.zip')
-                    if p.name=='reading-content.zip' or re.fullmatch(r'reading-graphics-\d+\.zip',p.name))
+                    if p.name in ('reading-content.zip','reading-ui.zip') or re.fullmatch(r'reading-graphics-\d+\.zip',p.name))
     if not archives:
         return
     state_path=root/'.streamlit-cache'/'bundles.json'
@@ -32,6 +32,10 @@ def ensure_bundled_files(root):
                     raise ValueError('Reading bundle is too large')
                 for entry in entries:
                     path=PurePosixPath(entry.filename)
+                    if archive.name=='reading-ui.zip' and entry.filename not in (
+                            'assets/streamlit-reader.css','assets/reading-navigation.js',
+                            'assets/reading-clock.js','assets/streamlit-chrome.css'):
+                        raise ValueError('Unexpected file in reading UI bundle')
                     if (path.is_absolute() or '..' in path.parts or '\\' in entry.filename
                             or not path.parts or path.parts[0] not in ('assets','graphics','data')
                             or path.suffix.lower() not in ('.json','.html','.jpg','.jpeg','.png','.webp','.gif','.bmp','.css','.js')):
