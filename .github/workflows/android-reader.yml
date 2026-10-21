@@ -21,7 +21,24 @@ jobs:
       - name: Expand reviewed Android source
         run: unzip -o android-reader-source.zip
       - name: Build installable APK
-        run: gradle -p android-reader --no-daemon assembleDebug lintDebug
+        run: |
+          set -o pipefail
+          gradle -p android-reader --no-daemon assembleDebug lintDebug 2>&1 | tee android-build.log
+      - name: Keep readable diagnostics if building failed
+        if: failure()
+        run: |
+          echo '## Android build diagnostics' >> "$GITHUB_STEP_SUMMARY"
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          tail -150 android-build.log >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-build-diagnostics
+          path: |
+            android-build.log
+            android-reader/app/build/reports/lint-results-debug.*
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         with:
           name: daily-reading-android
