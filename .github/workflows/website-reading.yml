@@ -2,11 +2,12 @@ name: Update daily chemistry reading
 
 on:
   schedule:
-    # Prepare tomorrow at Beijing 12:17 / 18:17; repair today at 00:17 / 06:17.
+    # Precompute tomorrow at Beijing 12:17 / 18:17 / 22:17; repair today at 00:07.
+    # The reader switches prepublished issues at 00:00; cron is not the release clock.
     - cron: '17 4 * * *'
     - cron: '17 10 * * *'
-    - cron: '17 16 * * *'
-    - cron: '17 22 * * *'
+    - cron: '17 14 * * *'
+    - cron: '7 16 * * *'
   workflow_dispatch:
     inputs:
       reading_date:
@@ -38,7 +39,7 @@ jobs:
       - id: state
         env:
           REQUESTED_DATE: ${{ inputs.reading_date }}
-          PREPARE_NEXT_DAY: ${{ github.event_name == 'schedule' && (github.event.schedule == '17 4 * * *' || github.event.schedule == '17 10 * * *') }}
+          PREPARE_NEXT_DAY: ${{ github.event_name == 'schedule' && (github.event.schedule == '17 4 * * *' || github.event.schedule == '17 10 * * *' || github.event.schedule == '17 14 * * *') }}
         run: |
           if [ -n "$REQUESTED_DATE" ]; then
             python -X utf8 website_daily.py preflight --date "$REQUESTED_DATE"
