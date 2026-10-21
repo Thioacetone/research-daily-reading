@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "packageId": "com.thioacetone.reading",
+  "versionCode": 101001,
+  "versionName": "1.1.10",
+  "minSdk": 26,
+  "sizeBytes": 4206995,
+  "sha256": "17392537b6f0f9cf419d1d8d7ed886120df6be11e7ed10188041267e076bfb7f",
+  "signingCertificateSha256": "471c23c3e545396224ab2e3ce1b7029b294e4dd2f8e57db47cbe559d9ff7c1f4",
+  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101001/daily-reading.apk",
+  "releaseNotes": "新增 APP 内版本更新：启动时自动检查，也可以点击“检查更新”。\n支持下载进度、取消下载、SHA-256 校验、包名与签名验证。\n下载完成后由你确认安装；论文、配图与页面内容仍从云端同步。"
+}
