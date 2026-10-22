@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "packageId": "com.thioacetone.reading",
-  "versionCode": 101201,
-  "versionName": "1.1.12",
+  "versionCode": 101301,
+  "versionName": "1.1.13",
   "minSdk": 26,
-  "sizeBytes": 27600683,
-  "sha256": "33310673ab4705305589f836ff47077540e9e5c767a10b259050ae9646a732f5",
+  "sizeBytes": 27604715,
+  "sha256": "92c3288f1abb991e92a705f567bcb5897db194c47afaa933488c0c2afbcde66e",
   "signingCertificateSha256": "471c23c3e545396224ab2e3ce1b7029b294e4dd2f8e57db47cbe559d9ff7c1f4",
-  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101201/daily-reading.apk",
-  "releaseNotes": "新增 GIF 加载动画，采用文件夹中的 thioacetone-magic-no-blink.gif，保留完整帧数、播放时长和循环。\n动画随论文库加载结束而退出，重试连接时重新播放；切入后台暂停，动画资源内置，无需单独下载。\n继续支持 APP 内检查更新、下载校验和确认安装，1.1.11 固定签名版可以直接覆盖升级。"
+  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101301/daily-reading.apk",
+  "releaseNotes": "修复检查更新只依赖单一下载域名的问题，新增独立静态更新站点，连接失败时自动切换备用地址。\n更新失败会显示具体连接原因，并提供重试和浏览器下载入口；自动检查失败后不再等待六小时才能重试。\n保留 GIF 加载动画、安装包摘要和签名验证；1.1.11 及以上版本可直接覆盖安装。"
 }
