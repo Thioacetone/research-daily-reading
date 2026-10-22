@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "packageId": "com.thioacetone.reading",
-  "versionCode": 101101,
-  "versionName": "1.1.11",
+  "versionCode": 101201,
+  "versionName": "1.1.12",
   "minSdk": 26,
-  "sizeBytes": 4206995,
-  "sha256": "82a041e952edde83e4db952aa18b46eac29db291064d59c1571c3b3d69965abe",
+  "sizeBytes": 27600683,
+  "sha256": "33310673ab4705305589f836ff47077540e9e5c767a10b259050ae9646a732f5",
   "signingCertificateSha256": "471c23c3e545396224ab2e3ce1b7029b294e4dd2f8e57db47cbe559d9ff7c1f4",
-  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101101/daily-reading.apk",
-  "releaseNotes": "新增 APP 内版本更新：启动时自动检查，也可以点击“检查更新”。\n支持下载进度、取消下载、SHA-256 校验、包名与签名验证。\n下载完成后由你确认安装；论文、配图与页面内容仍从云端同步。"
+  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101201/daily-reading.apk",
+  "releaseNotes": "新增 GIF 加载动画，采用文件夹中的 thioacetone-magic-no-blink.gif，保留完整帧数、播放时长和循环。\n动画随论文库加载结束而退出，重试连接时重新播放；切入后台暂停，动画资源内置，无需单独下载。\n继续支持 APP 内检查更新、下载校验和确认安装，1.1.11 固定签名版可以直接覆盖升级。"
 }
