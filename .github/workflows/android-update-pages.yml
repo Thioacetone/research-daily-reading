@@ -1,0 +1,73 @@
+name: Publish Android update download site
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/android-update-pages.yml']
+  workflow_run:
+    workflows: ['Build Android reading app']
+    types: [completed]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: android-update-pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Prepare public update metadata and verified APK downloads only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,html,json,shutil,zipfile
+          root=Path.cwd();manifest=json.loads((root/'android-update.json').read_text())
+          code=int(manifest['versionCode'])
+          relative=Path('android/releases')/str(code)/'daily-reading.apk'
+          expected_url='https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/'+relative.as_posix()
+          if manifest['packageId']!='com.thioacetone.reading' or manifest['apkUrl']!=expected_url:
+              raise ValueError('Unexpected update identity or download path')
+          with zipfile.ZipFile(root/'android-reader-source.zip') as source:
+              certificate=source.read('android-reader/signing-certificate.sha256').decode('utf-8-sig').strip()
+          data=(root/relative).read_bytes()
+          if (len(data)!=manifest['sizeBytes'] or len(data)>40_000_000 or
+              hashlib.sha256(data).hexdigest()!=manifest['sha256'] or
+              manifest['signingCertificateSha256']!=certificate):
+              raise ValueError('Update metadata does not match the verified release')
+          output=root/'.android-update-site';output.mkdir()
+          (output/'android-update.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+          versions=sorted([p for p in (root/'android/releases').iterdir() if p.is_dir() and p.name.isdigit()],key=lambda p:int(p.name))[-3:]
+          for version in versions:
+              apk=version/'daily-reading.apk'
+              if not apk.is_file() or apk.stat().st_size>40_000_000:raise ValueError('Unexpected versioned APK')
+              target=output/'android/releases'/version.name/'daily-reading.apk'
+              target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(apk,target)
+          name=html.escape(manifest['versionName']);notes=html.escape(manifest['releaseNotes'])
+          page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+          <title>每日论文精读 · 安卓更新</title><style>body{margin:0;background:#f5f7fb;color:#253347;font:17px/1.8 system-ui,sans-serif}main{max-width:620px;margin:8vh auto;padding:28px}h1{font-size:30px}a{display:inline-block;padding:13px 26px;background:#52618a;color:white;text-decoration:none;border-radius:14px}pre{white-space:pre-wrap;font:inherit}small{overflow-wrap:anywhere;color:#657185}</style>
+          <main><h1>每日论文精读</h1><p>安卓新版 VERSION · Android 8.0 及以上</p><a href="APKPATH" download>下载新版 APP</a><pre>NOTES</pre>
+          <p>已安装 1.1.11 或更高版本可直接覆盖安装，无需卸载。下载完成后，请按安卓系统提示确认安装。</p><small>SHA-256: DIGEST</small></main></html>'''
+          page=page.replace('VERSION',name).replace('APKPATH',relative.as_posix()).replace('NOTES',notes).replace('DIGEST',manifest['sha256'])
+          (output/'index.html').write_text(page);(output/'.nojekyll').touch()
+          print('Prepared verified Android release '+manifest['versionName'])
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .android-update-site
+      - name: Publish the independent HTTPS download site
+        id: deployment
+        uses: actions/deploy-pages@v4
