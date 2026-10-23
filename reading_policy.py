@@ -68,6 +68,12 @@ def identity_keys(item):
 
 
 def direction(item):
+    from paper_classification import classification
+    verified=classification(item)
+    if verified is not None:
+        return verified.get('direction','') if verified.get('eligible') else ''
+    # This fallback routes discoveries only. Publication must also call quality,
+    # which rejects every unreviewed subject, including old cached editorials.
     declared=item.get('research_direction','')
     result=ALIASES.get(declared,declared)
     return result if result in DIRECTIONS else ''

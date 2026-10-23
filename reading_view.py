@@ -71,6 +71,17 @@ def article_cards(entry):
     result=[]
     for index,(content,item) in enumerate(zip(cards,issue_items(entry)),1):
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
+        # Saved prose stays intact, but its old subject field must agree with
+        # the corrected directory/filter and the visible classification badge.
+        from paper_classification import EXTRA_ENGLISH
+        from bilingual_mail import DIRECTIONS as ENGLISH_SUBJECTS
+        main=paper_direction(item)
+        english=EXTRA_ENGLISH.get(main) or ENGLISH_SUBJECTS.get(main,'Subject pending review')
+        replacement=("<h4>Research direction <span lang='zh-CN'>研究方向</span></h4>"
+                     +"<div class='english-copy' lang='en'>"+html.escape(english)+"</div>"
+                     +"<div class='translation' lang='zh-CN'>"+html.escape(DIRECTION_LABELS[main])+"</div>")
+        content=re.sub(r'<h4>Research direction\s.*?</h4>.*?(?=<h4>|$)',
+                       lambda _:replacement,content,count=1,flags=re.S)
         content=re.sub(r'<div class=\'english-copy title-copy\'([^>]*)>(.*?)</div>',
                        r'<h2 class="english-copy title-copy"\1>\2</h2>',content,count=1,flags=re.S)
         # These old nested tables contain layout cells, not scientific data tables.

@@ -6,6 +6,7 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone, date
 from urllib.parse import unquote
 from reading_policy import DIRECTIONS as BROAD_DIRECTIONS,identity_keys
+from paper_classification import EXTRA_LABELS,reviewed,display_direction
 
 TYPE_LABELS={'all':'全部类型','review':'综述','research':'非综述'}
 DIRECTION_LABELS={
@@ -19,6 +20,7 @@ DIRECTION_LABELS={
     'other':'其他／待分类',
 }
 DIRECTION_LABELS.update({key:value for key,value in BROAD_DIRECTIONS.items() if key not in DIRECTION_LABELS})
+DIRECTION_LABELS.update(EXTRA_LABELS)
 
 
 def saved_cards(entry):
@@ -33,6 +35,8 @@ def saved_cards(entry):
 
 
 def paper_type(item):
+    verified=reviewed(item)
+    if verified:return verified['paper_type']
     value=item.get('recommendation_kind','').casefold()
     if value in ('review','research'):
         return value
@@ -45,22 +49,9 @@ def paper_type(item):
 
 
 def paper_direction(item):
-    declared=item.get('research_direction')
-    if declared in DIRECTION_LABELS:
-        return declared
-    # Infer only from the paper's own title, not speculative future applications.
-    title=(item.get('paper_title') or item.get('title') or '').casefold()
-    for direction,pattern in (
-        ('bioorthogonal',r'bioorthogonal|bio-orthogonal|staudinger ligation|click-to-release|tetrazine'),
-        ('cadd-aidd',r'docking|virtual screening|computer.aided|deep learning|generative|swissadme'),
-        ('neuropharmacology',r'psychedelic|psychoplastogen|hallucinogen|antidepressant|neural plasticity|depression'),
-        ('protein-degradation',r'degrad|protac|lytac'),
-        ('chemical-probes',r'covalent ligand|chemical probe|chemoproteom'),
-        ('drug-discovery',r'drug discovery|drug design'),
-        ('chemical-biology',r'chemical biology')):
-        if re.search(pattern,title):
-            return direction
-    return 'other'
+    # Never turn a search keyword or a broad title match into a reviewed label.
+    result=display_direction(item)
+    return result if result in DIRECTION_LABELS else 'other'
 
 
 def paper_key(item):
@@ -81,7 +72,7 @@ def beijing_today():
 
 def published_signature(root,today=None):
     stamps=[]
-    for name in ('reading-content.zip','site-publication.json'):
+    for name in ('reading-content.zip','site-publication.json','reviewed_classifications.json'):
         try:
             info=(Path(root)/name).stat();stamps.append((info.st_mtime_ns,info.st_size))
         except OSError:stamps.append((0,0))
