@@ -50,6 +50,7 @@ jobs:
           fi
       - name: Check quotas and persistent history without models
         run: |
+          python -X utf8 -m unittest discover -s tests -p test_paper_classification.py -v
           python -X utf8 -m unittest discover -s tests -p test_reading_policy.py -v
           python -X utf8 -m unittest discover -s tests -p test_paper_library.py -v
           python -X utf8 -m unittest discover -s tests -p test_website_daily.py -v
