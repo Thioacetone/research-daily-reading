@@ -106,16 +106,17 @@ else:
 entry=as_collection(filtered,view,today)
 st.html(hero(entry,image))
 
-navigation_column,art_column=st.columns([3,1],vertical_alignment='bottom')
-with navigation_column:
-    if view=='today':
-        st.button('查看往期论文',on_click=open_view,args=('archive',),use_container_width=True)
-    else:
-        st.button('返回今日论文',on_click=open_view,args=('today',),use_container_width=True)
-with art_column:
-    if st.button('换一张配图',use_container_width=True):
-        st.session_state.reading_artwork=choose_artwork()
-        st.rerun()
+with st.container(key='reader-navigation'):
+    navigation_column,art_column=st.columns([1,1],vertical_alignment='bottom')
+    with navigation_column:
+        if view=='today':
+            st.button('查看往期论文',on_click=open_view,args=('archive',),use_container_width=True)
+        else:
+            st.button('返回今日论文',on_click=open_view,args=('today',),use_container_width=True)
+    with art_column:
+        if st.button('换一张配图',use_container_width=True):
+            st.session_state.reading_artwork=choose_artwork()
+            st.rerun()
 
 if view=='archive':
     type_column,direction_column=st.columns([1,2],vertical_alignment='bottom')
@@ -146,6 +147,6 @@ for index,record in enumerate(filtered,1):
            or item.get('paper_title') or item['title'])
     key='paper-open-'+hashlib.sha256(record['key'].encode('utf-8')).hexdigest()[:16]
     with st.container(key=key):
-        st.button(f'{index:02d}　{title} →',key=key+'-button',use_container_width=True,
+        st.button(f'**{index:02d}**　{title} →',key=key+'-button',use_container_width=True,
                   on_click=open_paper,args=(record['key'],view,kind,direction))
         st.html(directory_metadata(item,record['type'],record['direction']))
