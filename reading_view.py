@@ -19,6 +19,17 @@ def issue_items(entry):
     return [item for section in entry['report']['sections'].values() for item in section['items']]
 
 
+def directory_metadata(item,kind,direction):
+    """Readable, non-editable subject badges use the same reviewed categories."""
+    kind=kind if kind in TYPE_LABELS else 'other'
+    return ('<div class="reader-directory-meta">'
+            '<span class="reader-journal">'+html.escape(item.get('venue',''))+'</span>'
+            '<span class="reader-directory-tags" aria-label="论文分类">'
+            '<span class="reader-kind reader-kind-'+kind+'">'+html.escape(TYPE_LABELS.get(kind,'类型待核实'))+'</span>'
+            '<span class="reader-subject">'+html.escape(DIRECTION_LABELS.get(direction,DIRECTION_LABELS['other']))+'</span>'
+            '</span></div>')
+
+
 def hero(entry,image):
     if entry.get('view')=='today':
         eyebrow=f'TODAY’S READING <span> / </span> {entry["today"]} · {entry["count"]:02d} PAPERS'

@@ -10,7 +10,7 @@ from app_branding import ARTWORK,choose_artwork,palette_from_rgb
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
 from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper,published_signature
-from reading_view import article_cards,hero,navigation_script,page_css
+from reading_view import article_cards,hero,navigation_script,page_css,directory_metadata
 
 ROOT=Path(__file__).resolve().parent
 ensure_bundled_files(ROOT)
@@ -148,5 +148,4 @@ for index,record in enumerate(filtered,1):
     with st.container(key=key):
         st.button(f'{index:02d}　{title} →',key=key+'-button',use_container_width=True,
                   on_click=open_paper,args=(record['key'],view,kind,direction))
-        st.caption(item.get('venue','')+' · '+TYPE_LABELS.get(record['type'],'类型待核实')
-                   +' · '+DIRECTION_LABELS[record['direction']])
+        st.html(directory_metadata(item,record['type'],record['direction']))
