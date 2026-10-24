@@ -42,9 +42,19 @@ def hero(entry,image):
         weekday=('周一','周二','周三','周四','周五','周六','周日')[day.weekday()]
         eyebrow=f'DAILY READING <span> / </span> {day:%Y.%m.%d} · {weekday}'
     heading='往期论文' if entry.get('view')=='archive' else '每日论文精读'
-    return (f'<header class="reader-hero" id="reading-top"><div class="reader-hero-copy">'
+    items=issue_items(entry)
+    reviews=sum(paper_type(item)=='review' for item in items)
+    research=sum(paper_type(item)=='research' for item in items)
+    stats=(f'<div class="reader-issue-stats"><div><strong>{entry["count"]:02d}</strong><span>论文 / PAPERS</span></div>'
+           f'<div><strong>{reviews:02d}</strong><span>综述 / REVIEWS</span></div>'
+           f'<div><strong>{research:02d}</strong><span>研究 / RESEARCH</span></div></div>')
+    return ('<div class="reader-brandbar"><div class="reader-brand"><span class="reader-monogram">T</span>'
+            '<span>THIOACETONE<small>RESEARCH LIBRARY</small></span></div>'
+            '<span class="reader-edition">CHEMISTRY &amp; LIFE SCIENCES</span></div>'
+            f'<header class="reader-hero" id="reading-top"><div class="reader-hero-copy">'
             f'<p class="reader-eyebrow">{eyebrow}</p>'
             f'<h1>{heading}<span class="reader-heading-dot">.</span></h1>'
+            f'{stats}'
             '</div><figure class="reader-hero-art">'
             f'<img src="{image_data(image)}" alt="本次阅读配图"></figure></header>')
 

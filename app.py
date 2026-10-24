@@ -140,8 +140,8 @@ if not filtered:
     else:
         st.info('暂时没有同时符合这两个分类的论文，可以选择“全部方向”或“全部类型”查看其他内容。')
     st.stop()
-st.html('<div class="reader-section-label"><span>论文目录</span><span>'+str(len(filtered))+' PAPERS</span></div>')
-for index,record in enumerate(filtered,1):
+st.html('<div class="reader-section-label"><span>论文目录 <small>CONTENTS</small></span><span>'+str(len(filtered)).zfill(2)+' PAPERS</span></div>')
+def render_directory_card(index,record):
     item=record['item']
     title=(item.get('bilingual',{}).get('title_zh') or item.get('title_zh')
            or item.get('paper_title') or item['title'])
@@ -150,3 +150,11 @@ for index,record in enumerate(filtered,1):
         st.button(f'**{index:02d}**　{title} →',key=key+'-button',use_container_width=True,
                   on_click=open_paper,args=(record['key'],view,kind,direction))
         st.html(directory_metadata(item,record['type'],record['direction']))
+
+
+with st.container(key='reader-directory'):
+    for offset in range(0,len(filtered),2):
+        columns=st.columns(2,gap='medium')
+        for column,index in zip(columns,range(offset,min(offset+2,len(filtered)))):
+            with column:
+                render_directory_card(index+1,filtered[index])
