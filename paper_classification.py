@@ -25,6 +25,9 @@ EXTRA_LABELS = {
     'microbial-ecology': '微生物生态学',
     'drug-delivery': '药物递送与制剂',
     'bioactive-peptides': '生物活性肽与作用机制',
+    'spatial-proteomics': '空间蛋白质组学与质谱分析',
+    'radiopharmaceuticals': '放射性药物与靶向治疗',
+    'digital-mental-health': '数字心理健康与心理治疗',
 }
 EXTRA_ENGLISH = {
     'cheminformatics':'Cheminformatics and molecular machine learning',
@@ -37,6 +40,9 @@ EXTRA_ENGLISH = {
     'microbial-ecology':'Microbial ecology',
     'drug-delivery':'Drug delivery and formulation',
     'bioactive-peptides':'Bioactive peptides and mechanisms of action',
+    'spatial-proteomics':'Spatial proteomics and mass spectrometry',
+    'radiopharmaceuticals':'Radiopharmaceuticals and targeted therapy',
+    'digital-mental-health':'Digital mental health and psychotherapy',
     'other':'Subject pending review',
 }
 
@@ -84,6 +90,11 @@ def semantic_issue(direction, title, original):
     """High-precision traps; these checks do not replace the full-text editor."""
     text = (title + '\n' + original).casefold()
     title = title.casefold()
+    if direction == 'neuropharmacology' and re.search(r'psychotherapy|text messages?|email', title) and not re.search(
+            r'antidepressant|drug|pharmacolog|psychoplastogen|psychedelic|receptor', title):
+        return 'Digital psychotherapy without a pharmacological contribution is not drug research'
+    if direction == 'catalysis' and re.search(r'variational eigenvalue|quantum processor|quantum eigensolver', title):
+        return 'A quantum-computing algorithm is theoretical chemistry, not catalysis'
     if direction == 'neuropharmacology' and not re.search(
             r'antidepress|depressive disorder|depression treatment|treatment.{0,35}depression|'
             r'psychedelic|psychoplastogen|hallucinogen|neural plasticity|behavioral antidepress|behavioural antidepress', text):
@@ -182,6 +193,8 @@ CLASSIFIER_RULES = (
     'protein degradation; isotope-labelled metal complexes are not biological chemical probes; '
     'depression of a cell ratio is not depressive illness; neuroendocrine cancer is not depression; '
     'generic molecular ML is interdisciplinary/cheminformatics, not automatically drug discovery. '
+    'Digital psychotherapy without drug development is out-of-scope, even when depression is an outcome. '
+    'Quantum eigenvalue-solving algorithms belong to theoretical chemistry, not catalysis. '
     'Drug delivery/formulation belongs to drug-discovery; electrochemical reaction development to '
     'electrochemistry; chemical analysis/metabolomics to analytical. Chemical biology needs a '
     'chemical method that interrogates or perturbs biology. Assign one main direction based on the '

@@ -1,0 +1,86 @@
+"""Prepare a small, data-only Streamlit deployment, excluding mail secrets."""
+from pathlib import Path
+import shutil
+import json
+from paper_library import build_paper_library,publication_history,validate_reader_classifications
+from zipfile import ZipFile, ZIP_DEFLATED
+from reading_library import load_library
+
+ROOT=Path(__file__).resolve().parent
+OUTPUT=ROOT/'dist'/'streamlit-reader'
+SOURCE_FILES=('app.py','app_branding.py','reading_library.py','reading_view.py','paper_library.py','reading_policy.py','cloud_bundle.py',
+              'paper_classification.py','reviewed_classifications.json',
+              'bilingual_mail.py','author_roles.py','chemical_typography.py',
+              'requirements.txt','institution_names.json','department_names.json',
+              'affiliation_countries.json')
+
+
+def archive(name,files):
+    with ZipFile(OUTPUT/name,'w',compression=ZIP_DEFLATED) as bundle:
+        for file in files:
+            bundle.write(file,file.relative_to(ROOT).as_posix())
+
+
+def build():
+    OUTPUT.mkdir(parents=True,exist_ok=True)
+    for name in SOURCE_FILES:
+        shutil.copyfile(ROOT/name,OUTPUT/name)
+    reports,unavailable=load_library(ROOT)
+    if unavailable:raise ValueError('Cannot package unreadable historical reports')
+    validate_reader_classifications(reports)
+    history_path=ROOT/'site-publication.json'
+    previous=json.loads(history_path.read_text(encoding='utf-8')) if history_path.exists() else {}
+    history=publication_history(build_paper_library(reports),previous)
+    history_path.write_text(json.dumps(history,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    shutil.copyfile(history_path,OUTPUT/history_path.name)
+    files=[ROOT/'assets'/name for name in ('program-art.jpg','reading-theme.css','reading-theme.js','streamlit-reader.css','reading-navigation.js','reading-clock.js','streamlit-chrome.css')]
+    archive('reading-ui.zip',[ROOT/'assets'/name for name in (
+        'streamlit-reader.css','reading-navigation.js','reading-clock.js','streamlit-chrome.css')])
+    for report in reports:
+        files.extend([report['file'],report['file'].with_name('report.html')])
+    archive('reading-content.zip',files)
+    pictures=[p for p in sorted((ROOT/'graphics').rglob('*'))
+              if p.is_file() and p.suffix.lower() in ('.jpg','.jpeg','.png','.webp','.gif','.bmp')
+              and p.resolve().is_relative_to((ROOT/'graphics').resolve())]
+    group=[];size=0;index=1
+    for picture in pictures:
+        length=picture.stat().st_size
+        if length>6_500_000:
+            raise ValueError('A picture exceeds the web upload bundle size')
+        if group and size+length>6_500_000:
+            archive(f'reading-graphics-{index:02d}.zip',group)
+            index+=1;group=[];size=0
+        group.append(picture);size+=length
+    if group:
+        archive(f'reading-graphics-{index:02d}.zip',group)
+    (OUTPUT/'.gitignore').write_text('__pycache__/\n*.pyc\n.env\n.streamlit/secrets.toml\n.streamlit-cache/\ndata/\ngraphics/\nassets/\n',encoding='utf-8')
+    (OUTPUT/'README.md').write_text(
+        '# 每日论文精读 · Streamlit\n\n'
+        'Streamlit Community Cloud：仓库选择 research-daily-reading，分支 main，入口 app.py。\n\n'
+        '本程序只展示已发布的精读报告，不启动邮件发送或模型生成。\n'
+        'reading-content.zip 保存报告和页面样式，reading-graphics-*.zip 保存原始配图。'
+        '启动时自动展开，首页展示今日精读；往期目录支持类型与方向筛选，点击进入独立单篇阅读页。\n'
+        '支持配图轮换与自动配色，不提供阅读页下载功能。\n'
+        'site-publication.json 持久记录正文更新到网站的日期，刷新或仅修改界面不会重置日期。\n\n'
+        '## 每日选文规则\n\n'
+        '每天目标 10 篇，覆盖化学各分支；至少 5 篇来自化学生物学、CADD/AIDD、药物研发与应用、'
+        '抑郁症与神经药理、化学交叉应用。每个主方向每天最多 3 篇。'
+        '生物正交、化学探针与蛋白降解共用化学生物学主方向配额。\n\n'
+        '按 DOI 和规范化题目与完整历史去重。重复上传或改写旧文不会把它改为今日新推荐。'
+        '全文、作者单位、深入解读和逐段双语检查未通过的文章不发布；不足 10 篇时任务报错，保留历史报告。\n\n'
+        '## 云端更新\n\n'
+        '独立 GitHub Actions 工作流 .github/workflows/website-reading.yml 在北京时间 12:17、18:17、22:17 准备次日内容，'
+        '00:07 补救当天内容。网站和安卓 APP 按北京时间凌晨 00:00 切换今日目录，提前准备的论文不会混入今天目录。'
+        '分 20 个化学方向检索公开文献，并使用开源模型在云端 CPU 上分析可合法读取的全文。'
+        '无需电脑开机、邮箱凭据或 AI 服务密钥。调度和分析可能延迟，这不是准点发布保证。\n\n'
+        'reading-generator.zip 是受控的生成程序源码包，由工作流显式展开；'
+        'cloud_bundle.py 只自动展开数据与配图包，避免源码包被误当成报告。'
+        'reading-candidates.json 保存已通过全文与双语检查、尚未发布的解读；数量和方向配额足够时直接组稿，'
+        '无需重新调用模型。未完成整期时也保留合格候选；只有正式发布才写入已读历史。'
+        '合格报告与 reading-history.json 一并提交后，Streamlit 随仓库自动更新。\n',encoding='utf-8')
+    print(f'Prepared {len(reports)} reports and {len(pictures)} pictures; unavailable: {unavailable}')
+    print(OUTPUT)
+
+
+if __name__=='__main__':
+    build()

@@ -129,6 +129,23 @@ def filter_papers(records,kind='all',direction='all'):
             and (direction=='all' or record['direction']==direction)]
 
 
+def validate_reader_classifications(reports):
+    """Refuse a bundle whose published labels cannot be rendered by the reader.
+
+    Includes precomputed issues and all historical reports. A reviewed historical
+    out-of-scope paper retains its accurate label, without becoming eligible for
+    new recommendations. Raw discovery lanes never satisfy this check.
+    """
+    missing=[]
+    for entry in reports:
+        for section in entry['report']['sections'].values():
+            for item in section['items']:
+                if paper_direction(item)=='other' or paper_type(item) not in ('review','research'):
+                    missing.append(paper_key(item))
+    if missing:
+        raise ValueError('Published papers lack verified reader classifications: '+', '.join(missing))
+
+
 def reading_period(records, view='today', today=None):
     """Use edition dates, so a bulk website migration is not a new reading issue."""
     today=today or beijing_today()
