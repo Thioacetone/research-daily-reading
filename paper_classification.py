@@ -13,6 +13,7 @@ import unicodedata
 from urllib.parse import unquote
 
 VERSION = 'original-evidence-subject-v1'
+AUDIT_RULES = 'central-subject-evidence-v2'
 REGISTRY = Path(__file__).with_name('reviewed_classifications.json')
 EXTRA_LABELS = {
     'cheminformatics': '化学信息学与分子机器学习',
@@ -90,6 +91,13 @@ def semantic_issue(direction, title, original):
     """High-precision traps; these checks do not replace the full-text editor."""
     text = (title + '\n' + original).casefold()
     title = title.casefold()
+    if direction=='chemical-biology' and re.search(
+            r'quantum (?:noise|coupled|processor)|cross.coupling|c.h functionalization|'
+            r'conducting polymers|aqueous batteries|carbon dioxide (?:conversion|source)|'
+            r'fibrous aerogels|hydrogen (?:evolution|generation)|electrocatalytic|'
+            r'force fields|carbene radicals|flavin catalysts',title) and not re.search(
+            r'bioorthogonal|in (?:vivo|cells)|proteom|enzyme|chemical probe',title):
+        return 'The central chemical method in the title is non-biological; biological applications do not make it chemical biology'
     if direction == 'neuropharmacology' and re.search(r'psychotherapy|text messages?|email', title) and not re.search(
             r'antidepressant|drug|pharmacolog|psychoplastogen|psychedelic|receptor', title):
         return 'Digital psychotherapy without a pharmacological contribution is not drug research'
@@ -132,7 +140,7 @@ def make_audit(item, first, second, paragraphs, abstract):
     sources = {p['id']: p['text'] for p in paragraphs}
     evidence = sorted(set(first['evidence_ids']) | set(second['evidence_ids']))
     return {
-        'version': VERSION, 'doi': doi_key(item['doi']),
+        'version': VERSION, 'rules_version': AUDIT_RULES, 'doi': doi_key(item['doi']),
         'title_key': title_key(item_title(item)), 'fulltext_sha256': item['fulltext_sha256'],
         'direction': first['research_direction'], 'eligible': True,
         'decisions': [{'direction': d['research_direction'],
@@ -146,7 +154,7 @@ def make_audit(item, first, second, paragraphs, abstract):
 
 def checked_audit(item):
     a = item.get('classification_audit')
-    if not isinstance(a, dict) or a.get('version') != VERSION:
+    if not isinstance(a, dict) or a.get('version') != VERSION or a.get('rules_version') != AUDIT_RULES:
         return None
     if (a.get('doi') != doi_key(item.get('doi')) or
             a.get('title_key') != title_key(item_title(item)) or
@@ -195,6 +203,9 @@ CLASSIFIER_RULES = (
     'generic molecular ML is interdisciplinary/cheminformatics, not automatically drug discovery. '
     'Digital psychotherapy without drug development is out-of-scope, even when depression is an outcome. '
     'Quantum eigenvalue-solving algorithms belong to theoretical chemistry, not catalysis. '
+    'Do not default to chemical biology. Batteries, COF photocatalysts, synthetic cross-coupling, '
+    'polymer printing, force-field development and quantum algorithms retain their own central subjects '
+    'even if biology is mentioned among applications. '
     'Drug delivery/formulation belongs to drug-discovery; electrochemical reaction development to '
     'electrochemistry; chemical analysis/metabolomics to analytical. Chemical biology needs a '
     'chemical method that interrogates or perturbs biology. Assign one main direction based on the '
