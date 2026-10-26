@@ -6,7 +6,7 @@ import mimetypes
 from pathlib import Path
 import re
 from urllib.parse import urlencode
-from paper_library import BROWSE_DIRECTIONS as DIRECTION_LABELS,BROWSE_ENGLISH,TYPE_LABELS,reader_direction,paper_type,paper_key,saved_cards,page_parameters
+from paper_library import BROWSE_DIRECTIONS as DIRECTION_LABELS,BROWSE_ENGLISH,TYPE_LABELS,reader_directions,paper_type,paper_key,saved_cards,page_parameters
 
 
 def image_data(path):
@@ -19,16 +19,16 @@ def issue_items(entry):
     return [item for section in entry['report']['sections'].values() for item in section['items']]
 
 
-def directory_metadata(item,kind,direction):
+def directory_metadata(item,kind,direction=None):
     """Readable, non-editable subject badges use the same reviewed categories."""
     kind=kind if kind in TYPE_LABELS else 'other'
-    from paper_library import browse_direction
-    direction=browse_direction(direction)
+    directions=reader_directions(item)
+    tags=''.join('<span class="reader-subject">'+html.escape(DIRECTION_LABELS[k])+'</span>' for k in directions)
     return ('<div class="reader-directory-meta">'
             '<span class="reader-journal">'+html.escape(item.get('venue',''))+'</span>'
             '<span class="reader-directory-tags" aria-label="论文分类">'
             '<span class="reader-kind reader-kind-'+kind+'">'+html.escape(TYPE_LABELS.get(kind,'类型待核实'))+'</span>'
-            '<span class="reader-subject">'+html.escape(DIRECTION_LABELS.get(direction,DIRECTION_LABELS['other']))+'</span>'
+            +tags+
             '</span></div>')
 
 
@@ -96,12 +96,12 @@ def article_cards(entry):
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
         # Saved prose stays intact, but its old subject field must agree with
         # the corrected directory/filter and the visible classification badge.
-        main=reader_direction(item)
-        english=BROWSE_ENGLISH[main]
-        replacement=("<h4>Research direction <span lang='zh-CN'>研究方向</span></h4>"
+        directions=reader_directions(item)
+        english='; '.join(BROWSE_ENGLISH[k] for k in directions)
+        replacement=("<h4>Research directions <span lang='zh-CN'>研究方向</span></h4>"
                      +"<div class='english-copy' lang='en'>"+html.escape(english)+"</div>"
-                     +"<div class='translation' lang='zh-CN'>"+html.escape(DIRECTION_LABELS[main])+"</div>")
-        content=re.sub(r'<h4>Research direction\s.*?</h4>.*?(?=<h4>|$)',
+                     +"<div class='translation' lang='zh-CN'>"+html.escape('、'.join(DIRECTION_LABELS[k] for k in directions))+"</div>")
+        content=re.sub(r'<h4>Research directions?\s.*?</h4>.*?(?=<h4>|$)',
                        lambda _:replacement,content,count=1,flags=re.S)
         content=re.sub(r'<div class=\'english-copy title-copy\'([^>]*)>(.*?)</div>',
                        r'<h2 class="english-copy title-copy"\1>\2</h2>',content,count=1,flags=re.S)
@@ -129,14 +129,14 @@ def article_cards(entry):
                      +('<p>更新到网站 / Website updated: <time datetime="'+updated_on+'">'+updated_on+'</time>（北京时间）</p>'
                        if updated_on else '<p>更新到网站：日期待记录</p>')+'</footer>')
         kind=TYPE_LABELS.get(paper_type(item),'类型待核实')
-        direction=DIRECTION_LABELS[reader_direction(item)]
+        tags=''.join('<span>'+html.escape(DIRECTION_LABELS[k])+'</span>' for k in directions)
         back_link=('' if entry.get('view')=='paper' else
                    '<a class="reader-back-top" href="#reading-top" target="_self">'
                    +('返回顶部 ↑' if entry.get('view')=='today' else '返回目录 ↑')+'</a>')
         result.append(f'<article class="reading-paper" id="reading-paper-{index}">'
                       f'<div class="reader-paper-meta"><span>{html.escape(item.get("venue",""))}</span>'
                       f'<div class="reader-classification"><span>{html.escape(kind)}</span>'
-                      f'<span>{html.escape(direction)}</span></div></div>'+content
+                      +tags+'</div></div>'+content
                       +publication+back_link+'</article>')
     return result
 

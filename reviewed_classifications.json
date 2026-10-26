@@ -39,7 +39,12 @@
       "reason": "核心贡献是整理小分子活性及靶点数据的 ChEMBL 数据库，属于支撑药物发现的化学信息资源。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1093%2Fnar%2Fgkr777%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "f36e61475eef804c13287a00883d11df6cddad79df4f7092dcf9f2f4e0ab5c47"
+      "source_abstract_sha256": "f36e61475eef804c13287a00883d11df6cddad79df4f7092dcf9f2f4e0ab5c47",
+      "additional_directions": [
+        "medicinal"
+      ],
+      "additional_directions_reason": "ChEMBL 收集化合物生物活性与药物靶点数据，数据库的明确用途是支持药物发现。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1186/1758-2946-6-13": {
       "title": "TCMSP: a database of systems pharmacology for drug discovery from herbal medicines",
@@ -65,7 +70,12 @@
       "reason": "直接研究抗抑郁或致幻剂相关神经可塑性、结构优化及治疗潜力。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fnature10130%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "a1235aa4f3e74d9b856814be2a528f2cbbdc7efcf79bf1fdee2ad963feac41ed"
+      "source_abstract_sha256": "a1235aa4f3e74d9b856814be2a528f2cbbdc7efcf79bf1fdee2ad963feac41ed",
+      "additional_directions": [
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "研究 NMDA 受体阻断与快速抗抑郁反应之间的分子和神经可塑性机制，兼属生物化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.chemrev.1c00332": {
       "title": "Technological Innovations in Photochemistry for Organic Synthesis: Flow Chemistry, High-Throughput Experimentation, Scale-up, and Photoelectrochemistry",
@@ -78,7 +88,13 @@
       "reason": "核心讨论有机合成反应方法、反应策略及应用。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facs.chemrev.1c00332%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "767af6f0ae443d67377aae8287fe7284a3c37c99912fab0f2d5d441f2332a615"
+      "source_abstract_sha256": "767af6f0ae443d67377aae8287fe7284a3c37c99912fab0f2d5d441f2332a615",
+      "additional_directions": [
+        "chemical-engineering",
+        "physical"
+      ],
+      "additional_directions_reason": "综述系统讨论流动光化学、高通量实验、放大及光电化学，涉及反应工程与光化学过程。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1002/advs.77522": {
       "title": "Adaptive Conductive Systems: Enabling Deformable Electronics Through Engineered Materials, Circuits, and Intelligent Systems",
@@ -104,7 +120,12 @@
       "reason": "研究导电聚合物结构对离子与电子混合输运的调控，主要归入高分子化学。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fncomms11287%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "7b8862613bb98cf72fc7f7003c491b6abc918ec91d04c9e48a95a0f28ff933c3"
+      "source_abstract_sha256": "7b8862613bb98cf72fc7f7003c491b6abc918ec91d04c9e48a95a0f28ff933c3",
+      "additional_directions": [
+        "physical"
+      ],
+      "additional_directions_reason": "导电聚合物研究实质分析结构如何控制离子与电子混合传输，兼属输运物理化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1126/sciadv.aee9683": {
       "title": "Precise molecular sieving in polycrystalline covalent organic framework membranes",
@@ -117,7 +138,13 @@
       "reason": "通过多晶 COF 膜实现精确分子筛分，核心问题是膜分离性能与选择性。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1126%2Fsciadv.aee9683%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "42c835339abf6011cf4b23483c8a25929c9e8d4224a51001665d4f0daa8e160b"
+      "source_abstract_sha256": "42c835339abf6011cf4b23483c8a25929c9e8d4224a51001665d4f0daa8e160b",
+      "additional_directions": [
+        "materials",
+        "organic"
+      ],
+      "additional_directions_reason": "利用共价有机框架膜的结构设计与制备实现精确分子筛分，同时涉及有机框架材料。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1007/s10555-026-10388-1": {
       "title": "Vascular plasticity in the gastric cancer environment: mechanisms, prognostic significance, and concepts of therapeutic interventions",
@@ -143,7 +170,12 @@
       "reason": "比较 Ce、Nd、Np 和 Pu 配合物的膦配位及同位素光谱，是无机与配位化学，不是生物化学探针。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fadvs.78113%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "ea1205998d3cd53d9bcc1d32a65de8f2cfe8d49545356641ecbf44ae4a7c5494"
+      "source_abstract_sha256": "ea1205998d3cd53d9bcc1d32a65de8f2cfe8d49545356641ecbf44ae4a7c5494",
+      "additional_directions": [
+        "physical"
+      ],
+      "additional_directions_reason": "除合成与配位比较外，文章实质研究配合物同位素体及其光谱，具有物理化学表征内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1039/c7sc02664a": {
       "title": "MoleculeNet: a benchmark for molecular machine learning † †Electronic supplementary information (ESI) available. See DOI: 10.1039/c7sc02664a",
@@ -156,7 +188,13 @@
       "reason": "MoleculeNet 比较分子机器学习在量子、物化、生物物理和生理数据集上的表现，范围比药物设计更广。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1039%2Fc7sc02664a%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "13861224a395e2caf10c594b42900ffb501398e36bfb9cb73cf58f2a2c777110"
+      "source_abstract_sha256": "13861224a395e2caf10c594b42900ffb501398e36bfb9cb73cf58f2a2c777110",
+      "additional_directions": [
+        "physical",
+        "medicinal"
+      ],
+      "additional_directions_reason": "MoleculeNet 实际比较量子、物化、生物物理和生理任务，包含物理性质预测及药物相关建模。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.jcim.6c01331": {
       "title": "Gaps in AI-Driven Pharmacokinetic Property Prediction for Early Drug Development: A Scoping Review",
@@ -208,7 +246,12 @@
       "reason": "核心讨论有机合成反应方法、反应策略及应用。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1039%2Fd6ra05613j%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "858678ad99c91637afc6b824270871252c7456680befc88550fa6fa02e6bf2d5"
+      "source_abstract_sha256": "858678ad99c91637afc6b824270871252c7456680befc88550fa6fa02e6bf2d5",
+      "additional_directions": [
+        "inorganic"
+      ],
+      "additional_directions_reason": "有机合成方法综述的核心试剂是超价碘化合物，涉及碘中心高价态及反应性。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.chemrev.7b00259": {
       "title": "How Water’s Properties Are Encoded in Its Molecular Structure and Energies",
@@ -247,7 +290,13 @@
       "reason": "核心讨论催化位点、催化策略及反应机制。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facs.chemrev.7b00776%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "094ae6f3626befc597b6afd230a9314f6aa2a2c2b266ffe0f7ac14e7ccf45e3c"
+      "source_abstract_sha256": "094ae6f3626befc597b6afd230a9314f6aa2a2c2b266ffe0f7ac14e7ccf45e3c",
+      "additional_directions": [
+        "inorganic",
+        "materials"
+      ],
+      "additional_directions_reason": "综述金属单原子、纳米簇与纳米颗粒的活性位点和材料尺寸效应，兼属无机和材料化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acscentsci.0c01413": {
       "title": "C–H Activation: Toward Sustainability and Applications",
@@ -260,7 +309,12 @@
       "reason": "明确围绕 C–H 活化的可持续性、绿色化学原则及应用展开批判性综述。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facscentsci.0c01413%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "7ef6a1abfda371f770bf903ca95f89aeaf6a9c20865759af986e9db97faf1663"
+      "source_abstract_sha256": "7ef6a1abfda371f770bf903ca95f89aeaf6a9c20865759af986e9db97faf1663",
+      "additional_directions": [
+        "organic"
+      ],
+      "additional_directions_reason": "绿色化学综述的具体反应对象是 C–H 活化与合成应用，具有明确的有机化学内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/nature09472": {
       "title": "Quantitative reactivity profiling predicts functional cysteines in proteomes",
@@ -273,7 +327,12 @@
       "reason": "使用反应性或共价配体开展蛋白质组位点检测与功能研究。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fnature09472%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "f47ef2e285ae3a9ea0de60191cfceceab2ff1d71f2e43e7d36defd242f1cc73e"
+      "source_abstract_sha256": "f47ef2e285ae3a9ea0de60191cfceceab2ff1d71f2e43e7d36defd242f1cc73e",
+      "additional_directions": [
+        "analytical"
+      ],
+      "additional_directions_reason": "该蛋白质组反应性研究以位点定量检测与功能半胱氨酸比较为关键方法，具有分析化学内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1080/19490976.2026.2740921": {
       "title": "Distinction of meal quality and interaction with the gut microbiota by breath volatilome analysis in humans",
@@ -286,7 +345,12 @@
       "reason": "通过人体呼气挥发物分析区分餐食质量及肠道菌群相关变化，核心是分析检测与代谢表型。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1080%2F19490976.2026.2740921%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "ae697bf87be69e816715f9b6f46c95b8ececc4fb2a9a6b7aae9fbf5fed217373"
+      "source_abstract_sha256": "ae697bf87be69e816715f9b6f46c95b8ececc4fb2a9a6b7aae9fbf5fed217373",
+      "additional_directions": [
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "通过人体呼气挥发物连接餐食质量、代谢表型与肠道菌群作用，涉及生物体系的化学分析。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1080/10717544.2026.2679844": {
       "title": "Lysosome-directed targeted protein degradation technologies for overcoming cancer drug resistance: mechanisms, design principles, and therapeutic opportunities",
@@ -312,7 +376,12 @@
       "reason": "BindingDB 提供实验测定的蛋白-配体结合亲和力数据库，属于化学信息与药物发现数据资源。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1093%2Fnar%2Fgkl999%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "5a960bc4ff976eb151cce9e31feb1f1451d5fae84730cf34ffa1a26273dedd19"
+      "source_abstract_sha256": "5a960bc4ff976eb151cce9e31feb1f1451d5fae84730cf34ffa1a26273dedd19",
+      "additional_directions": [
+        "medicinal"
+      ],
+      "additional_directions_reason": "BindingDB 的实际数据是蛋白-配体结合亲和力，直接用于药物发现与计算筛选。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.7150/thno.18068": {
       "title": "Dual Somatostatin Receptor/FDG PET/CT Imaging in Metastatic Neuroendocrine Tumours: Proposal for a Novel Grading Scheme with Prognostic Significance",
@@ -338,7 +407,13 @@
       "reason": "研究配位不对称调控 Cu 位点重构及硝酸盐电还原制氨，主方向是电催化。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fadvs.78164%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "35a72cfb205ac3252b4b0ee9225fe45fa44d05e725ba42bf025f091510f68a34"
+      "source_abstract_sha256": "35a72cfb205ac3252b4b0ee9225fe45fa44d05e725ba42bf025f091510f68a34",
+      "additional_directions": [
+        "inorganic",
+        "materials"
+      ],
+      "additional_directions_reason": "研究 Cu 催化材料的配位不对称、活性位点重构和硝酸盐电还原制氨，兼有无机与材料内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1039/d6ra07599a": {
       "title": "Graphene nanoplatelet-enhanced PANI-PAMPSA ultrafiltration membranes: influence of conductivity on fouling and electro-assisted cleaning",
@@ -351,7 +426,13 @@
       "reason": "研究导电超滤膜的污染行为及电辅助清洗，核心是膜分离与运行过程。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1039%2Fd6ra07599a%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "64463ec60d654cdf363d4dd9a71a07b874bf7f8fd9b1451ff653f084d6a6eb08"
+      "source_abstract_sha256": "64463ec60d654cdf363d4dd9a71a07b874bf7f8fd9b1451ff653f084d6a6eb08",
+      "additional_directions": [
+        "materials",
+        "polymer"
+      ],
+      "additional_directions_reason": "膜分离研究的材料是石墨烯纳米片增强的 PANI-PAMPSA 高分子导电复合膜。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1002/gch2.70145": {
       "title": "Systematic Evaluation of Reaction Phase Effects on Photocatalytic CO 2 Reduction Using Cu‐Doped SrTiO 3",
@@ -364,7 +445,13 @@
       "reason": "核心讨论催化位点、催化策略及反应机制。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fgch2.70145%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "9f32966dd6229b7efa587746ad8637131251d5e001a4345b39327b2fe85ffe56"
+      "source_abstract_sha256": "9f32966dd6229b7efa587746ad8637131251d5e001a4345b39327b2fe85ffe56",
+      "additional_directions": [
+        "inorganic",
+        "materials"
+      ],
+      "additional_directions_reason": "光催化 CO2 还原实验使用 Cu 掺杂 SrTiO3 材料，实质比较其催化性质与反应相效应。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1186/2049-2618-1-28": {
       "title": "Colonization patterns of soil microbial communities in the Atacama Desert",
@@ -403,7 +490,12 @@
       "reason": "使用反应性或共价配体开展蛋白质组位点检测与功能研究。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fnature18002%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "b67c6764c220138651c5548bac9ef66dbf1f86d60f8196d66ac90434f99f4ef1"
+      "source_abstract_sha256": "b67c6764c220138651c5548bac9ef66dbf1f86d60f8196d66ac90434f99f4ef1",
+      "additional_directions": [
+        "medicinal"
+      ],
+      "additional_directions_reason": "在天然生物体系发现可结合蛋白的共价配体，既提供化学工具，也构成早期药物发现的配体资源。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/nature10879": {
       "title": "Phase Transitions in the Assembly of Multi-Valent Signaling Proteins",
@@ -455,7 +547,12 @@
       "reason": "直接研究抗抑郁或致幻剂相关神经可塑性、结构优化及治疗潜力。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1016%2Fj.celrep.2018.05.022%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "3c2049951cad4a11f2639588bf25aa73a55110a993412b28fb6f6510356d0922"
+      "source_abstract_sha256": "3c2049951cad4a11f2639588bf25aa73a55110a993412b28fb6f6510356d0922",
+      "additional_directions": [
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "以致幻剂诱导神经结构与功能可塑性实验研究药物的分子和细胞作用机制。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1073/pnas.2416106122": {
       "title": "Molecular design of a therapeutic LSD analogue with reduced hallucinogenic potential",
@@ -468,7 +565,13 @@
       "reason": "直接研究抗抑郁或致幻剂相关神经可塑性、结构优化及治疗潜力。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1073%2Fpnas.2416106122%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "1fa31ac371f0fa428ffbd27f0aff2ad2235ef27b262edccfe909a29755d30632"
+      "source_abstract_sha256": "1fa31ac371f0fa428ffbd27f0aff2ad2235ef27b262edccfe909a29755d30632",
+      "additional_directions": [
+        "chemical-biology",
+        "organic"
+      ],
+      "additional_directions_reason": "研究治疗性 LSD 类似物的分子结构设计及其神经药理与致幻潜力，兼有有机分子设计内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.chemrev.6b00512": {
       "title": "Applications of Palladium-Catalyzed C–N Cross-Coupling Reactions",
@@ -481,7 +584,12 @@
       "reason": "核心讨论有机合成反应方法、反应策略及应用。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facs.chemrev.6b00512%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "957c8291c937aa3a12d41d6a75405d670ea4be731dd7c2ef0372c646b0fee8da"
+      "source_abstract_sha256": "957c8291c937aa3a12d41d6a75405d670ea4be731dd7c2ef0372c646b0fee8da",
+      "additional_directions": [
+        "inorganic"
+      ],
+      "additional_directions_reason": "综述 Pd 催化碳氮交叉偶联，同时涉及有机合成和过渡金属催化反应体系。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.chemrev.6b00018": {
       "title": "Dual Catalysis Strategies in Photochemical Synthesis",
@@ -494,7 +602,12 @@
       "reason": "核心讨论催化位点、催化策略及反应机制。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facs.chemrev.6b00018%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "a43a2fd84cd0c046e48aca1d1d922209c9a369de0c388c6ba102902c17e1f2d3"
+      "source_abstract_sha256": "a43a2fd84cd0c046e48aca1d1d922209c9a369de0c388c6ba102902c17e1f2d3",
+      "additional_directions": [
+        "organic"
+      ],
+      "additional_directions_reason": "光化学双催化策略综述的主要反应应用是有机转化和合成，兼属有机化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/ncomms8497": {
       "title": "Ionic transport in hybrid lead iodide perovskite solar cells",
@@ -507,7 +620,13 @@
       "reason": "核心研究太阳能电池中离子输运及其器件相关行为。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fncomms8497%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "e82748e894639165345c2bc21bc6443b016396ae6ced4582b52acb6027d010f4"
+      "source_abstract_sha256": "e82748e894639165345c2bc21bc6443b016396ae6ced4582b52acb6027d010f4",
+      "additional_directions": [
+        "materials",
+        "inorganic"
+      ],
+      "additional_directions_reason": "研究杂化碘化铅钙钛矿太阳能电池中的离子传输，实际对象是金属卤化物光电材料。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.chemrev.5b00146": {
       "title": "Artificial Molecular Machines",
@@ -520,7 +639,12 @@
       "reason": "系统讨论人工分子机器的结构、运动控制和超分子设计。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facs.chemrev.5b00146%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "source_abstract_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "additional_directions": [
+        "organic"
+      ],
+      "additional_directions_reason": "人工分子机器综述实质讨论合成分子的结构设计及其可控运动，兼具有机化学内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41573-020-00114-z": {
       "title": "Natural products in drug discovery: advances and opportunities",
@@ -533,7 +657,12 @@
       "reason": "综述天然产物用于药物发现的机制、策略与机会。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fs41573-020-00114-z%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "1dbbf195a86a8886b30b96f1f8bf4fe4951dbf7367dc2ad026601c6b9d90d5d8"
+      "source_abstract_sha256": "1dbbf195a86a8886b30b96f1f8bf4fe4951dbf7367dc2ad026601c6b9d90d5d8",
+      "additional_directions": [
+        "organic"
+      ],
+      "additional_directions_reason": "天然产物药物发现综述涉及天然有机分子的结构、化学多样性、获得与优化策略。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/srep42717": {
       "title": "SwissADME: a free web tool to evaluate pharmacokinetics, drug-likeness and medicinal chemistry friendliness of small molecules",
@@ -572,7 +701,12 @@
       "reason": "直接研究抗抑郁或致幻剂相关神经可塑性、结构优化及治疗潜力。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3389%2Ffpsyt.2021.727117%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "0fea68778aa2783aef2a6954c9f93ff4a7fa88078daf39499924154c544ddddb"
+      "source_abstract_sha256": "0fea68778aa2783aef2a6954c9f93ff4a7fa88078daf39499924154c544ddddb",
+      "additional_directions": [
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "综述致幻剂及神经可塑性促进剂的分子和细胞作用机制与治疗用途，兼有生物化学内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1186/s13045-025-01703-4": {
       "title": "Targeted degradation of extracellular proteins: state of the art and diversity of degrader designs",
@@ -598,7 +732,13 @@
       "reason": "直接研究抗抑郁或致幻剂相关神经可塑性、结构优化及治疗潜力。",
       "reviewed_on": "2026-10-22",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1038%2Fs41586-020-3008-z%22&format=json&resultType=core&pageSize=3",
-      "source_abstract_sha256": "0b71f7fd4209a5ccb708aef9c6a02b129bd27f2fa66b737a5c636d469ea90a11"
+      "source_abstract_sha256": "0b71f7fd4209a5ccb708aef9c6a02b129bd27f2fa66b737a5c636d469ea90a11",
+      "additional_directions": [
+        "chemical-biology",
+        "organic"
+      ],
+      "additional_directions_reason": "通过分子结构改造获得低致幻潜力的类似物，并验证其神经可塑性与治疗相关生物学作用。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41586-019-0917-9": {
       "title": "Ultra-large library docking for discovering new chemotypes",
@@ -625,7 +765,13 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6391913/fullTextXML",
       "source_abstract_sha256": "3c55f787977d07eee46867ad45d3ad8e1228bb9697d3b656ecd4443b066a66ed",
-      "source_fulltext_xml_sha256": "43689040b4116413f964e88ab4d7c4c7df0ec48466c39ce99173a50211d2803c"
+      "source_fulltext_xml_sha256": "43689040b4116413f964e88ab4d7c4c7df0ec48466c39ce99173a50211d2803c",
+      "additional_directions": [
+        "computational",
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "QSep 以定量数据分析比较空间蛋白质组学实验的亚细胞分辨率，研究对象是蛋白质细胞定位。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1186/s13321-018-0283-x": {
       "title": "ADMETlab: a platform for systematic ADMET evaluation based on a comprehensively collected ADMET database",
@@ -653,7 +799,13 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13618335/fullTextXML",
       "source_abstract_sha256": "37fafe19efe1536110ba1327988ed678fe70070d0ba01efa81f9b424a608b880",
-      "source_fulltext_xml_sha256": "44126c673a7ab7b1ed21a015f258e14a379f7c59ee2f0c1bf18dcf268be18683"
+      "source_fulltext_xml_sha256": "44126c673a7ab7b1ed21a015f258e14a379f7c59ee2f0c1bf18dcf268be18683",
+      "additional_directions": [
+        "organic",
+        "computational"
+      ],
+      "additional_directions_reason": "除酶抑制活性评价外，文章完成杂环衍生物合成，并实施分子对接与 ADMET 预测。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.2967/jnumed.125.271705": {
       "title": "[ 177 Lu]Lu-AKIR001 for CD44v6-Positive Pancreatic Cancer: Preclinical Efficacy and Combination Strategies",
@@ -667,7 +819,13 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13544198/fullTextXML",
       "source_abstract_sha256": "4df760a12975817be543f1c2dba7f13adad310cade23a6234debd768312de698",
-      "source_fulltext_xml_sha256": "781580deeee3e747a8762bd5e36ba3893f18c1cfebc2b4eafa3ea22e4106e2f8"
+      "source_fulltext_xml_sha256": "781580deeee3e747a8762bd5e36ba3893f18c1cfebc2b4eafa3ea22e4106e2f8",
+      "additional_directions": [
+        "inorganic",
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "镥-177 标记靶向药物同时涉及放射性核素，并验证 CD44v6 结合、肿瘤摄取与治疗生物学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.2196/93446": {
       "title": "Incorporating Data From Text Messages and Email Into Psychotherapy: Randomized Controlled Trial",
@@ -695,7 +853,12 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13679714/fullTextXML",
       "source_abstract_sha256": "6ba7ac76c85015b84b2f2fd9eed7f88e7dac0740a324be5b03e010b84c9630fc",
-      "source_fulltext_xml_sha256": "157dbd6bb5aca7b095beb74c0f040e1dd39532782860129ff3c44665e14d133d"
+      "source_fulltext_xml_sha256": "157dbd6bb5aca7b095beb74c0f040e1dd39532782860129ff3c44665e14d133d",
+      "additional_directions": [
+        "medicinal"
+      ],
+      "additional_directions_reason": "综述同时涵盖氨基噁唑和氨基噻唑的合成策略与生物活性，具有明确的药物化学内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.chemrev.6b00440": {
       "title": "Metal Ion Modeling Using Classical Mechanics",
@@ -709,7 +872,12 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5312828/fullTextXML",
       "source_abstract_sha256": "002146264d766ddc75c825af2b797260ab2a2e0ba10c8088e446bb1991f7d1f5",
-      "source_fulltext_xml_sha256": "2bcb811a43b5ade494fc925900e0fb0fec5dc2475cf055d61f5932f905b29bdb"
+      "source_fulltext_xml_sha256": "2bcb811a43b5ade494fc925900e0fb0fec5dc2475cf055d61f5932f905b29bdb",
+      "additional_directions": [
+        "inorganic"
+      ],
+      "additional_directions_reason": "该计算综述的具体对象是金属离子的经典模型、配位、电荷和极化处理，直接关联无机化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41467-026-76790-z": {
       "title": "Ultrafast directional hot carrier transfer in bilayer perovskite heterojunctions",
@@ -723,7 +891,12 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13550544/fullTextXML",
       "source_abstract_sha256": "15a31e1772ecc543e01494bb867008b80d533d20e12e1b846a62102edcc9bb87",
-      "source_fulltext_xml_sha256": "30e32cb9770e3629797315d9bfd873088f7515f02fdec2eaa0004fcf6c41c05f"
+      "source_fulltext_xml_sha256": "30e32cb9770e3629797315d9bfd873088f7515f02fdec2eaa0004fcf6c41c05f",
+      "additional_directions": [
+        "physical"
+      ],
+      "additional_directions_reason": "文章以超快热载流子的定向界面传输与光电动力学为核心实验内容，兼属物理化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1002/advs.77159": {
       "title": "Hydraulic Pressure‐Programmed Molecular Transport in Tough Hydrogels",
@@ -737,7 +910,12 @@
       "reviewed_on": "2026-10-24",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13491361/fullTextXML",
       "source_abstract_sha256": "00210611dce25b2ce38870a6598b3982f7547bceb27306acd03aa215b70577ae",
-      "source_fulltext_xml_sha256": "8ae19cbd93affe8874adb0b2618ced010d8a22fa6aaa1e578e861fcd4f04c56b"
+      "source_fulltext_xml_sha256": "8ae19cbd93affe8874adb0b2618ced010d8a22fa6aaa1e578e861fcd4f04c56b",
+      "additional_directions": [
+        "physical"
+      ],
+      "additional_directions_reason": "水凝胶分子传输研究实质分析压力驱动的对流与分子扩散及其与网络结构的关系。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/ncomms5213": {
       "title": "A variational eigenvalue solver on a photonic quantum processor",
@@ -764,7 +942,12 @@
       "reason": "以糖基化位点突变、生物层干涉及分子动力学研究糖链如何调控刺突蛋白构象与受体结合。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7523240/fullTextXML",
-      "source_abstract_sha256": "2c67bfc2fd2699cb938f03c6e639101e03f3cf92e4bb2a61d13c383ee43458bf"
+      "source_abstract_sha256": "2c67bfc2fd2699cb938f03c6e639101e03f3cf92e4bb2a61d13c383ee43458bf",
+      "additional_directions": [
+        "computational"
+      ],
+      "additional_directions_reason": "除糖基化位点突变与结合实验外，分子动力学模拟是解析糖链调控刺突蛋白构象的核心证据。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1126/sciadv.1601314": {
       "title": "Wearable/disposable sweat-based glucose monitoring device with multistage transdermal drug delivery module",
@@ -777,7 +960,14 @@
       "reason": "将汗液电化学传感、软生物电子及温敏微针给药整合成反馈系统，核心是化学检测与器件递送交叉。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5342654/fullTextXML",
-      "source_abstract_sha256": "8f4eba9228283153095abe455543040fdcfae16cda339a8f0049a1289168ffff"
+      "source_abstract_sha256": "8f4eba9228283153095abe455543040fdcfae16cda339a8f0049a1289168ffff",
+      "additional_directions": [
+        "analytical",
+        "medicinal",
+        "materials"
+      ],
+      "additional_directions_reason": "器件整合汗液葡萄糖电化学检测、柔性生物电子材料与多阶段经皮给药，三者均有实际实验验证。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1186/s13321-026-01283-6": {
       "title": "BONAFIDE: a Python framework for the calculation of local features for atoms and bonds in molecules",
@@ -803,7 +993,13 @@
       "reason": "综述膜穿肽的物理化学机制、转位实验与细胞内递送，研究分子工具如何跨越生物膜。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13523643/fullTextXML",
-      "source_abstract_sha256": "846ed4aea7714c483ec2721579a01191ad7db9b604f469a4cf8ce844deed400e"
+      "source_abstract_sha256": "846ed4aea7714c483ec2721579a01191ad7db9b604f469a4cf8ce844deed400e",
+      "additional_directions": [
+        "physical",
+        "medicinal"
+      ],
+      "additional_directions_reason": "综述膜穿肽跨膜的物理化学机制、实验检测与细胞内递送，兼顾药物递送工具的设计问题。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41573-020-0073-9": {
       "title": "Radiopharmaceutical therapy in cancer: clinical advances and challenges",
@@ -816,7 +1012,12 @@
       "reason": "综述靶向放射性药物的基本性质、临床开发、剂量学及转化挑战，主要是治疗药物研发与应用。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7390460/fullTextXML",
-      "source_abstract_sha256": "33ac131ba1c6c060d29ca24bb32e019c86ce8a027f1a3f9134885684c842754b"
+      "source_abstract_sha256": "33ac131ba1c6c060d29ca24bb32e019c86ce8a027f1a3f9134885684c842754b",
+      "additional_directions": [
+        "inorganic"
+      ],
+      "additional_directions_reason": "靶向放射性药物综述实质讨论治疗核素、放射化学性质和药物构建，具有核与无机化学内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1016/j.sbi.2021.11.011": {
       "title": "Recent Progress in General Force Fields of Small Molecules",
@@ -842,7 +1043,12 @@
       "reason": "系统比较有机金属试剂构建手性碳碳键的对映选择性与对映特异性交叉偶联及控制立体化学的机制。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4566132/fullTextXML",
-      "source_abstract_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "source_abstract_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "additional_directions": [
+        "inorganic"
+      ],
+      "additional_directions_reason": "综述有机金属试剂和过渡金属催化体系的立体化学控制，兼有有机合成与金属配位反应内容。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41467-020-15316-7": {
       "title": "3D printing of conducting polymers",
@@ -868,7 +1074,13 @@
       "reason": "通过 COF 分子设计调节结构与光电性质并验证可见光析氢，属于能源转化材料与光催化。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4598847/fullTextXML",
-      "source_abstract_sha256": "c08f65482a252d3362c57b1fb3895ffe5ae6febdec7c048dc647aba827df757d"
+      "source_abstract_sha256": "c08f65482a252d3362c57b1fb3895ffe5ae6febdec7c048dc647aba827df757d",
+      "additional_directions": [
+        "materials",
+        "organic"
+      ],
+      "additional_directions_reason": "通过有机框架分子设计和 COF 制备调节结构与光电性质，并以可见光析氢实验验证功能。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1126/sciadv.aba4098": {
       "title": "Roadmap for advanced aqueous batteries: From design of materials to applications",
@@ -881,7 +1093,12 @@
       "reason": "综述先进水系电池的电解质窗口、离子载流子、电极稳定性与器件应用路线，核心是储能电化学。",
       "reviewed_on": "2026-10-25",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7244306/fullTextXML",
-      "source_abstract_sha256": "1d817353b918fc643dbe0a599c7b8a8f3018451b557f21f12a8decd869816833"
+      "source_abstract_sha256": "1d817353b918fc643dbe0a599c7b8a8f3018451b557f21f12a8decd869816833",
+      "additional_directions": [
+        "materials"
+      ],
+      "additional_directions_reason": "水系电池路线图实质比较电极、电解质与界面材料的稳定性和器件应用，而不仅讨论电化学原理。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1039/d6ra02940j": {
       "title": "Health risk assessment of trace elements in plant-based cosmetics and personal care products using inductively coupled plasma-mass spectrometry (ICP-MS)",
@@ -907,7 +1124,12 @@
       "reason": "比较中性/带电探针采样与 Drude 极化力场，改进高电荷酶口袋的药效团建模和虚拟筛选，核心是计算药物发现。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13663488/fullTextXML",
-      "source_abstract_sha256": "62adc6cff0123709ba953e8bb3c7f5081b6c97698e497a85566db2ecd61c1a6b"
+      "source_abstract_sha256": "62adc6cff0123709ba953e8bb3c7f5081b6c97698e497a85566db2ecd61c1a6b",
+      "additional_directions": [
+        "physical"
+      ],
+      "additional_directions_reason": "除药物虚拟筛选外，文章实质比较中性与带电片段采样、极化力场和自由能相互作用图。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41573-022-00542-z": {
       "title": "Advances in covalent drug discovery",
@@ -920,7 +1142,13 @@
       "reason": "综述共价药物的反应性、选择性、动力学和临床研发实例；计算设计只是工具之一，主方向应为药物发现。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9403961/fullTextXML",
-      "source_abstract_sha256": "4ab69f24ede522a84c9f3a5746e67343f7b3f98334d97ab524a253d52b6155bd"
+      "source_abstract_sha256": "4ab69f24ede522a84c9f3a5746e67343f7b3f98334d97ab524a253d52b6155bd",
+      "additional_directions": [
+        "organic",
+        "chemical-biology"
+      ],
+      "additional_directions_reason": "综述共价药物中亲电基团设计、共价反应动力学和化学蛋白质组学的靶标及选择性检测。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1186/s12951-018-0392-8": {
       "title": "Nano based drug delivery systems: recent developments and future prospects",
@@ -933,7 +1161,13 @@
       "reason": "以材料组成、刺激响应释放和转化障碍组织纳米药物递送体系的综述，核心是药物制剂与递送。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6145203/fullTextXML",
-      "source_abstract_sha256": "ba8196a2eed1cd09242a53d8aecb3db4f5688513e2c73ef0c72fffea53cadd1a"
+      "source_abstract_sha256": "ba8196a2eed1cd09242a53d8aecb3db4f5688513e2c73ef0c72fffea53cadd1a",
+      "additional_directions": [
+        "materials",
+        "polymer"
+      ],
+      "additional_directions_reason": "以纳米载体的组成与响应释放组织综述，并实质讨论壳聚糖等高分子载体的药物递送。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41467-017-01035-z": {
       "title": "Understanding activity and selectivity of metal-nitrogen-doped carbon catalysts for electrochemical reduction of CO 2",
@@ -946,7 +1180,14 @@
       "reason": "结合多种金属氮碳单活性中心的实验活性和 DFT 中间体结合能，建立 CO2 还原催化活性与选择性描述符。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5643516/fullTextXML",
-      "source_abstract_sha256": "84e6d422d8234cda9776b7b2c531d516b46ccb51031d9f8842c6749c849f0d3f"
+      "source_abstract_sha256": "84e6d422d8234cda9776b7b2c531d516b46ccb51031d9f8842c6749c849f0d3f",
+      "additional_directions": [
+        "inorganic",
+        "materials",
+        "computational"
+      ],
+      "additional_directions_reason": "比较金属氮碳催化位点与多孔碳材料的电催化性质，并以 DFT 中间体结合能解释活性和选择性。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1021/acs.analchem.6c02269": {
       "title": "DES-Based Green Synthesis of 2D Fluorescent Molybdenum Disulfide for Highly Sensitive and Selective Detection of Nifedipine",
@@ -972,7 +1213,12 @@
       "reason": "受控甲烷释放结合气体扩散、碳同位素和功能组学，解释土壤氧化还原边界与碳转化耦合。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13492269/fullTextXML",
-      "source_abstract_sha256": "82273692090992db3a9c168049f0bc181abebc6c04a12445d6e6c8a516e8f8a8"
+      "source_abstract_sha256": "82273692090992db3a9c168049f0bc181abebc6c04a12445d6e6c8a516e8f8a8",
+      "additional_directions": [
+        "analytical"
+      ],
+      "additional_directions_reason": "受控甲烷释放实验的关键证据包含碳同位素、碳氮比、气体浓度和碳酸盐的空间化学测量。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1039/d6sc05000j": {
       "title": "Cross-dehydrogenative coupling macrocyclization for the construction of donor–acceptor nanohoops",
@@ -985,7 +1231,12 @@
       "reason": "开发直接 C–H/C–H 交叉脱氢偶联大环化与室温还原芳构化，主要贡献为供体-受体纳米环的合成路线。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13621426/fullTextXML",
-      "source_abstract_sha256": "d7c6fa42343d05afbec6056582ba9a8cdba8c65ecce21692924fab15d387715c"
+      "source_abstract_sha256": "d7c6fa42343d05afbec6056582ba9a8cdba8c65ecce21692924fab15d387715c",
+      "additional_directions": [
+        "materials"
+      ],
+      "additional_directions_reason": "除纳米环有机合成外，还实测给受体结构、晶体堆积、客体作用和光电性质。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/s41467-026-76827-3": {
       "title": "Bright isolated light pulses reaching 18 attoseconds from high-order harmonic generation by post-compressed Yb lasers",
@@ -1037,7 +1288,12 @@
       "reason": "系统比较电有机合成中电极电子转移、介导剂、催化耦合与流动电解的研究路线和放大条件。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6001547/fullTextXML",
-      "source_abstract_sha256": "803c52efb34638eca71e232cb69a983140beb17977ceb83ba3ecb6ad9b748ba5"
+      "source_abstract_sha256": "803c52efb34638eca71e232cb69a983140beb17977ceb83ba3ecb6ad9b748ba5",
+      "additional_directions": [
+        "organic"
+      ],
+      "additional_directions_reason": "综述的具体对象是有机化合物的电化学转化、介导氧化还原与合成方法，兼属有机化学。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1038/ncomms2040": {
       "title": "Imaging enzyme-triggered self-assembly of small molecules inside live cells",
@@ -1050,7 +1306,13 @@
       "reason": "设计荧光自组装前体并以酶脱磷酸化触发，在活细胞中直接成像组装位置和动态，中心贡献是研究细胞内化学过程的分子工具。",
       "reviewed_on": "2026-10-26",
       "source_url": "https://europepmc.org/articles/PMC3521559",
-      "source_abstract_sha256": "0224642adb3803860d622a27542fb605fd31a9923fa65965d9b25f5b8ad5b5b0"
+      "source_abstract_sha256": "0224642adb3803860d622a27542fb605fd31a9923fa65965d9b25f5b8ad5b5b0",
+      "additional_directions": [
+        "materials",
+        "physical"
+      ],
+      "additional_directions_reason": "荧光凝胶前体的酶促转化、纳米纤维自组装及其细胞内成像，同时涉及材料组装和超分子相互作用。",
+      "additional_directions_reviewed_on": "2026-10-26"
     },
     "10.1016/j.redox.2026.104436": {
       "title": "Structural basis for cysteine-linked redox-state plasticity in mammalian methionine sulfoxide reductase A",

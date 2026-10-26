@@ -91,7 +91,7 @@ if paper:
 
 period=reading_period(records,view,today)
 if view=='archive':
-    if direction!='all' and not any(r['direction']==direction for r in period):
+    if direction!='all' and not filter_papers(period,direction=direction):
         direction='all'
     filtered=filter_papers(period,kind,direction)
 else:
@@ -102,10 +102,12 @@ if browse:
     label='研究方向' if browse=='direction' else '论文类型'
     english='SUBJECT INDEX' if browse=='direction' else 'ARTICLE TYPES'
     choices=category_counts(period,browse,kind,direction)
+    hint=('按篇数从多到少排列 · 同一论文可计入多个分类' if browse=='direction'
+          else '按篇数从多到少排列 · 点击分类查看论文')
     st.button('返回往期论文',key='category-back',on_click=open_view,args=('archive',kind,direction))
     st.html('<header id="reading-top" class="reader-category-heading">'
             f'<p>{english}</p><h1>{label}</h1>'
-            '<span>按篇数从多到少排列 · 点击分类查看论文</span></header>')
+            f'<span>{hint}</span></header>')
     with st.container(key='reader-category-choices'):
         for offset in range(0,len(choices),2):
             columns=st.columns(2,gap='medium')
@@ -165,7 +167,7 @@ def render_directory_card(index,record):
     with st.container(key=key):
         st.button(f'**{index:02d}**　{title} →',key=key+'-button',use_container_width=True,
                   on_click=open_paper,args=(record['key'],view,kind,direction))
-        st.html(directory_metadata(item,record['type'],record['direction']))
+        st.html(directory_metadata(item,record['type'],record['directions']))
 
 
 with st.container(key='reader-directory'):

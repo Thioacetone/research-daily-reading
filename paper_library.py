@@ -61,6 +61,21 @@ DIRECTION_GROUPS={
     'other':'other',
 }
 
+# These secondary disciplines follow a verified specific subject, never search
+# keywords or generated future applications. Paper-specific additions require
+# an exact reviewed DOI/title pair and a recorded original-evidence rationale.
+RELATED_DISCIPLINES={
+    'cadd-aidd':('medicinal',),
+    'theoretical':('physical',),
+    'computational-structural-biology':('chemical-biology',),
+    'bioorthogonal':('organic',),
+    'chemical-probes':('organic',),
+    'protein-degradation':('medicinal',),
+    'drug-delivery':('materials',),
+    'biophysical':('chemical-biology',),
+    'polymer':('materials',),
+}
+
 
 def browse_direction(subject):
     return DIRECTION_GROUPS.get(subject,subject if subject in BROWSE_DIRECTIONS else 'other')
@@ -68,6 +83,26 @@ def browse_direction(subject):
 
 def reader_direction(item):
     return browse_direction(paper_direction(item))
+
+
+def reader_directions(item):
+    """All supported reader labels, with the primary discipline first."""
+    subject=paper_direction(item);primary=browse_direction(subject)
+    if primary=='other':return ['other']
+    values=[primary,*RELATED_DISCIPLINES.get(subject,())]
+    row=reviewed(item)
+    if row and len(row.get('additional_directions_reason',''))>=20:
+        values.extend(row.get('additional_directions',[]))
+    return list(dict.fromkeys(k for k in values if k in BROWSE_DIRECTIONS and k!='other'))
+
+
+def record_directions(record):
+    values=record.get('directions')
+    if isinstance(values,(list,tuple)):
+        return list(dict.fromkeys(browse_direction(k) for k in values))
+    if isinstance(record.get('item'),dict):return reader_directions(record['item'])
+    subject=record.get('direction','other')
+    return list(dict.fromkeys([browse_direction(subject),*RELATED_DISCIPLINES.get(subject,())]))
 
 
 def saved_cards(entry):
@@ -164,7 +199,8 @@ def build_paper_library(reports, history=None):
             if updated_on:
                 date.fromisoformat(updated_on)
             record={'key':key,'item':item,'content':content,'day':entry['day'],'updated_on':updated_on,
-                    'type':paper_type(item),'direction':reader_direction(item)}
+                    'type':paper_type(item),'direction':reader_direction(item),
+                    'directions':reader_directions(item)}
             records.append(record)
             for alias in identities:by_identity[alias]=record
     return newest_first(records)
@@ -174,7 +210,7 @@ def filter_papers(records,kind='all',direction='all'):
     direction=direction if direction=='all' else browse_direction(direction)
     return [record for record in records
             if (kind=='all' or record['type']==kind)
-            and (direction=='all' or browse_direction(record['direction'])==direction)]
+            and (direction=='all' or direction in record_directions(record))]
 
 
 def category_counts(records,axis,kind='all',direction='all'):
@@ -190,7 +226,7 @@ def category_counts(records,axis,kind='all',direction='all'):
     rows=[]
     for key,label in labels.items():
         count=len(scope) if key=='all' else sum(
-            (browse_direction(record[axis]) if axis=='direction' else record[axis])==key for record in scope)
+            key in record_directions(record) if axis=='direction' else record[axis]==key for record in scope)
         if count or key=='all':rows.append({'key':key,'label':label,'count':count})
     return sorted(rows,key=lambda row:(-row['count'],row['key']!='all',row['label']))
 
