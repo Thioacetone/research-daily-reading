@@ -438,7 +438,7 @@ def main():
         values=preflight_state(ROOT,args.date)
         if os.environ.get('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
-                for key,value in values.items():f.write(key+'='+value+'\n')
+                for key,value in values.items():f.write(key+'='+str(value)+'\n')
         print(json.dumps(values))
     elif args.mode=='worker':
         if not args.lane:p.error('--lane is required')
