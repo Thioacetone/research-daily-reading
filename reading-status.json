@@ -1,16 +1,14 @@
 {
-  "checked_at": "2026-10-26T11:04:10.585998+08:00",
+  "checked_at": "2026-10-26T22:11:23.408245+08:00",
   "today": "2026-10-26",
   "today_ready": true,
-  "published_now": [
-    "2026-10-26"
-  ],
+  "published_now": [],
   "next_pending": {
     "day": "2026-10-27",
     "run": "true",
     "generate": "true",
-    "lanes": "[\"chemical-biology\", \"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"geochemistry\"]",
-    "available": 4,
-    "priority_available": 1
+    "lanes": "[\"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"geochemistry\", \"chemical-engineering\"]",
+    "available": 6,
+    "priority_available": 3
   }
 }
