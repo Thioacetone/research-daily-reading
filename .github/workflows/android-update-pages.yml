@@ -56,11 +56,12 @@ jobs:
               target=output/'android/releases'/version.name/'daily-reading.apk'
               target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(apk,target)
           name=html.escape(manifest['versionName']);notes=html.escape(manifest['releaseNotes'])
+          app_name=html.escape(manifest.get('appName','每日论文精读'))
           page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-          <title>每日论文精读 · 安卓更新</title><style>body{margin:0;background:#f5f7fb;color:#253347;font:17px/1.8 system-ui,sans-serif}main{max-width:620px;margin:8vh auto;padding:28px}h1{font-size:30px}a{display:inline-block;padding:13px 26px;background:#52618a;color:white;text-decoration:none;border-radius:14px}pre{white-space:pre-wrap;font:inherit}small{overflow-wrap:anywhere;color:#657185}</style>
-          <main><h1>每日论文精读</h1><p>安卓新版 VERSION · Android 8.0 及以上</p><a href="APKPATH" download>下载新版 APP</a><pre>NOTES</pre>
+          <title>APPNAME · 安卓更新</title><style>body{margin:0;background:#f5f7fb;color:#253347;font:17px/1.8 system-ui,sans-serif}main{max-width:620px;margin:8vh auto;padding:28px}h1{font-size:30px}a{display:inline-block;padding:13px 26px;background:#52618a;color:white;text-decoration:none;border-radius:14px}pre{white-space:pre-wrap;font:inherit}small{overflow-wrap:anywhere;color:#657185}</style>
+          <main><h1>APPNAME</h1><p>安卓新版 VERSION · Android 8.0 及以上</p><a href="APKPATH" download>下载新版 APP</a><pre>NOTES</pre>
           <p>已安装 1.1.11 或更高版本可直接覆盖安装，无需卸载。下载完成后，请按安卓系统提示确认安装。</p><small>SHA-256: DIGEST</small></main></html>'''
-          page=page.replace('VERSION',name).replace('APKPATH',relative.as_posix()).replace('NOTES',notes).replace('DIGEST',manifest['sha256'])
+          page=page.replace('APPNAME',app_name).replace('VERSION',name).replace('APKPATH',relative.as_posix()).replace('NOTES',notes).replace('DIGEST',manifest['sha256'])
           (output/'index.html').write_text(page);(output/'.nojekyll').touch()
           print('Prepared verified Android release '+manifest['versionName'])
           PY
