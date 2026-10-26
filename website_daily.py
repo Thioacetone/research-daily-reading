@@ -1,5 +1,6 @@
 """Cloud-only daily website build; no email credentials or inference API calls."""
 import argparse
+from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 import hashlib
 import json
@@ -65,11 +66,21 @@ def collect_candidates(root,pools):
     _,saved=history(root)
     items=candidate_bank(root,set(saved));seen=set(saved)
     for item in items:seen.update(identity_keys(item))
+    held_pool=[]
+    rejection_path=Path(root)/'reading-candidates.json'
+    previous=json.loads(rejection_path.read_text(encoding='utf-8')) if rejection_path.exists() else {}
+    rejections=previous.get('rejections',{})
+    today=datetime.now(BJ).date().isoformat()
+    rejections={k:v for k,v in rejections.items() if v.get('until','')>today}
     for path in sorted(Path(pools).rglob('*.json')):
         value=json.loads(path.read_text(encoding='utf-8'))
+        rejections.update(value.get('rejections',{}))
         for item in value.get('items',[]):
             keys=identity_keys(item)
-            if keys&seen or not quality(item):continue
+            if keys&seen:continue
+            if not quality(item):
+                held_pool.append(item)
+                continue
             items.append(item);seen.update(keys)
     destination=Path(root)/'reading-candidates.json'
     # Keep completed older reviews for reclassification; never count them as
@@ -81,8 +92,13 @@ def collect_candidates(root,pools):
             keys=identity_keys(item)
             if keys&seen:continue
             held.append(item);seen.update(keys)
+    for item in held_pool:
+        keys=identity_keys(item)
+        if keys&seen:continue
+        held.append(item);seen.update(keys)
     temporary=destination.with_suffix('.tmp')
-    temporary.write_text(json.dumps({'policy_version':POLICY_VERSION,'items':items+held},ensure_ascii=False),encoding='utf-8')
+    temporary.write_text(json.dumps({'policy_version':POLICY_VERSION,'items':items+held,
+                                    'rejections':rejections},ensure_ascii=False),encoding='utf-8')
     temporary.replace(destination)
     print(json.dumps({'unused_completed_reviews':len(items),'held_for_reclassification':len(held)}))
 
@@ -112,13 +128,35 @@ def already_published(root,day):
 
 def preflight_state(root,day):
     ready=already_published(root,day)
-    generate=False
+    generate=False;lanes=[];counts=Counter()
     if not ready:
         _,saved=history(root)
-        try:choose_daily(candidate_bank(root,set(saved)),set(saved),quality_check=quality)
-        except PolicyError:generate=True
+        bank=candidate_bank(root,set(saved))
+        counts.update(direction(i) for i in bank)
+        try:choose_daily(bank,set(saved),quality_check=quality)
+        except PolicyError:
+            generate=True
+            capacity=sum(min(3,n) for n in counts.values())
+            priority=sum(min(3,counts[k]) for k in PRIORITY)
+            # Fix the binding quota first. Never rerun already-sufficient broad
+            # lanes while the whole issue is blocked by one missing priority.
+            lanes=[k for k in DIRECTIONS if k in PRIORITY and counts[k]<3] if priority<5 else []
+            if capacity<10:
+                broad=[k for k in DIRECTIONS if k not in PRIORITY and counts[k]<2]
+                broad.sort(key=lambda k:(counts[k],hashlib.sha256((day+k).encode()).digest()))
+                lanes+=broad[:max(1,6-len(lanes))]
     return {'day':day,'run':str(not ready).lower(),'generate':str(generate).lower(),
-            'lanes':json.dumps(list(DIRECTIONS))}
+            'lanes':json.dumps(lanes),'available':sum(counts.values()),
+            'priority_available':sum(min(3,counts[k]) for k in PRIORITY)}
+
+
+def automatic_day(root,today=None,horizon=2):
+    """Repair today first, then prepare two days ahead; never abandon a gap."""
+    current=today or datetime.now(BJ).date()
+    for offset in range(horizon+1):
+        day=(current+timedelta(days=offset)).isoformat()
+        if not already_published(root,day):return day
+    return (current+timedelta(days=horizon)).isoformat()
 
 
 def requested_day(value=None,next_day=False,today=None):
@@ -221,6 +259,13 @@ def worker(root,lane,day,output):
     from recommendation_writer import DeepReadingWriter
     from journal_discovery import JournalRegistry
     reports,saved=history(root);used=set(saved)
+    # Existing stock is available to the assembler, not a fresh discovery by
+    # every worker. Recounting it here made all subsequent retries stall.
+    for item in candidate_bank(root,used):used.update(identity_keys(item))
+    bank_path=Path(root)/'reading-candidates.json'
+    state=json.loads(bank_path.read_text(encoding='utf-8')) if bank_path.exists() else {}
+    for key,row in state.get('rejections',{}).items():
+        if row.get('until','')>datetime.now(BJ).date().isoformat():used.add(key)
     registry=JournalRegistry.load(root)
     result=[];writer=DeepReadingWriter(root)
     diagnostics={'discovered':0,'fulltext_failed':0,'journal_rejected':0,
@@ -230,7 +275,24 @@ def worker(root,lane,day,output):
         reasons=diagnostics['rejection_reasons']
         reasons[value]=reasons.get(value,0)+1
     target=2 if lane in PRIORITY else 1
-    curated=[i for i in candidate_bank(root,used)+load_catalog(root) if direction(i)==lane and not identity_keys(i)&used]
+    rejected={}
+    output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
+    def checkpoint():
+        diagnostics['qualified']=len(result)
+        temporary=output.with_suffix('.tmp')
+        temporary.write_text(json.dumps({'day':day,'lane':lane,'items':result,
+                             'diagnostics':diagnostics,'rejections':rejected},ensure_ascii=False),encoding='utf-8')
+        temporary.replace(output)
+    def reject_candidate(candidate,why):
+        rejected.update({k:{'until':(datetime.now(BJ).date()+timedelta(days=3)).isoformat(),
+                               'reason':why} for k in identity_keys(candidate) if k.startswith('doi:')})
+        checkpoint()
+    def enough():
+        # Cross-lane successes are retained, but a broad discovery must not
+        # terminate a worker whose purpose is to fill a priority-area deficit.
+        return sum(direction(i)==lane for i in result)>=target or len(result)>=6
+    checkpoint()
+    curated=[i for i in load_catalog(root) if direction(i)==lane and not identity_keys(i)&used]
     for item in curated:
         if identity_keys(item)&used:continue
         if not registry.match(item.get('venue','')):continue
@@ -238,9 +300,9 @@ def worker(root,lane,day,output):
         except (OSError,ValueError):
             diagnostics['bilingual_failed']+=1
             continue
-        result.append(item);used.update(identity_keys(item))
-        if len(result)>=target:break
-    if len(result)<target:
+        result.append(item);used.update(identity_keys(item));checkpoint()
+        if enough():break
+    if not enough():
         source_audit={}
         candidates=discover(root,lane,used,day,audit=source_audit)
         diagnostics['sources']=source_audit
@@ -263,6 +325,7 @@ def worker(root,lane,day,output):
                 if not units_complete(paper):supplement_affiliations(paper,root)
                 if not units_complete(paper):
                     diagnostics['editorial_rejected']+=1;reason('affiliation_detail_or_country')
+                    reject_candidate(candidate,'affiliation_detail_or_country')
                     continue
                 stage='editorial_rejected'
                 diagnostics['editorial_attempts']+=1
@@ -274,6 +337,7 @@ def worker(root,lane,day,output):
                     rejection=str(getattr(writer,'last_rejection','') or 'final_item_check')
                     reason(rejection)
                     LOG.info('Candidate rejected: %s (%s)',candidate['doi'],rejection)
+                    reject_candidate(candidate,rejection)
                     continue
                 stage='bilingual_failed'
                 item=prepare_item(root,item,day,writer)
@@ -283,12 +347,11 @@ def worker(root,lane,day,output):
                 if str(exc)=='Full-text evidence exceeds the model context budget':detail='model_context_budget'
                 reason(stage+':'+detail)
                 LOG.warning('Candidate did not pass full-text or bilingual checks: %s',candidate['doi'])
+                reject_candidate(candidate,stage+':'+detail)
                 continue
-            result.append(item);used.update(identity_keys(item))
-            if len(result)>=target:break
-    diagnostics['qualified']=len(result)
-    output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
-    output.write_text(json.dumps({'day':day,'lane':lane,'items':result,'diagnostics':diagnostics},ensure_ascii=False),encoding='utf-8')
+            result.append(item);used.update(identity_keys(item));checkpoint()
+            if enough():break
+    checkpoint()
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         summary=[f'### {lane}',f'- Date: {day}',
                  *[f'- {key}: {value}' for key,value in diagnostics.items()],
@@ -342,18 +405,36 @@ def combine(root,day,pools):
     print(json.dumps(audit,ensure_ascii=False))
 
 
+def release_window(root,pools,today=None,horizon=2):
+    """Publish every available issue in date order, preserving prior editions."""
+    current=today or datetime.now(BJ).date();published=[];pending=None
+    for offset in range(horizon+1):
+        day=(current+timedelta(days=offset)).isoformat()
+        if already_published(root,day):continue
+        try:combine(root,day,pools)
+        except PolicyError:
+            pending=preflight_state(root,day);break
+        published.append(day)
+    status={'checked_at':datetime.now(BJ).isoformat(),'today':current.isoformat(),
+            'today_ready':already_published(root,current.isoformat()),
+            'published_now':published,'next_pending':pending}
+    (Path(root)/'reading-status.json').write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps(status,ensure_ascii=False))
+    return status
+
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('mode',choices=('preflight','worker','collect','combine'))
+    p=argparse.ArgumentParser();p.add_argument('mode',choices=('preflight','worker','collect','combine','release'))
     p.add_argument('--date')
     p.add_argument('--next-day',action='store_true')
     p.add_argument('--lane',choices=list(DIRECTIONS));p.add_argument('--output',default='pool/result.json')
     p.add_argument('--pools',default='pool');args=p.parse_args()
     if args.next_day and args.mode!='preflight':p.error('--next-day is only used by preflight')
-    args.date=requested_day(args.date,args.next_day)
+    args.date=(automatic_day(ROOT) if args.mode=='preflight' and not args.date and not args.next_day
+               else requested_day(args.date,args.next_day))
     if args.mode=='preflight':
-        import os
-        if not datetime.now(BJ).date()<=date.fromisoformat(args.date)<=datetime.now(BJ).date()+timedelta(days=1):
-            p.error('Only today or tomorrow can be generated automatically')
+        if not datetime.now(BJ).date()<=date.fromisoformat(args.date)<=datetime.now(BJ).date()+timedelta(days=2):
+            p.error('Only today or the next two days can be generated automatically')
         values=preflight_state(ROOT,args.date)
         if os.environ.get('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
@@ -363,6 +444,14 @@ def main():
         if not args.lane:p.error('--lane is required')
         worker(ROOT,args.lane,args.date,args.output)
     elif args.mode=='collect':collect_candidates(ROOT,args.pools)
+    elif args.mode=='release':
+        status=release_window(ROOT,args.pools)
+        target_ready=already_published(ROOT,args.date)
+        if os.environ.get('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+                f.write('published='+str(bool(status['published_now'])).lower()+'\n')
+                f.write('target_ready='+str(target_ready).lower()+'\n')
+        if not target_ready:raise PolicyError('Requested issue is incomplete; saved candidates will be retried automatically')
     else:combine(ROOT,args.date,args.pools)
 
 

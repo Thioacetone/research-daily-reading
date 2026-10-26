@@ -181,7 +181,14 @@ def checked_audit(item):
 
 
 def classification(item):
-    return reviewed(item) or checked_audit(item)
+    row = reviewed(item) or checked_audit(item)
+    if row is None:return None
+    # The evidence retains the precise scientific label. Daily quotas use the
+    # shared parent subject, so probes/degraders cannot disappear or evade 3/day.
+    from reading_policy import ALIASES
+    subject=row.get('direction','')
+    return {**row,'direction':ALIASES.get(subject,subject),
+            'display_direction':row.get('display_direction') or subject}
 
 
 def classification_ready(item):
