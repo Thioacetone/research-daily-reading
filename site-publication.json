@@ -1,4 +1,44 @@
 {
+  "doi:10.1016/j.redox.2026.104436": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "f559e28cc25298ac2eb939ee4559796bc28a3b0091337f618fe1dcf8420a3e20"
+  },
+  "doi:10.1021/acs.chemrev.7b00287": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "7a5059cd077928cabe0dcd6b95bb1039027fa11f997dfefa0c22c08e829cbe93"
+  },
+  "doi:10.1093/bib/bby061": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "0b1ece2711bcf8b748698d665fc22d71cc5430dea9c49234853f000c3346aa8a"
+  },
+  "doi:10.1371/journal.pbio.3004002": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "a8f2cd5a5e1caa514e1ef301a5f010d2a7eaf5735ab29259013ffdc95190a947"
+  },
+  "doi:10.1038/s41573-020-0075-7": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "98a9dc2e57259d0defcb10cc75642842da26785359f7be20f6082058aff090a3"
+  },
+  "doi:10.1016/j.bbi.2015.06.001": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "b1466301cb8959765f3e457621329dc4b9b838fd7281699dba5793fc2bc21976"
+  },
+  "doi:10.1021/acs.analchem.6c01976": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "dac1e7653ee13857c7e6d8c7cc8708b64af51729163d002fa66829391074db7d"
+  },
+  "doi:10.1038/s41467-019-13941-5": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "ed87ca5de5def36e7def8f876af1a5b8553187ca81a5620b4a4462a534e5c0b2"
+  },
+  "doi:10.1038/s41467-017-00055-z": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "ed31e3cba088b0463575ea0109e32275eff0d986093a59e8dacb3ad2ce46e69e"
+  },
+  "doi:10.1021/acscatal.3c00591": {
+    "updated_on": "2026-10-27",
+    "content_sha256": "32dbd89b9eb3ff27e1a1a11580a4b7571952ac1f14ec43063e5e9a2a44a465ef"
+  },
   "doi:10.1016/j.molcel.2016.11.017": {
     "updated_on": "2026-10-26",
     "content_sha256": "365615a8be3609160d1bd87b4313248eedd3475894ee9576e92c47f87ffb9ee4"
