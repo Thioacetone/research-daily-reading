@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
+  "appName": "读文献的硫代丙酮",
   "packageId": "com.thioacetone.reading",
-  "versionCode": 101301,
-  "versionName": "1.1.13",
+  "versionCode": 101401,
+  "versionName": "1.1.14",
   "minSdk": 26,
-  "sizeBytes": 27604715,
-  "sha256": "92c3288f1abb991e92a705f567bcb5897db194c47afaa933488c0c2afbcde66e",
+  "sizeBytes": 27605979,
+  "sha256": "616a8004bc4d45e7a29290f7c3fa5dab05a21938a09a5b5f20c1e7f3748faf0a",
   "signingCertificateSha256": "471c23c3e545396224ab2e3ce1b7029b294e4dd2f8e57db47cbe559d9ff7c1f4",
-  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101301/daily-reading.apk",
-  "releaseNotes": "修复检查更新只依赖单一下载域名的问题，新增独立静态更新站点，连接失败时自动切换备用地址。\n更新失败会显示具体连接原因，并提供重试和浏览器下载入口；自动检查失败后不再等待六小时才能重试。\n保留 GIF 加载动画、安装包摘要和签名验证；1.1.11 及以上版本可直接覆盖安装。"
+  "apkUrl": "https://raw.githubusercontent.com/Thioacetone/research-daily-reading/main/android/releases/101401/daily-reading.apk",
+  "releaseNotes": "APP 正式更名为“读文献的硫代丙酮”。\n桌面名称、启动加载提示、系统应用名称和更新安装提示同步更名。\n保留原应用包名与签名，可直接覆盖升级；论文库、GIF 加载动画和应用内更新功能保持可用。"
 }
