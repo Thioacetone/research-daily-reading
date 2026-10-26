@@ -9,7 +9,7 @@ importlib.invalidate_caches()
 from app_branding import ARTWORK,choose_artwork,palette_from_rgb
 from cloud_bundle import ensure_bundled_files
 from reading_library import load_library
-from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper,published_signature
+from paper_library import DIRECTION_LABELS,TYPE_LABELS,as_collection,build_paper_library,filter_papers,reading_period,beijing_today,page_parameters,selected_paper,published_signature,category_counts
 from reading_view import article_cards,hero,navigation_script,page_css,directory_metadata
 
 ROOT=Path(__file__).resolve().parent
@@ -49,13 +49,9 @@ except (ValueError,OSError):
     st.error('论文库暂时无法完整读取，请稍后刷新。')
     st.stop()
 
-def open_view(view, kind='all', direction='all'):
-    st.query_params.from_dict(page_parameters(view,kind,direction))
+def open_view(view, kind='all', direction='all', browse=None):
+    st.query_params.from_dict(page_parameters(view,kind,direction,browse=browse))
     st.session_state.reading_scroll_top=True
-
-
-def apply_filters():
-    open_view('archive',st.session_state.paper_type_filter,st.session_state.paper_direction_filter)
 
 
 def open_paper(key, view, kind, direction):
@@ -72,7 +68,8 @@ def scroll_to_top():
 
 today=beijing_today()
 route=page_parameters(st.query_params.get('view','today'),st.query_params.get('kind','all'),
-                      st.query_params.get('direction','all'))
+                      st.query_params.get('direction','all'),paper=st.query_params.get('paper'),
+                      browse=st.query_params.get('browse'))
 view=route['view']
 kind=route.get('kind','all')
 direction=route.get('direction','all')
@@ -94,15 +91,34 @@ if paper:
 
 period=reading_period(records,view,today)
 if view=='archive':
-    type_options=['all','review','research']
-    direction_options=['all']+[key for key in DIRECTION_LABELS if any(r['direction']==key for r in period)]
-    if direction not in direction_options:
+    if direction!='all' and not any(r['direction']==direction for r in period):
         direction='all'
-    st.session_state.paper_type_filter=kind
-    st.session_state.paper_direction_filter=direction
     filtered=filter_papers(period,kind,direction)
 else:
     filtered=period
+
+browse=route.get('browse')
+if browse:
+    label='研究方向' if browse=='direction' else '论文类型'
+    english='SUBJECT INDEX' if browse=='direction' else 'ARTICLE TYPES'
+    choices=category_counts(period,browse,kind,direction)
+    st.button('返回往期论文',key='category-back',on_click=open_view,args=('archive',kind,direction))
+    st.html('<header id="reading-top" class="reader-category-heading">'
+            f'<p>{english}</p><h1>{label}</h1>'
+            '<span>按篇数从多到少排列 · 点击分类查看论文</span></header>')
+    with st.container(key='reader-category-choices'):
+        for offset in range(0,len(choices),2):
+            columns=st.columns(2,gap='medium')
+            for column,row in zip(columns,choices[offset:offset+2]):
+                next_kind=row['key'] if browse=='type' else kind
+                next_direction=row['key'] if browse=='direction' else direction
+                with column:
+                    st.button(f'{row["label"]}\n\n**{row["count"]} 篇**　→',
+                              key='category-'+browse+'-'+row['key'],use_container_width=True,
+                              on_click=open_view,args=('archive',next_kind,next_direction))
+    scroll_to_top()
+    st.stop()
+
 entry=as_collection(filtered,view,today)
 st.html(hero(entry,image))
 
@@ -119,15 +135,15 @@ with st.container(key='reader-navigation'):
             st.rerun()
 
 if view=='archive':
-    type_column,direction_column=st.columns([1,2],vertical_alignment='bottom')
-    with type_column:
-        st.selectbox('论文类型',type_options,key='paper_type_filter',filter_mode=None,accept_new_options=False,
-                     on_change=apply_filters,
-                     format_func=lambda key:TYPE_LABELS[key]+f" · {len(filter_papers(period,key))} 篇")
-    with direction_column:
-        st.selectbox('研究方向',direction_options,key='paper_direction_filter',filter_mode=None,accept_new_options=False,
-                     on_change=apply_filters,
-                     format_func=lambda key:('全部方向' if key=='all' else DIRECTION_LABELS[key])+f" · {len(filter_papers(period,kind,key))} 篇")
+    with st.container(key='reader-category-navigation'):
+        type_column,direction_column=st.columns(2,gap='medium')
+        with type_column:
+            st.button('论文类型 · '+TYPE_LABELS[kind]+' →',key='choose-paper-type',
+                      use_container_width=True,on_click=open_view,args=('archive',kind,direction,'type'))
+        with direction_column:
+            st.button('研究方向 · '+('全部方向' if direction=='all' else DIRECTION_LABELS[direction])+' →',
+                      key='choose-paper-direction',use_container_width=True,
+                      on_click=open_view,args=('archive',kind,direction,'direction'))
     st.caption(f'往期共 {len(period)} 篇不重复论文 · 当前显示 {len(filtered)} 篇 · 点击标题进入单篇阅读')
 scroll_to_top()
 if unavailable:

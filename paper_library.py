@@ -129,6 +129,23 @@ def filter_papers(records,kind='all',direction='all'):
             and (direction=='all' or record['direction']==direction)]
 
 
+def category_counts(records,axis,kind='all',direction='all'):
+    """Count the other filter's scope; return populated choices by size."""
+    if axis=='direction':
+        scope=filter_papers(records,kind=kind)
+        labels={'all':'全部方向',**DIRECTION_LABELS}
+    elif axis=='type':
+        scope=filter_papers(records,direction=direction)
+        labels=TYPE_LABELS
+    else:
+        raise ValueError('Unknown category axis')
+    rows=[]
+    for key,label in labels.items():
+        count=len(scope) if key=='all' else sum(record[axis]==key for record in scope)
+        if count or key=='all':rows.append({'key':key,'label':label,'count':count})
+    return sorted(rows,key=lambda row:(-row['count'],row['key']!='all',row['label']))
+
+
 def validate_reader_classifications(reports):
     """Refuse a bundle whose published labels cannot be rendered by the reader.
 
@@ -157,7 +174,7 @@ def reading_period(records, view='today', today=None):
     raise ValueError('Unknown reading period')
 
 
-def page_parameters(view='today', kind='all', direction='all', paper=None):
+def page_parameters(view='today', kind='all', direction='all', paper=None, browse=None):
     """Only the reading route and validated filters belong in navigation URLs."""
     view=view if view in ('today','archive') else 'today'
     values={'view':view}
@@ -166,6 +183,8 @@ def page_parameters(view='today', kind='all', direction='all', paper=None):
         values['direction']=direction if direction in DIRECTION_LABELS or direction=='all' else 'all'
     if paper:
         values['paper']=paper
+    elif view=='archive' and browse in ('direction','type'):
+        values['browse']=browse
     return values
 
 
