@@ -1,10 +1,8 @@
 {
-  "checked_at": "2026-10-27T07:25:05.061164+08:00",
+  "checked_at": "2026-10-27T07:25:45.980886+08:00",
   "today": "2026-10-27",
   "today_ready": true,
-  "published_now": [
-    "2026-10-27"
-  ],
+  "published_now": [],
   "next_pending": {
     "day": "2026-10-28",
     "run": "true",
