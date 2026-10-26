@@ -22,6 +22,53 @@ DIRECTION_LABELS={
 DIRECTION_LABELS.update({key:value for key,value in BROAD_DIRECTIONS.items() if key not in DIRECTION_LABELS})
 DIRECTION_LABELS.update(EXTRA_LABELS)
 
+# Reader navigation uses disciplines; evidence and daily selection keep their
+# original scientific subjects so regrouping does not alter publication quotas.
+BROWSE_DIRECTIONS={
+    'inorganic':'无机化学','organic':'有机化学','physical':'物理化学',
+    'analytical':'分析化学','polymer':'高分子化学','materials':'材料化学',
+    'chemical-biology':'生物化学','medicinal':'药物化学',
+    'environmental':'环境化学','chemical-engineering':'化学工程',
+    'interdisciplinary':'交叉学科','other':'其他／待分类',
+}
+BROWSE_ENGLISH={
+    'inorganic':'Inorganic chemistry','organic':'Organic chemistry',
+    'physical':'Physical chemistry','analytical':'Analytical chemistry',
+    'polymer':'Polymer chemistry','materials':'Materials chemistry',
+    'chemical-biology':'Biochemistry','medicinal':'Medicinal chemistry',
+    'environmental':'Environmental chemistry','chemical-engineering':'Chemical engineering',
+    'interdisciplinary':'Interdisciplinary studies','other':'Subject pending review',
+}
+DIRECTION_GROUPS={
+    'inorganic':'inorganic','nuclear':'inorganic','geochemistry':'inorganic',
+    'organic':'organic',
+    'physical':'physical','theoretical':'physical','catalysis':'physical',
+    'electrochemistry':'physical','energy':'physical','supramolecular':'physical',
+    'analytical':'analytical','spatial-proteomics':'analytical',
+    'polymer':'polymer','materials':'materials',
+    'chemical-biology':'chemical-biology','bioorthogonal':'chemical-biology',
+    'chemical-probes':'chemical-biology','protein-degradation':'chemical-biology',
+    'structural-biology':'chemical-biology','bioactive-peptides':'chemical-biology',
+    'biophysical':'physical',
+    'drug-discovery':'medicinal','cadd-aidd':'medicinal',
+    'neuropharmacology':'medicinal','drug-delivery':'medicinal',
+    'radiopharmaceuticals':'medicinal',
+    'environmental':'environmental','chemical-engineering':'chemical-engineering',
+    'interdisciplinary':'interdisciplinary','cheminformatics':'interdisciplinary',
+    'computational-structural-biology':'interdisciplinary','cancer-biology':'interdisciplinary',
+    'medical-education':'interdisciplinary','diagnostic-imaging':'interdisciplinary',
+    'microbial-ecology':'interdisciplinary','digital-mental-health':'interdisciplinary',
+    'other':'other',
+}
+
+
+def browse_direction(subject):
+    return DIRECTION_GROUPS.get(subject,subject if subject in BROWSE_DIRECTIONS else 'other')
+
+
+def reader_direction(item):
+    return browse_direction(paper_direction(item))
+
 
 def saved_cards(entry):
     if 'saved_cards' in entry:
@@ -117,23 +164,24 @@ def build_paper_library(reports, history=None):
             if updated_on:
                 date.fromisoformat(updated_on)
             record={'key':key,'item':item,'content':content,'day':entry['day'],'updated_on':updated_on,
-                    'type':paper_type(item),'direction':paper_direction(item)}
+                    'type':paper_type(item),'direction':reader_direction(item)}
             records.append(record)
             for alias in identities:by_identity[alias]=record
     return newest_first(records)
 
 
 def filter_papers(records,kind='all',direction='all'):
+    direction=direction if direction=='all' else browse_direction(direction)
     return [record for record in records
             if (kind=='all' or record['type']==kind)
-            and (direction=='all' or record['direction']==direction)]
+            and (direction=='all' or browse_direction(record['direction'])==direction)]
 
 
 def category_counts(records,axis,kind='all',direction='all'):
     """Count the other filter's scope; return populated choices by size."""
     if axis=='direction':
         scope=filter_papers(records,kind=kind)
-        labels={'all':'全部方向',**DIRECTION_LABELS}
+        labels={'all':'全部方向',**BROWSE_DIRECTIONS}
     elif axis=='type':
         scope=filter_papers(records,direction=direction)
         labels=TYPE_LABELS
@@ -141,7 +189,8 @@ def category_counts(records,axis,kind='all',direction='all'):
         raise ValueError('Unknown category axis')
     rows=[]
     for key,label in labels.items():
-        count=len(scope) if key=='all' else sum(record[axis]==key for record in scope)
+        count=len(scope) if key=='all' else sum(
+            (browse_direction(record[axis]) if axis=='direction' else record[axis])==key for record in scope)
         if count or key=='all':rows.append({'key':key,'label':label,'count':count})
     return sorted(rows,key=lambda row:(-row['count'],row['key']!='all',row['label']))
 
@@ -157,7 +206,7 @@ def validate_reader_classifications(reports):
     for entry in reports:
         for section in entry['report']['sections'].values():
             for item in section['items']:
-                if paper_direction(item)=='other' or paper_type(item) not in ('review','research'):
+                if reader_direction(item)=='other' or paper_type(item) not in ('review','research'):
                     missing.append(paper_key(item))
     if missing:
         raise ValueError('Published papers lack verified reader classifications: '+', '.join(missing))
@@ -180,7 +229,8 @@ def page_parameters(view='today', kind='all', direction='all', paper=None, brows
     values={'view':view}
     if view=='archive':
         values['kind']=kind if kind in TYPE_LABELS else 'all'
-        values['direction']=direction if direction in DIRECTION_LABELS or direction=='all' else 'all'
+        values['direction']=(browse_direction(direction) if direction in DIRECTION_LABELS or direction in BROWSE_DIRECTIONS
+                             else 'all')
     if paper:
         values['paper']=paper
     elif view=='archive' and browse in ('direction','type'):

@@ -6,7 +6,7 @@ import mimetypes
 from pathlib import Path
 import re
 from urllib.parse import urlencode
-from paper_library import DIRECTION_LABELS,TYPE_LABELS,paper_direction,paper_type,paper_key,saved_cards,page_parameters
+from paper_library import BROWSE_DIRECTIONS as DIRECTION_LABELS,BROWSE_ENGLISH,TYPE_LABELS,reader_direction,paper_type,paper_key,saved_cards,page_parameters
 
 
 def image_data(path):
@@ -22,6 +22,8 @@ def issue_items(entry):
 def directory_metadata(item,kind,direction):
     """Readable, non-editable subject badges use the same reviewed categories."""
     kind=kind if kind in TYPE_LABELS else 'other'
+    from paper_library import browse_direction
+    direction=browse_direction(direction)
     return ('<div class="reader-directory-meta">'
             '<span class="reader-journal">'+html.escape(item.get('venue',''))+'</span>'
             '<span class="reader-directory-tags" aria-label="论文分类">'
@@ -94,10 +96,8 @@ def article_cards(entry):
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
         # Saved prose stays intact, but its old subject field must agree with
         # the corrected directory/filter and the visible classification badge.
-        from paper_classification import EXTRA_ENGLISH
-        from bilingual_mail import DIRECTIONS as ENGLISH_SUBJECTS
-        main=paper_direction(item)
-        english=EXTRA_ENGLISH.get(main) or ENGLISH_SUBJECTS.get(main,'Subject pending review')
+        main=reader_direction(item)
+        english=BROWSE_ENGLISH[main]
         replacement=("<h4>Research direction <span lang='zh-CN'>研究方向</span></h4>"
                      +"<div class='english-copy' lang='en'>"+html.escape(english)+"</div>"
                      +"<div class='translation' lang='zh-CN'>"+html.escape(DIRECTION_LABELS[main])+"</div>")
@@ -129,7 +129,7 @@ def article_cards(entry):
                      +('<p>更新到网站 / Website updated: <time datetime="'+updated_on+'">'+updated_on+'</time>（北京时间）</p>'
                        if updated_on else '<p>更新到网站：日期待记录</p>')+'</footer>')
         kind=TYPE_LABELS.get(paper_type(item),'类型待核实')
-        direction=DIRECTION_LABELS[paper_direction(item)]
+        direction=DIRECTION_LABELS[reader_direction(item)]
         back_link=('' if entry.get('view')=='paper' else
                    '<a class="reader-back-top" href="#reading-top" target="_self">'
                    +('返回顶部 ↑' if entry.get('view')=='today' else '返回目录 ↑')+'</a>')
