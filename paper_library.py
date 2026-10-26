@@ -25,7 +25,7 @@ DIRECTION_LABELS.update(EXTRA_LABELS)
 # Reader navigation uses disciplines; evidence and daily selection keep their
 # original scientific subjects so regrouping does not alter publication quotas.
 BROWSE_DIRECTIONS={
-    'inorganic':'无机化学','organic':'有机化学','physical':'物理化学',
+    'inorganic':'无机化学','organic':'有机化学','physical':'物理化学','computational':'计算化学',
     'analytical':'分析化学','polymer':'高分子化学','materials':'材料化学',
     'chemical-biology':'生物化学','medicinal':'药物化学',
     'environmental':'环境化学','chemical-engineering':'化学工程',
@@ -33,7 +33,7 @@ BROWSE_DIRECTIONS={
 }
 BROWSE_ENGLISH={
     'inorganic':'Inorganic chemistry','organic':'Organic chemistry',
-    'physical':'Physical chemistry','analytical':'Analytical chemistry',
+    'physical':'Physical chemistry','computational':'Computational chemistry','analytical':'Analytical chemistry',
     'polymer':'Polymer chemistry','materials':'Materials chemistry',
     'chemical-biology':'Biochemistry','medicinal':'Medicinal chemistry',
     'environmental':'Environmental chemistry','chemical-engineering':'Chemical engineering',
@@ -42,7 +42,7 @@ BROWSE_ENGLISH={
 DIRECTION_GROUPS={
     'inorganic':'inorganic','nuclear':'inorganic','geochemistry':'inorganic',
     'organic':'organic',
-    'physical':'physical','theoretical':'physical','catalysis':'physical',
+    'physical':'physical','theoretical':'computational','catalysis':'physical',
     'electrochemistry':'physical','energy':'physical','supramolecular':'physical',
     'analytical':'analytical','spatial-proteomics':'analytical',
     'polymer':'polymer','materials':'materials',
@@ -50,12 +50,12 @@ DIRECTION_GROUPS={
     'chemical-probes':'chemical-biology','protein-degradation':'chemical-biology',
     'structural-biology':'chemical-biology','bioactive-peptides':'chemical-biology',
     'biophysical':'physical',
-    'drug-discovery':'medicinal','cadd-aidd':'medicinal',
+    'drug-discovery':'medicinal','cadd-aidd':'computational',
     'neuropharmacology':'medicinal','drug-delivery':'medicinal',
     'radiopharmaceuticals':'medicinal',
     'environmental':'environmental','chemical-engineering':'chemical-engineering',
-    'interdisciplinary':'interdisciplinary','cheminformatics':'interdisciplinary',
-    'computational-structural-biology':'interdisciplinary','cancer-biology':'interdisciplinary',
+    'interdisciplinary':'interdisciplinary','cheminformatics':'computational',
+    'computational-structural-biology':'computational','cancer-biology':'interdisciplinary',
     'medical-education':'interdisciplinary','diagnostic-imaging':'interdisciplinary',
     'microbial-ecology':'interdisciplinary','digital-mental-health':'interdisciplinary',
     'other':'other',
