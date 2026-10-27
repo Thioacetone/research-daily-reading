@@ -1,14 +1,14 @@
 {
-  "checked_at": "2026-10-27T16:42:23.309157+08:00",
-  "today": "2026-10-27",
+  "checked_at": "2026-10-28T03:33:28.479698+08:00",
+  "today": "2026-10-28",
   "today_ready": true,
   "published_now": [],
   "next_pending": {
     "day": "2026-10-29",
     "run": "true",
     "generate": "true",
-    "lanes": "[\"chemical-biology\", \"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"analytical\"]",
-    "available": 0,
-    "priority_available": 0
+    "lanes": "[\"organic\", \"energy\", \"inorganic\", \"nuclear\", \"electrochemistry\", \"environmental\"]",
+    "available": 8,
+    "priority_available": 7
   }
 }
