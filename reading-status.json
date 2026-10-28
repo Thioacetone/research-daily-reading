@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-28T12:49:06.478799+08:00",
+  "checked_at": "2026-10-28T18:29:30.741079+08:00",
   "today": "2026-10-28",
   "today_ready": true,
   "published_now": [],
@@ -8,7 +8,7 @@
     "run": "true",
     "generate": "true",
     "lanes": "[\"inorganic\", \"catalysis\", \"environmental\", \"analytical\", \"energy\", \"polymer\"]",
-    "available": 7,
+    "available": 8,
     "priority_available": 6
   }
 }
