@@ -1,4 +1,44 @@
 {
+  "doi:10.1038/s41467-017-02356-9": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "a5e4a601cbb327fd5c01d149ccd088a8f7d21352918cc44a5bed6d7ae99463fb"
+  },
+  "doi:10.1093/nar/gkaa1011": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "5cfc80ba000003f48436d9862653bcc2d349314d59c05a8bae20c928197e5d49"
+  },
+  "doi:10.1093/nar/gkaa379": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "418c8e737eb8fb6521e14b8fd12421e2f62d6bdb268c74a570497787ac278d60"
+  },
+  "doi:10.1093/bib/bbae275": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "8642828cc7bd78e31efe64097450395a6909f9a24b780b69761b705ab4513312"
+  },
+  "doi:10.1016/j.jpha.2020.04.008": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "ccd291eba8f4e4cf848984622a76ce88d84a353ff5a8dab7102538c0d4d30526"
+  },
+  "doi:10.1007/s00259-017-3727-z": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "6c4fc3ef7165097cb1fe84c6c8b31f0c25aac1880fdce74e78eea89ef7a11740"
+  },
+  "doi:10.1039/d6sc03387c": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "efa543b7d53f5d7046f7ef2662d8a916a7dbf1544f52618845c3861dd440eca8"
+  },
+  "doi:10.1038/ncomms7582": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "7f48d56eb2018a94ea9b477d1d0a0520ccf6d370523cf9a53aebd50699b9a446"
+  },
+  "doi:10.1126/sciadv.aeh1679": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "8680cdfa2aacc1b4dbba5b78d15f9e82c86cb24c1557bec89f06147a2868238c"
+  },
+  "doi:10.3390/pharmaceutics13010049": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "46d080a49b65e28df783407ec018a5dd9d39947db89c087cba2cf4805ed24421"
+  },
   "doi:10.1039/c6np00001k": {
     "updated_on": "2026-10-29",
     "content_sha256": "8cf95750939df4088a916d60277861c43059259200aaab43a6fe1811f147657a"
