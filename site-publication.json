@@ -1,4 +1,44 @@
 {
+  "doi:10.1038/s41586-022-05235-6": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "a9ffa9716b7135a2e810af59f3d480af6f6ab21273bddc2a5340e856a174a702"
+  },
+  "doi:10.1002/advs.77575": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "0abcbe0646bd5266047820a35b9a33685fcd5ed143344c7d59692f9d5574d503"
+  },
+  "doi:10.1038/ng.1027": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "0e9932ae16bcc3f48d00c7a2bee289517f5e781cda4ef400c00d97fddb69c762"
+  },
+  "doi:10.1093/jamia/ocag137": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "4395ef6163862ca676d8b41b2333dca945afc2bfaef1ab12300ed7a70dad5d46"
+  },
+  "doi:10.1093/bib/bbab476": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "00a8ae70d2f0198badace52ed20edb336ab10cfdf1cd9fccde7e5de6f9fe3da5"
+  },
+  "doi:10.1021/acs.est.6c02272": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "0c3b7cb88c54751947a63a273886616fab76460def4ecb31f58da9f89b257782"
+  },
+  "doi:10.1126/sciadv.aee9782": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "24301a8e9084242edfc2a554a1580b386e9df2265588c4c354788b8a2df0eb1f"
+  },
+  "doi:10.1007/s40820-026-02288-4": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "53afda5b6c1c5f65a34e60bae4dae6715a0964615bbda4b66b03f05258e19a34"
+  },
+  "doi:10.1039/d1cs00890k": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "56befaf5415974bb29131bfeba29c28ba6293b445bb1f873db779e41f309a6b4"
+  },
+  "doi:10.1038/s41467-020-19029-9": {
+    "updated_on": "2026-10-30",
+    "content_sha256": "2c1395ca79c0a85401a851f3ed5047714597b480563be290b558732442df060a"
+  },
   "doi:10.1038/s41467-017-02356-9": {
     "updated_on": "2026-10-30",
     "content_sha256": "a5e4a601cbb327fd5c01d149ccd088a8f7d21352918cc44a5bed6d7ae99463fb"
