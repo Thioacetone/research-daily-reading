@@ -1,14 +1,9 @@
 {
-  "checked_at": "2026-10-31T08:56:07.609232+08:00",
+  "checked_at": "2026-10-31T20:04:46.214906+08:00",
   "today": "2026-10-31",
   "today_ready": true,
-  "published_now": [],
-  "next_pending": {
-    "day": "2026-11-02",
-    "run": "true",
-    "generate": "true",
-    "lanes": "[\"organic\", \"energy\", \"polymer\", \"nuclear\", \"chemical-engineering\", \"inorganic\"]",
-    "available": 17,
-    "priority_available": 5
-  }
+  "published_now": [
+    "2026-11-02"
+  ],
+  "next_pending": null
 }

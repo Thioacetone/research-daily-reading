@@ -1,4 +1,44 @@
 {
+  "doi:10.1038/s41589-018-0062-z": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "1c084a16cd0f17b1724511766f0300c72aaf5ba93eba3e2a629a4ef1abfd050d"
+  },
+  "doi:10.1038/ncomms1057": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "79d7db9a0a1f32d1e16ce5e224fc7c752fe5314e89266e1271458cf3e7aa5bf0"
+  },
+  "doi:10.1038/s41392-024-02041-6": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "d0d2e86c8ec56e265aa3fd145163d22d934c285aaf93ecc4d5a7ee02cd6ed65a"
+  },
+  "doi:10.1038/nrd.2015.37": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "139b02603216b846df2cd7b8a25576bc399e9a60155ede90e96a8af9c186b76c"
+  },
+  "doi:10.1038/s41398-019-0514-6": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "e02058428f28d08dff7f9c409e75d7bfbfe435aeb36f95783737537137e26d08"
+  },
+  "doi:10.1038/s41467-026-77390-7": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "b75be7adc7cc2c854c7efe2716186aafce6c0edceebcf2576e0939389a958983"
+  },
+  "doi:10.1038/s41467-021-23209-6": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "db933cbc50905963904c3c8d8712bc355deffa483881a39539e3bbe9fa87815b"
+  },
+  "doi:10.1021/jacs.6c06029": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "54913c354b0ce51b195e950691029979a4d985d1781607f9d9c168b9e3ec3c28"
+  },
+  "doi:10.1021/jacsau.6c00298": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "8105b52d6a54b636953e97dbe5bb0d3c542f853e9bf16d6e3868772293c6abc5"
+  },
+  "doi:10.1038/ncomms10766": {
+    "updated_on": "2026-10-31",
+    "content_sha256": "04e8d7133e86210699cb7636be7f6c46bab6c952e346888155f2b9f2235fb39b"
+  },
   "doi:10.1038/s41586-022-05235-6": {
     "updated_on": "2026-10-30",
     "content_sha256": "a9ffa9716b7135a2e810af59f3d480af6f6ab21273bddc2a5340e856a174a702"
