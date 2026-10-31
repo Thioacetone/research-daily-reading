@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-31T02:53:26.863597+08:00",
+  "checked_at": "2026-10-31T08:56:07.609232+08:00",
   "today": "2026-10-31",
   "today_ready": true,
   "published_now": [],
@@ -7,8 +7,8 @@
     "day": "2026-11-02",
     "run": "true",
     "generate": "true",
-    "lanes": "[\"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"organic\", \"energy\"]",
-    "available": 12,
-    "priority_available": 4
+    "lanes": "[\"organic\", \"energy\", \"polymer\", \"nuclear\", \"chemical-engineering\", \"inorganic\"]",
+    "available": 17,
+    "priority_available": 5
   }
 }
