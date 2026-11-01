@@ -1,9 +1,14 @@
 {
-  "checked_at": "2026-10-31T20:04:46.214906+08:00",
-  "today": "2026-10-31",
+  "checked_at": "2026-11-01T10:31:28.448658+08:00",
+  "today": "2026-11-01",
   "today_ready": true,
-  "published_now": [
-    "2026-11-02"
-  ],
-  "next_pending": null
+  "published_now": [],
+  "next_pending": {
+    "day": "2026-11-03",
+    "run": "true",
+    "generate": "true",
+    "lanes": "[\"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"energy\", \"polymer\"]",
+    "available": 15,
+    "priority_available": 3
+  }
 }
