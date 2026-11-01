@@ -1,9 +1,14 @@
 {
-  "checked_at": "2026-11-01T21:04:17.795379+08:00",
-  "today": "2026-11-01",
+  "checked_at": "2026-11-02T02:59:28.431648+08:00",
+  "today": "2026-11-02",
   "today_ready": true,
-  "published_now": [
-    "2026-11-03"
-  ],
-  "next_pending": null
+  "published_now": [],
+  "next_pending": {
+    "day": "2026-11-04",
+    "run": "true",
+    "generate": "true",
+    "lanes": "[\"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"environmental\", \"organic\"]",
+    "available": 13,
+    "priority_available": 3
+  }
 }
