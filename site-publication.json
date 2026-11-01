@@ -1,4 +1,44 @@
 {
+  "doi:10.1016/j.semcdb.2017.08.035": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "5e9ba71a3b9c72c6f118d8f17c3e98b16b538ad17a7e2165c3f04b688288248f"
+  },
+  "doi:10.2174/1570159x14666160115130414": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "3774a85a54d443031bcaa9d4805243573558258a5210d4ce321c1433f642d098"
+  },
+  "doi:10.1093/burnst/tkag063": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "30889f337cecbf2ee0447616d02fc88c76e3dcb281c9cbc5b721ebbba35aa695"
+  },
+  "doi:10.1007/s10462-022-10306-1": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "bf664431d5e9d55e2eb75fff5d2804c06c072a8d31c0fc33266226c11ac36034"
+  },
+  "doi:10.1021/ci100244v": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "cd5c0bb343a02577541681cceee2a4dfe3b8191fa6fbcafca9ba30cfd0ab7bf3"
+  },
+  "doi:10.1021/ar500131v": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "cc75f578263cbf02e3bbd1b912fe33a454303fc90f1ac3a2e5c27341620089d3"
+  },
+  "doi:10.1021/jacs.5b02576": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "6e551c61e9c2fb31addf7c5f1da43d5fdc6da7ffd8ae5759b6d64172c70762b6"
+  },
+  "doi:10.1021/acscentsci.7b00123": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "662622d89f6bc2b8800500e8776b4dea9469fed601c178adb91979df4fabe399"
+  },
+  "doi:10.1016/j.apmt.2022.101473": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "1857309af6a705e5bd01ebed269f2bdda002ffa00dff549714fb77db0805e106"
+  },
+  "doi:10.1039/d5ra09833e": {
+    "updated_on": "2026-11-01",
+    "content_sha256": "33546c756f06b95c3413468bbb2674e729bcdb40e3a6f79257532cd3a3064f59"
+  },
   "doi:10.1038/s41589-018-0062-z": {
     "updated_on": "2026-10-31",
     "content_sha256": "1c084a16cd0f17b1724511766f0300c72aaf5ba93eba3e2a629a4ef1abfd050d"
