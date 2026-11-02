@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parent
 OUTPUT=ROOT/'dist'/'streamlit-reader'
 SOURCE_FILES=('app.py','app_branding.py','reading_library.py','reading_view.py','paper_library.py','reading_policy.py','cloud_bundle.py',
               'paper_classification.py','reviewed_classifications.json',
-              'bilingual_mail.py','author_roles.py','chemical_typography.py',
+              'bilingual_mail.py','reviewed_sentence_translations.json','author_roles.py','chemical_typography.py',
               'requirements.txt','institution_names.json','department_names.json',
               'affiliation_countries.json')
 
@@ -33,7 +33,7 @@ def build():
     history=publication_history(build_paper_library(reports),previous)
     history_path.write_text(json.dumps(history,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     shutil.copyfile(history_path,OUTPUT/history_path.name)
-    files=[ROOT/'assets'/name for name in ('program-art.jpg','reading-theme.css','reading-theme.js','streamlit-reader.css','reading-navigation.js','reading-clock.js','streamlit-chrome.css')]
+    files=[ROOT/'assets'/name for name in ('program-art.jpg','app-icon.png','reading-theme.css','reading-theme.js','streamlit-reader.css','reading-navigation.js','reading-clock.js','streamlit-chrome.css')]
     archive('reading-ui.zip',[ROOT/'assets'/name for name in (
         'streamlit-reader.css','reading-navigation.js','reading-clock.js','streamlit-chrome.css')])
     for report in reports:

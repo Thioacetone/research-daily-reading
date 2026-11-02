@@ -6,6 +6,8 @@ import mimetypes
 from pathlib import Path
 import re
 from urllib.parse import urlencode
+from bilingual_mail import PARAGRAPH_LABELS,reading_segments
+from chemical_typography import chemical_html
 from paper_library import BROWSE_DIRECTIONS as DIRECTION_LABELS,BROWSE_ENGLISH,TYPE_LABELS,reader_directions,paper_type,paper_key,saved_cards,page_parameters
 
 
@@ -94,6 +96,16 @@ def article_cards(entry):
     result=[]
     for index,(content,item) in enumerate(zip(cards,issue_items(entry)),1):
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
+        # Reflow saved translations without changing article identities or dates.
+        for field in item.get('bilingual',{}).get('fields',[]):
+            if field.get('label_en') not in PARAGRAPH_LABELS:continue
+            pairs=reading_segments(field)
+            rendered=''.join('<div class="reader-sentence-pair"><div class="english-copy" lang="en">'
+                             +chemical_html(p['en'])+'</div><div class="translation" lang="zh-CN">'
+                             +chemical_html(p['zh'])+'</div></div>' for p in pairs)
+            label=re.escape(field['label_en'])
+            content=re.sub(r'(<h4>'+label+r'\s.*?</h4>).*?(?=<h4>|$)',
+                           lambda m:m[1]+rendered,content,count=1,flags=re.S)
         # Saved prose stays intact, but its old subject field must agree with
         # the corrected directory/filter and the visible classification badge.
         directions=reader_directions(item)

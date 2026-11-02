@@ -249,7 +249,7 @@ def prepare_item(root,item,day,writer=None):
             'sections':{'papers':{'status':'ok','items':[item],'note':'','sources':[]}}}
     translator=bilingual_mail.LocalTranslator(root)
     if writer is not None:translator.writer=writer
-    bilingual_mail.prepare(report,root,translator=translator)
+    bilingual_mail.prepare(report,root,translator=translator,sentence_layout=True)
     if not quality(item):raise PolicyError('Full text, affiliations or paragraph translations are incomplete')
     return item
 
