@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-02T02:59:28.431648+08:00",
+  "checked_at": "2026-11-02T09:54:58.188604+08:00",
   "today": "2026-11-02",
   "today_ready": true,
   "published_now": [],
@@ -8,7 +8,7 @@
     "run": "true",
     "generate": "true",
     "lanes": "[\"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\", \"environmental\", \"organic\"]",
-    "available": 13,
-    "priority_available": 3
+    "available": 15,
+    "priority_available": 4
   }
 }
