@@ -114,7 +114,9 @@ class DeepReadingWriter:
         from affiliation_sources import units_complete
         if not units_complete(item):return self.reject('affiliation_detail_or_country')
         units=display_unit_names(item)
-        key=VERSION+'original-evidence-depth-v10'+item['doi']+item['fulltext_sha256']+json.dumps(units)
+        is_review = item['recommendation_kind'] == 'review'
+        editorial_version = 'review-topic-depth-v11' if is_review else 'original-evidence-depth-v10'
+        key=VERSION+editorial_version+item['doi']+item['fulltext_sha256']+json.dumps(units)
         cache=self.directory/(hashlib.sha256(key.encode()).hexdigest()+'.json')
         if cache.exists():
             try:result=json.loads(cache.read_text(encoding='utf-8'))
@@ -239,9 +241,19 @@ class DeepReadingWriter:
                   '只依据提供的全文段落，不添加事实、数字或临床疗效。区分实验、理论、综述引用和编辑判断。未找到事实应省略，不能凑字。')
         minimums={'action':750,'research_logic':350,'own_synthesis':250,'selection_reason':320,
                   'application_prospects':200,'future_directions':250}
+        if is_review:
+            instructions['action'] = (
+                '用1600至2200字写综述内容详解。先交代综述的范围和组织方式，再分主题讲至少三个正文板块，最后归纳分歧与适用边界。'
+                '每个主题写成独立段落并用空行分隔，解释核心概念和代表方法，至少详解两项被引用的具体研究：做了什么比较、采用什么测量、得出什么结果。'
+                '原文有图表时说明读者该看什么，有数据时写明条件。比较方法的输入、优势和限制，不要把引用的实验归功于综述作者。'
+                '如果是范围较窄的综述，可按机制、证据和应用分主题，不要虚构原文没有的章节。')
+            minimums['action'] = 1300
         for key in NARRATIVES:
+            evidence_minimum = min(5, len(ids)) if is_review and key == 'action' else {
+                'action': 3, 'research_logic': 2,
+            }.get(key, 1)
             def check_narrative(response):
-                issue=references(response,3 if key=='action' else 2 if key=='research_logic' else 1)
+                issue=references(response,evidence_minimum)
                 if issue:return issue
                 value=response.get('text','')
                 value=value.replace('\\n\\n','\n\n')
@@ -249,6 +261,8 @@ class DeepReadingWriter:
                 if len(re.findall(r'[\u4e00-\u9fff]',value))<minimums[key]//2:
                     return 'text字段必须改写成完整的简体中文分析，不能输出英文正文。Write the entire text in Simplified Chinese.'
                 if len(value)<minimums[key]:return '分析过短，需要具体解释全文中的研究设计、证据和意义'
+                if is_review and key == 'action' and len(re.split(r'\n\s*\n', value.strip())) < 4:
+                    return '综述介绍要分主题展开，至少四个正文段落，段落之间留空行'
                 from paper_recommendation import repetitive_narrative
                 if repetitive_narrative(value):return '多个句子重复，不能靠反复复述结论凑字数。各段分别写背景、关键设计与对照、不同证据及结论边界，删去重复句并补充不同的原文细节'
                 if key=='own_synthesis' and not re.search(r'归纳|启发|迁移|方法论|在我看来|我的理解',value):
@@ -257,8 +271,9 @@ class DeepReadingWriter:
                 if missing:return '删除未被所提供原文支持的数字或编号：'+', '.join(sorted(missing))+'；不要为替代数字编造新的事实'
                 if not grounded_narrative(source,value):return '中文分析需要纯正文，去掉模型标记或代码围栏，长度不得超过3500字符'
                 return ''
-            response=stage(key,grounded+instructions[key]+' 同时输出支撑这段分析的evidence_ids；内容概括至少引用三个不同的正文段落，证据链至少引用两个。',source,
-                           {'text':{'type':'string'},'evidence_ids':reference_schema},3400 if key=='action' else 1900,check_narrative)
+            token_budget = (4800 if is_review else 3400) if key == 'action' else 1900
+            response=stage(key,grounded+instructions[key]+f' 同时输出至少 {evidence_minimum} 个不同的原文段落编号作为 evidence_ids。',source,
+                           {'text':{'type':'string'},'evidence_ids':reference_schema},token_budget,check_narrative)
             if response is None:return None
             result[key]=response['text']
         if not complete_item(result):

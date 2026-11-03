@@ -115,9 +115,14 @@ def article_cards(entry):
     result=[]
     for index,(content,item) in enumerate(zip(cards,issue_items(entry)),1):
         key=paper_key(item)
+        article_type = paper_type(item)
         note = depth_notes.get(key.removeprefix('doi:')) if key.startswith('doi:') else None
         corrections = note.get('corrections') if note else None
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
+        if article_type == 'review' and item.get('recommendation_kind') == 'research':
+            content = re.sub(r'(<h4>Article type\s.*?</h4>).*?(?=<h4>|$)',
+                             lambda match: match[1] + render_sentence_pairs([{'en': 'Review', 'zh': '综述'}]),
+                             content, count=1, flags=re.S)
         # Reflow saved translations without changing article identities or dates.
         for field in item.get('bilingual',{}).get('fields',[]):
             if field.get('label_en') not in PARAGRAPH_LABELS:continue
@@ -154,8 +159,16 @@ def article_cards(entry):
         content=re.sub(r'<p\b[^>]*>\s*(?:<a\b[^>]*>.*?</a>\s*)+</p>','',content,flags=re.S|re.I)
         content=re.sub(r'<a\b[^>]*>(.*?)</a>',r'\1',content,flags=re.S|re.I)
         if note:
-            depth = ('<h4>Detailed reading notes <span lang="zh-CN">深读补充</span></h4>'
-                     + render_sentence_pairs(note['sentences']))
+            review_sections = note.get('review_sections', [])
+            depth = ''
+            if review_sections:
+                depth = '<h4>Review in detail <span lang="zh-CN">综述内容详解</span></h4>'
+                for section in review_sections:
+                    depth += ('<h5 lang="en">' + html.escape(section['title_en'])
+                              + '</h5><p lang="zh-CN">' + html.escape(section['title_zh']) + '</p>'
+                              + render_sentence_pairs(section['sentences']))
+            depth += ('<h4>Detailed reading notes <span lang="zh-CN">深读补充</span></h4>'
+                      + render_sentence_pairs(note['sentences']))
             insertion = content.find('<h4>Research logic and evidence ')
             content = (content[:insertion] + depth + content[insertion:]
                        if insertion >= 0 else content + depth)
@@ -165,7 +178,7 @@ def article_cards(entry):
         publication=(f'<footer class="reader-publication"><p>DOI: <span class="reader-doi">{html.escape(doi)}</span></p>'
                      +('<p>更新到网站 / Website updated: <time datetime="'+updated_on+'">'+updated_on+'</time>（北京时间）</p>'
                        if updated_on else '<p>更新到网站：日期待记录</p>')+'</footer>')
-        kind=TYPE_LABELS.get(paper_type(item),'类型待核实')
+        kind=TYPE_LABELS.get(article_type,'类型待核实')
         tags=''.join('<span>'+html.escape(DIRECTION_LABELS[k])+'</span>' for k in directions)
         back_link=('' if entry.get('view')=='paper' else
                    '<a class="reader-back-top" href="#reading-top" target="_self">'

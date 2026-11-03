@@ -25,6 +25,62 @@
         "en": "The review also discusses nuclear envelope sealing, where the shared need to close a membrane opening provides a useful comparison but does not establish that the recruitment sequence is identical.",
         "zh": "综述还讨论了核膜孔洞的封闭，可利用两者共有的膜闭合需求比较机制，但仍需分别测量各蛋白的招募顺序。"
       }
+    ],
+    "review_sections": [
+      {
+        "title_en": "Recruitment at the cell bridge",
+        "title_zh": "细胞间桥上的招募顺序",
+        "sentences": [
+          {
+            "en": "During mitotic exit, degradation of PLK1 releases a brake on CEP55 recruitment to the centre of the midbody.",
+            "zh": "细胞退出有丝分裂时，PLK1 降解，CEP55 才得以进入中体中央，因此蛋白招募本身就是控制分裂时序的环节。"
+          },
+          {
+            "en": "CEP55 can recruit CHMP4 through ALIX, or assemble ESCRT-III indirectly through TSG101, ESCRT-II and CHMP6.",
+            "zh": "CEP55 可经 ALIX 招募 CHMP4，也可经 TSG101、ESCRT-II 和 CHMP6 间接组装 ESCRT-III，两条路线提供了可比较的招募机制。"
+          },
+          {
+            "en": "The review notes that the indirect route becomes apparent when the ALIX connection is disrupted, so depletion of one adaptor can underestimate the role of the full recruitment system.",
+            "zh": "综述指出，破坏 ALIX 与 ESCRT-III 的连接时，间接路线的作用更容易显现，因此单独去除一种接头蛋白可能低估整个招募系统的重要性。"
+          }
+        ]
+      },
+      {
+        "title_en": "Coordinating membrane and microtubule removal",
+        "title_zh": "膜切断如何与微管清除配合",
+        "sentences": [
+          {
+            "en": "The bridge contains microtubules as well as membrane, and CHMP1B helps recruit the microtubule-severing ATPase spastin.",
+            "zh": "细胞间桥内部还有微管，CHMP1B 参与招募能切断微管的 ATP 酶 spastin，让膜重塑与细胞骨架清除发生在相近位置。"
+          },
+          {
+            "en": "Electron tomography resolves spiral filaments around the constriction, whereas fluorescence recovery measures how their constituents exchange over time.",
+            "zh": "电子断层成像可看清收缩处的螺旋丝结构，荧光恢复实验则测量亚基随时间交换的速度，两种读数分别回答结构与动态的问题。"
+          },
+          {
+            "en": "A useful interpretation is to treat filament assembly, microtubule clearance and final membrane separation as distinct readouts, because a delay in one can produce a similar persistent bridge phenotype.",
+            "zh": "阅读这些实验时，可以将丝状结构组装、微管清除和最终膜分离当作三种读数，因为其中任何一步延迟都可能表现为细胞间桥持续存在。"
+          }
+        ]
+      },
+      {
+        "title_en": "When the cut is delayed",
+        "title_zh": "何时暂停最终切断",
+        "sentences": [
+          {
+            "en": "The review compares the filament-forming CHMP4B with CHMP4C, a paralogue whose phosphorylated form participates in the abscission checkpoint.",
+            "zh": "综述将参与形成丝状结构的 CHMP4B 与同源蛋白 CHMP4C 对照，后者的磷酸化形式参与分裂末期的切断检查点。"
+          },
+          {
+            "en": "Replacing CHMP4C with a phosphorylation-defective form can permit premature abscission in cells that still have chromatin at the bridge.",
+            "zh": "被引用的实验发现，用无法正常磷酸化的 CHMP4C 替换原蛋白后，即使细胞间桥仍残留染色质，也可能过早完成切断。"
+          },
+          {
+            "en": "The checkpoint finding establishes a timing role, while the review discusses competing explanations for how CHMP4C positioning and interactions produce that delay.",
+            "zh": "这些结果支持 CHMP4C 参与调节时机，综述还比较了它的定位和蛋白互作如何产生延迟的不同解释，这些解释需要用定位与功能实验进一步区分。"
+          }
+        ]
+      }
     ]
   },
   "10.2174/1570159x14666160115130414": {
@@ -52,6 +108,62 @@
       {
         "en": "A useful follow-up design would collect repeated measurements of inflammation, drug exposure and symptoms to establish whether biomarker changes precede the clinical response.",
         "zh": "可在后续试验中反复测量炎症指标、药物暴露和症状评分，以判断标志物变化是否先于临床反应，并评估它能否提供比单次基线测量更可靠的信息。"
+      }
+    ],
+    "review_sections": [
+      {
+        "title_en": "Molecular routes from inflammation to symptoms",
+        "title_zh": "炎症怎样影响神经系统",
+        "sentences": [
+          {
+            "en": "One pathway discussed in the review runs through IDO, which diverts tryptophan into the kynurenine pathway and can change the balance of downstream metabolites such as quinolinic acid.",
+            "zh": "综述讨论的机制之一是炎症信号诱导 IDO，把色氨酸代谢引向犬尿氨酸通路，并可能改变喹啉酸等下游代谢物的相对水平。"
+          },
+          {
+            "en": "The review also covers altered serotonin transport and weaker feedback in the stress hormone axis, so the proposed effects extend beyond the supply of a neurotransmitter precursor.",
+            "zh": "作者也梳理了血清素转运变化和应激激素轴负反馈减弱，因此炎症相关假说涉及递质转运、应激反应和代谢多条途径。"
+          },
+          {
+            "en": "In the cited lipopolysaccharide models, perturbing IDO helps probe whether that branch contributes to behavioural changes, but the model represents a specific inflammatory challenge.",
+            "zh": "综述引用的脂多糖模型通过干预 IDO 判断这条代谢支路是否参与行为变化，解释结果时需考虑它模拟的是特定的炎症刺激条件。"
+          }
+        ]
+      },
+      {
+        "title_en": "What the biomarkers can tell us",
+        "title_zh": "炎症指标能回答什么",
+        "sentences": [
+          {
+            "en": "The evidence synthesis reports more consistent group differences for IL-6 and CRP than for TNF-α or IL-1β, with results varying according to cohort selection.",
+            "zh": "综述汇总的证据显示，IL-6 和 CRP 的组间差异相对一致，而 TNF-α 和 IL-1β 的结果更不统一，纳入人群的差异也会影响比较。"
+          },
+          {
+            "en": "Changes in cytokines during treatment can occur independently of symptom improvement, making them potential markers of biological response that require separate validation as predictors of benefit.",
+            "zh": "治疗期间的细胞因子变化可能与症状改善脱钩，因此这些读数可以提示生物学反应，但能否预测临床获益仍需要单独验证。"
+          },
+          {
+            "en": "An informative study would measure the biomarker before treatment and compare whether it predicts a different response to the intervention and to placebo.",
+            "zh": "一个有辨别力的试验应在用药前测定标志物，并比较它对干预组和安慰剂组的预测是否不同，从而区分治疗效应预测和一般预后判断。"
+          }
+        ]
+      },
+      {
+        "title_en": "Comparing interventions",
+        "title_zh": "不同免疫干预为何不能合并解读",
+        "sentences": [
+          {
+            "en": "The review considers TNF-targeted antibodies, anti-inflammatory agents and ketamine, whose primary actions and supporting experiments differ substantially.",
+            "zh": "综述把靶向 TNF 的抗体、抗炎药和氯胺酮放在同一研究框架下讨论，但这些干预的主要作用和证据来自不同类型的实验。"
+          },
+          {
+            "en": "For ketamine, the animal studies discussed include changes in hippocampal cytokines and tryptophan metabolism, leaving the contribution of those changes to clinical antidepressant effects unresolved.",
+            "zh": "例如，综述所引的氯胺酮动物实验观察到海马细胞因子和色氨酸代谢变化，但这些变化对临床抗抑郁效应有多大贡献尚未确定。"
+          },
+          {
+            "en": "A practical way to compare the cited interventions is to record the target, study population, comparator and primary outcome separately for each trial before interpreting any apparent convergence.",
+            "zh": "比较这些干预时，可以逐个试验列出靶点、纳入人群、对照和主要终点，再判断所谓共同的抗炎作用是否真的对应相似的临床结果。"
+          }
+        ]
       }
     ]
   },
@@ -118,6 +230,62 @@
         "en": "For a small laboratory, the useful deliverable is a reproducible shortlist with uncertainty and a defined assay, so model performance can be connected to a decision about which compounds to make or buy.",
         "zh": "对于实验资源有限的团队，可把交付目标定为可复现的候选清单，附上不确定性与明确的验证方法，把模型表现与下一步合成或购买哪些分子的决定联系起来。"
       }
+    ],
+    "review_sections": [
+      {
+        "title_en": "From inputs to binding predictions",
+        "title_zh": "分子与蛋白如何变成模型输入",
+        "sentences": [
+          {
+            "en": "The review covers more than 300 studies from 2000 to 2022 and organizes much of the literature by the question being predicted, rather than by a single neural network architecture.",
+            "zh": "这篇综述回顾了 2000 至 2022 年的 300 多篇研究，主要按模型要回答的药物研发问题组织文献，读者可先找到与自身任务最相关的部分。"
+          },
+          {
+            "en": "DeepDTA is a sequence-based example that learns from compound SMILES and protein amino acid sequences, with Davis and KIBA discussed as benchmarks.",
+            "zh": "以 DeepDTA 为例，模型从化合物的 SMILES 和蛋白氨基酸序列学习特征，综述用 Davis 与 KIBA 数据集说明此类模型如何进行基准评估。"
+          },
+          {
+            "en": "Structure-based examples such as AtomNet encode atoms in a three-dimensional grid, which adds geometric information but also makes performance dependent on the quality of the input structures.",
+            "zh": "AtomNet 一类结构方法则把原子放入三维网格，增加了空间相互作用信息，但模型表现也会受所用结构质量和构象选择的影响。"
+          }
+        ]
+      },
+      {
+        "title_en": "What changes across tasks",
+        "title_zh": "相互作用、药敏与不良反应的区别",
+        "sentences": [
+          {
+            "en": "Binding prediction targets a molecular interaction or affinity, whereas response prediction can involve a cell line, its molecular profile and a measured viability response.",
+            "zh": "结合预测关注分子层面的相互作用或亲和力，药敏预测则可能同时使用细胞系、分子特征和测得的细胞存活反应。"
+          },
+          {
+            "en": "Drug combinations pose another problem because an observed response may depend on the doses and biological context, while a similarity score describes a relation between two compounds.",
+            "zh": "药物组合又是另一类问题，观察到的反应会随剂量与生物背景改变，而相似性得分描述的是两个化合物之间的关系。"
+          },
+          {
+            "en": "A useful comparison should separate errors due to noisy assay labels from errors due to the representation, because a larger model cannot resolve an inconsistent experimental definition of activity.",
+            "zh": "比较模型时应区分实验标签噪声与分子表征造成的误差，因为模型规模再大，也难以消除不同实验对活性定义不一致带来的问题。"
+          }
+        ]
+      },
+      {
+        "title_en": "How to read the reported benchmarks",
+        "title_zh": "如何读懂性能数字和解释结果",
+        "sentences": [
+          {
+            "en": "An affinity regression error and a binary interaction classification score measure different properties, and performance on a benchmark does not directly specify the hit rate in a prospective screen.",
+            "zh": "亲和力回归误差与相互作用二分类指标衡量的能力不同，某项基准测试的成绩也无法直接换算为下一轮实际筛选的命中率。"
+          },
+          {
+            "en": "The review discusses explainable AI, which can suggest molecular regions or features for inspection, while experimental perturbation is still needed to test whether they drive binding or response.",
+            "zh": "综述还讨论了可解释人工智能，它可以提示值得检查的分子区域或特征，而这些线索是否真的决定结合或反应，需要通过实验扰动检验。"
+          },
+          {
+            "en": "For a prospective project, an actionable comparison would reserve a chemically distinct test series and evaluate confirmed hits per assay slot alongside the model's retrospective metrics.",
+            "zh": "如果要用于真实项目，可以留出结构明显不同的化合物系列，把每个实验名额能获得多少确认命中与回顾性模型指标放在一起比较。"
+          }
+        ]
+      }
     ]
   },
   "10.1021/ci100244v": {
@@ -173,6 +341,62 @@
       {
         "en": "For a delivery study, independently matching size and surface chemistry while varying shell cross-link density would help isolate mechanics from charge-dependent uptake or differences in drug loading.",
         "zh": "设计载药实验时，可匹配粒径和表面化学，只改变壳层交联密度，并分别测量摄取与载药量，从而区分力学作用、表面电荷效应及载药差异。"
+      }
+    ],
+    "review_sections": [
+      {
+        "title_en": "Synthesis and network architecture",
+        "title_zh": "合成路线决定的交联结构",
+        "sentences": [
+          {
+            "en": "The review contrasts pNIPAm and pNIPMAm microgels made with a cleavable cross-linker, illustrating how monomer reactivity can change the network even at the same nominal formulation.",
+            "zh": "综述比较了用可切断交联剂制备的 pNIPAm 和 pNIPMAm 微凝胶，说明即使名义配方相同，单体反应性仍会改变颗粒内部网络。"
+          },
+          {
+            "en": "In the examples cited, pNIPAm can lose material from the periphery and leave a remnant, whereas the pNIPMAm network can swell initially and then erode completely.",
+            "zh": "被引用的案例中，pNIPAm 可先从外围失去材料并留下残余颗粒，pNIPMAm 则可能先溶胀、再逐渐完全侵蚀，这揭示了不同的网络解体路径。"
+          },
+          {
+            "en": "Reading mass and particle dimensions together helps distinguish the opening of a network from loss of polymer, because a particle may grow while some of its mass is already being lost.",
+            "zh": "同时追踪质量和粒径有助于区分网络松弛与聚合物脱落，因为颗粒可能在已经失去部分质量时，仍因吸水溶胀而变大。"
+          }
+        ]
+      },
+      {
+        "title_en": "How environment changes mechanics",
+        "title_zh": "同一个微凝胶在不同环境下的表现",
+        "sentences": [
+          {
+            "en": "The review treats osmotic pressure, solvent conditions and confinement as independent ways to change the effective response of a microgel.",
+            "zh": "综述把渗透压、溶剂环境与空间限域视为改变微凝胶实际响应的不同因素，因此一个条件下测得的软硬不能直接代表所有使用场景。"
+          },
+          {
+            "en": "In the artificial pore experiments, deformable microgels could transit under pressure while similarly sized rigid polystyrene particles tended to jam.",
+            "zh": "在人工孔道实验中，可变形微凝胶能够在压力作用下通过孔道，而尺寸接近的刚性聚苯乙烯颗粒则容易堵塞。"
+          },
+          {
+            "en": "This comparison supports the relevance of deformation, but translating it to a delivery system requires controlling charge, hydrated size and the changing composition of the biological fluid.",
+            "zh": "该对照说明形变能力值得关注，若要迁移到载药体系，还需要匹配表面电荷和水合粒径，并考虑生物流体组成变化带来的影响。"
+          }
+        ]
+      },
+      {
+        "title_en": "From particles to cell-facing films",
+        "title_zh": "从单颗粒转向细胞接触的薄膜",
+        "sentences": [
+          {
+            "en": "The cited film work compares microgel monolayers and multilayers, then uses interparticle cross-linking to restrict mobility within the assembled coating.",
+            "zh": "综述引用的薄膜实验比较微凝胶单层和多层结构，并通过颗粒间交联限制颗粒在组装膜层中的移动。"
+          },
+          {
+            "en": "Figure 8 links poor fibroblast spreading on untreated multilayers to differences in focal adhesions, even though the films adsorb substantial protein.",
+            "zh": "图 8 显示，未经交联处理的多层膜上成纤维细胞铺展较差，黏着斑也存在差异，而各膜层仍能吸附较多蛋白。"
+          },
+          {
+            "en": "A useful design inference is to measure how rapidly a film relaxes under cell-generated force alongside its stiffness, so a mechanically mobile interface is not mistaken for a surface that simply lacks adsorbed proteins.",
+            "zh": "可迁移的设计思路是同时测量薄膜刚度及其在细胞牵引下的松弛速度，以判断黏附差异究竟来自动态力学界面还是表面吸附条件。"
+          }
+        ]
       }
     ]
   },
@@ -258,6 +482,62 @@
         "en": "Before moving toward a biomedical product, a useful verification set would include hydrated mechanics, pore structure after sterilization and batch-to-batch reproducibility of the yarn.",
         "zh": "面向生物医用产品时，可进一步验证水合力学性能、灭菌后的孔隙结构和纱线批间重现性，以判断实验室工艺能否稳定转移到实际制造。"
       }
+    ],
+    "review_sections": [
+      {
+        "title_en": "Making continuous yarn from a fibre jet",
+        "title_zh": "从纺丝射流到连续纱线",
+        "sentences": [
+          {
+            "en": "Conventional electrospinning readily makes a nonwoven mat, whereas this review focuses on routes that collect the fibres into a continuously handled yarn.",
+            "zh": "常规静电纺容易得到无纺纤维膜，这篇综述聚焦如何将纳米纤维收集成能够连续牵引、收卷和后续加工的纱线。"
+          },
+          {
+            "en": "In liquid-assisted collection, the bath gathers fibres and the take-up stage controls drawing, so collection conditions and winding speed affect different steps of production.",
+            "zh": "在液体辅助收集中，凝固浴负责汇聚纤维，收卷负责牵引，因此浴液状态与牵引速度影响的是生产中不同的步骤。"
+          },
+          {
+            "en": "Twist can improve cohesion during handling, but an application that needs longitudinal alignment should separately measure how much fibre orientation is lost as twist increases.",
+            "zh": "加捻能提高纤维束在操作时的抱合性，但对于依赖轴向取向的应用，应另外测量随捻度提高有多少纤维偏离纱线轴向。"
+          }
+        ]
+      },
+      {
+        "title_en": "Weaving, knitting and braiding",
+        "title_zh": "机织、针织与编辫如何影响结构",
+        "sentences": [
+          {
+            "en": "Moving from yarn to fabric introduces new variables because a woven crossing, a knitted loop and a braided path distribute load and define pores differently.",
+            "zh": "从纱线变成织物会引入新的结构变量，机织交叉点、针织线圈和编辫路径分别以不同方式传递载荷并形成孔隙。"
+          },
+          {
+            "en": "A woven construction is a useful starting point when directional constraint matters, while a looped construction can accommodate extension through changes in loop geometry.",
+            "zh": "需要限制特定方向形变时，可以优先考察机织结构，而线圈结构可通过线圈几何变化获得更大的可伸展空间。"
+          },
+          {
+            "en": "For a fair comparison, the same starting yarn should be processed into different structures and tested at matched specimen dimensions in the hydrated state.",
+            "zh": "要公平比较这些结构，可用同一批纱线制成不同织物，并在一致的试样尺寸与水合状态下测试，减少纱线原料和测试条件造成的差异。"
+          }
+        ]
+      },
+      {
+        "title_en": "Selecting a biomedical test",
+        "title_zh": "怎样根据用途选择生物医用测试",
+        "sentences": [
+          {
+            "en": "A directional tissue scaffold should be assessed for cell alignment and penetration, while a load-bearing textile also needs repeated loading and mechanical retention measurements.",
+            "zh": "用于定向组织的支架应评估细胞排列和深入孔隙的程度，承力织物还需要测量循环加载下的疲劳表现与力学保持率。"
+          },
+          {
+            "en": "For wound-contact materials, water handling and wet structural integrity can be more informative than the dry strength of a single yarn.",
+            "zh": "面向创面接触的材料时，液体吸收和排出能力以及湿态结构完整性，通常比单根干纱的强度更能说明实际使用表现。"
+          },
+          {
+            "en": "At scale, reporting yarn breaks, variability in diameter and retained performance after sterilization would make the process comparison more informative than a successful photograph of one specimen.",
+            "zh": "评价放大可行性时，应记录断纱情况、纱线直径波动及灭菌后的性能保持程度，这些数据比单件试样的展示照片更能区分不同制备路线。"
+          }
+        ]
+      }
     ]
   },
   "10.1039/d5ra09833e": {
@@ -285,6 +565,62 @@
       {
         "en": "The editorial implication is to validate an integrated device in stages, measuring charge separation, product formation and durability separately so a gain in one metric can be traced to its actual source.",
         "zh": "我的归纳是，应分阶段验证集成器件，分别测量电荷分离、产物形成和耐久性，从而查清某项指标的提高来自分子催化、界面工程还是器件条件。"
+      }
+    ],
+    "review_sections": [
+      {
+        "title_en": "From excited states to catalyst design",
+        "title_zh": "从激发态理解配体设计",
+        "sentences": [
+          {
+            "en": "The review describes Cu complexes as candidate photosensitizers and explains that iron complexes pose a different design challenge because metal-centred states can rapidly deactivate the desired charge-transfer state.",
+            "zh": "综述将铜配合物作为候选光敏剂讨论，并指出铁配合物面临不同的设计问题：金属中心态可能迅速耗散所需的电荷转移态。"
+          },
+          {
+            "en": "A strong-field ligand can raise the energy of competing metal-centred states in an iron complex, which motivates measuring the state lifetime and charge-transfer yield after ligand substitution.",
+            "zh": "强场配体可以抬高铁配合物中竞争性金属中心态的能量，因此更换配体后应同时测量激发态寿命和电荷转移产率。"
+          },
+          {
+            "en": "A long-lived excited state is most useful when its redox potential and interfacial transfer rate also suit the intended reaction.",
+            "zh": "只有当氧化还原电位和界面电荷转移速率也适合目标反应时，较长的激发态寿命才容易转化为有效的光催化性能。"
+          }
+        ]
+      },
+      {
+        "title_en": "Comparing the device routes",
+        "title_zh": "光电化学、染料敏化和人工光合作用",
+        "sentences": [
+          {
+            "en": "In a photoelectrochemical cell, the photoelectrode supplies charge to chemical reactions, while a dye-sensitized solar cell extracts current through a sensitizer, semiconductor and redox mediator.",
+            "zh": "光电化学电池用光电极向化学反应提供电荷，染料敏化太阳能电池则通过染料、半导体和氧化还原介质组成的循环提取电流。"
+          },
+          {
+            "en": "The artificial photosynthesis section discusses pairing water oxidation with CO₂ reduction, where product selectivity determines whether the generated charges reach the desired chemical feedstock.",
+            "zh": "人工光合作用章节讨论水氧化与 CO₂ 还原的耦合，此时产物选择性决定光生电荷有多少真正用于生成目标化工原料。"
+          },
+          {
+            "en": "For a tandem water-splitting device, a useful comparison should ask how the absorbers share light, how their currents match and whether their combined photovoltage sustains both half-reactions.",
+            "zh": "比较串联分解水器件时，应关注两个吸光单元如何分配光谱、怎样匹配电流，以及合计光电压能否维持两个半反应。"
+          }
+        ]
+      },
+      {
+        "title_en": "Assessing scale and durability",
+        "title_zh": "把效率和长期使用条件放在一起",
+        "sentences": [
+          {
+            "en": "A protective layer may extend electrode life while adding fabrication steps and creating an additional interface through which charge must travel.",
+            "zh": "保护层可能延长电极寿命，同时也会增加制备步骤，并增加一道电荷必须通过的界面，因此需要同时观察耐久性和传输代价。"
+          },
+          {
+            "en": "A useful stability report would distinguish falling current from falling product selectivity, because the two outcomes point to different degradation mechanisms.",
+            "zh": "稳定性报告宜区分电流下降与产物选择性下降，因为两种情况指向的失效机制不同，后续应更换或优化的材料也可能不同。"
+          },
+          {
+            "en": "For cost and scalability, an informative comparison should account for material supply, coating complexity, operating area and the amount of useful product delivered over the device lifetime.",
+            "zh": "比较成本和放大潜力时，应把材料供给、涂层工艺复杂度、运行面积以及器件寿命内实际获得的产品总量一起纳入评估。"
+          }
+        ]
       }
     ]
   }

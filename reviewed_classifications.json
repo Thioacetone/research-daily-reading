@@ -1326,6 +1326,42 @@
       "reviewed_on": "2026-10-26",
       "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13678007/fullTextXML",
       "source_abstract_sha256": "212a2c3fc4244e2560e848bd8087414e8198df8b78d32b0c161abee5519704b2"
+    },
+    "10.2174/1570159x14666160115130414": {
+      "title": "Inflammation and Immune Regulation as Potential Drug Targets in Antidepressant Treatment",
+      "source_title": "Inflammation and Immune Regulation as Potential Drug Targets in Antidepressant Treatment",
+      "title_key": "inflammationandimmuneregulationaspotentialdrugtargetsinantidepressanttreatment",
+      "display_direction": "chemical-biology",
+      "direction": "chemical-biology",
+      "eligible": true,
+      "paper_type": "review",
+      "reason": "正文以综述形式综合细胞因子、抗抑郁药和免疫调节剂的既有临床与前临床研究。",
+      "reviewed_on": "2026-11-03",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5050395/"
+    },
+    "10.1007/s10462-022-10306-1": {
+      "title": "Deep learning in drug discovery: an integrative review and future challenges",
+      "source_title": "Deep learning in drug discovery: an integrative review and future challenges",
+      "title_key": "deeplearningindrugdiscoveryanintegrativereviewandfuturechallenges",
+      "display_direction": "cadd-aidd",
+      "direction": "cadd-aidd",
+      "eligible": true,
+      "paper_type": "review",
+      "reason": "出版者摘要明确标为系统性文献综述，按任务汇总药物研发中的深度学习研究。",
+      "reviewed_on": "2026-11-03",
+      "source_url": "https://link.springer.com/article/10.1007/s10462-022-10306-1"
+    },
+    "10.1021/ar500131v": {
+      "title": "Microgel Mechanics in Biomaterial Design",
+      "source_title": "Microgel Mechanics in Biomaterial Design",
+      "title_key": "microgelmechanicsinbiomaterialdesign",
+      "display_direction": "materials",
+      "direction": "materials",
+      "eligible": true,
+      "paper_type": "review",
+      "reason": "ACS Account 按合成、环境响应和组装膜梳理微凝胶力学，并汇总作者及其他研究团队此前的实验。",
+      "reviewed_on": "2026-11-03",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4139169/"
     }
   }
 }
