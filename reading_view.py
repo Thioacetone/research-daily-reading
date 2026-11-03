@@ -2,6 +2,7 @@
 import base64
 from datetime import date
 import html
+import json
 import mimetypes
 from pathlib import Path
 import re
@@ -90,19 +91,38 @@ def table_of_contents(entry):
             '<div class="reader-toc-grid">'+''.join(cards)+'</div></nav>')
 
 
+def render_sentence_pairs(pairs, corrections=None):
+    corrections = corrections or {}
+
+    def corrected(text, language):
+        for before, after in corrections.get(language, {}).items():
+            text = text.replace(before, after)
+        return chemical_html(text)
+
+    return ''.join(
+        '<div class="reader-sentence-pair"><div class="english-copy" lang="en">'
+        + corrected(pair['en'], 'en') + '</div><div class="translation" lang="zh-CN">'
+        + corrected(pair['zh'], 'zh') + '</div></div>'
+        for pair in pairs
+    )
+
+
 def article_cards(entry):
-    # Saved HTML is the publication record; preserve the scientific copy verbatim.
+    # Apply DOI-specific editorial notes without rewriting the publication record.
+    notes_path = Path(__file__).with_name('reading_depth_notes.json')
+    depth_notes = json.loads(notes_path.read_text(encoding='utf-8')) if notes_path.is_file() else {}
     cards=saved_cards(entry)
     result=[]
     for index,(content,item) in enumerate(zip(cards,issue_items(entry)),1):
+        key=paper_key(item)
+        note = depth_notes.get(key.removeprefix('doi:')) if key.startswith('doi:') else None
+        corrections = note.get('corrections') if note else None
         content=re.sub(r'\sstyle=(?:"[^"]*"|\'[^\']*\')','',content)
         # Reflow saved translations without changing article identities or dates.
         for field in item.get('bilingual',{}).get('fields',[]):
             if field.get('label_en') not in PARAGRAPH_LABELS:continue
             pairs=reading_segments(field)
-            rendered=''.join('<div class="reader-sentence-pair"><div class="english-copy" lang="en">'
-                             +chemical_html(p['en'])+'</div><div class="translation" lang="zh-CN">'
-                             +chemical_html(p['zh'])+'</div></div>' for p in pairs)
+            rendered=render_sentence_pairs(pairs, corrections)
             label=re.escape(field['label_en'])
             content=re.sub(r'(<h4>'+label+r'\s.*?</h4>).*?(?=<h4>|$)',
                            lambda m:m[1]+rendered,content,count=1,flags=re.S)
@@ -133,7 +153,12 @@ def article_cards(entry):
         # Replace the old original/supporting-source buttons with a plain DOI.
         content=re.sub(r'<p\b[^>]*>\s*(?:<a\b[^>]*>.*?</a>\s*)+</p>','',content,flags=re.S|re.I)
         content=re.sub(r'<a\b[^>]*>(.*?)</a>',r'\1',content,flags=re.S|re.I)
-        key=paper_key(item)
+        if note:
+            depth = ('<h4>Detailed reading notes <span lang="zh-CN">深读补充</span></h4>'
+                     + render_sentence_pairs(note['sentences']))
+            insertion = content.find('<h4>Research logic and evidence ')
+            content = (content[:insertion] + depth + content[insertion:]
+                       if insertion >= 0 else content + depth)
         doi=key[4:] if key.startswith('doi:') else '未提供 / Not provided'
         updates=entry.get('paper_updates',[])
         updated_on=updates[index-1] if index<=len(updates) else ''

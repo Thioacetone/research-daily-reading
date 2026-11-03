@@ -1,0 +1,291 @@
+{
+  "10.1016/j.semcdb.2017.08.035": {
+    "sentences": [
+      {
+        "en": "The review starts from a topological comparison: the final cut in cytokinesis severs a membrane neck from its cytoplasmic side, a geometry shared by inward endosomal budding and enveloped virus release.",
+        "zh": "这篇综述从膜的拓扑关系切入：胞质分裂的最后一步要从胞质侧切断连接两个子细胞的膜颈，这一几何关系与内体向内出芽和包膜病毒释放相通。"
+      },
+      {
+        "en": "The cited live-cell microscopy and photobleaching experiments show exchange between soluble and midbody-associated ESCRT-III subunits, so the filament at the bridge can change composition while the structure remains visible.",
+        "zh": "综述引用的活细胞成像和光漂白实验显示，可溶性 ESCRT-III 亚基与位于中体的亚基持续交换，因此即使显微镜下仍能看到丝状结构，它的组成也可能一直在变化。"
+      },
+      {
+        "en": "That exchange depends on the ATPase VPS4, which supports a model in which ATP-driven remodelling contributes to bridge constriction instead of simply cleaning up after cleavage.",
+        "zh": "这种交换依赖 ATP 酶 VPS4，支持了一个机制模型：ATP 驱动的重塑参与细胞间桥的收缩，也因此值得在切断之前测量 VPS4 的活性。"
+      },
+      {
+        "en": "The Aurora B–CHMP4C checkpoint addresses a separate question about timing: the cell can delay abscission when chromosome material or other problems at the bridge make immediate separation risky.",
+        "zh": "Aurora B–CHMP4C 检查点处理的是切断时机：当染色质残留在细胞间桥，或桥上出现其他问题时，细胞可延迟分离。"
+      },
+      {
+        "en": "One way to discriminate between competing models would be to track filament exchange, bridge diameter and the instant of severing in the same cell while perturbing VPS4 and CHMP4C separately.",
+        "zh": "一个可区分机制的后续实验是分别扰动 VPS4 和 CHMP4C，在同一个细胞里同步记录亚基交换、桥径和切断时刻，比较两种扰动究竟影响收缩过程还是切断时机。"
+      },
+      {
+        "en": "The review also discusses nuclear envelope sealing, where the shared need to close a membrane opening provides a useful comparison but does not establish that the recruitment sequence is identical.",
+        "zh": "综述还讨论了核膜孔洞的封闭，可利用两者共有的膜闭合需求比较机制，但仍需分别测量各蛋白的招募顺序。"
+      }
+    ]
+  },
+  "10.2174/1570159x14666160115130414": {
+    "sentences": [
+      {
+        "en": "The review describes two ways inflammation could alter treatment response: cytokine signalling may affect disease biology, and inflammation may change drug exposure through effects on metabolism and transport.",
+        "zh": "综述提出炎症影响治疗反应的两条路径：细胞因子信号可能改变疾病相关过程，炎症也可能通过影响代谢和转运，改变药物在体内的实际暴露。"
+      },
+      {
+        "en": "This distinction matters experimentally because an association between a cytokine and symptom change could reflect a different drug concentration rather than a direct effect on a depression-related pathway.",
+        "zh": "这一划分有实验意义：细胞因子与症状改善有关，可能是药物浓度变化造成的关联，也可能来自炎症信号对疾病通路的直接影响，需要测量暴露量才能区分。"
+      },
+      {
+        "en": "The infliximab study discussed in the review suggests a signal among participants with higher baseline C-reactive protein, making inflammatory status a candidate stratification variable for a future trial.",
+        "zh": "综述引用的英夫利西单抗试验在基线 C 反应蛋白较高的人群中提示了一个信号，因而炎症状态可以作为后续试验的候选分层变量。"
+      },
+      {
+        "en": "A subgroup signal needs independent prospective validation, with a prespecified biomarker cutoff and a test of whether treatment effects actually differ between strata.",
+        "zh": "亚组信号需要用独立的前瞻试验验证，事先规定标志物阈值，并检验不同层之间的治疗效应是否存在差异。"
+      },
+      {
+        "en": "The review puts chemically and pharmacologically dissimilar agents in the same discussion, so a positive result for one agent cannot be transferred directly to another with a different target or exposure profile.",
+        "zh": "综述将化学性质和药理特点各异的药物放在一起讨论，因此解读时需区分药物靶点、组织暴露和给药背景，一种药物的积极结果不能直接外推给另一种。"
+      },
+      {
+        "en": "A useful follow-up design would collect repeated measurements of inflammation, drug exposure and symptoms to establish whether biomarker changes precede the clinical response.",
+        "zh": "可在后续试验中反复测量炎症指标、药物暴露和症状评分，以判断标志物变化是否先于临床反应，并评估它能否提供比单次基线测量更可靠的信息。"
+      }
+    ]
+  },
+  "10.1093/burnst/tkag063": {
+    "sentences": [
+      {
+        "en": "The study combines single-cell profiling of scar tissue with perturbation experiments to separate the abundance of RUNX1-high POSTN-positive fibroblasts from the effects of RUNX1 within those cells.",
+        "zh": "研究将瘢痕组织单细胞分析与干预实验结合，分别判断高表达 RUNX1 的 POSTN 阳性成纤维细胞是否增多，以及 RUNX1 在这些细胞内具体调节了什么。"
+      },
+      {
+        "en": "The proposed mechanism has distinct branches: ATF4 is linked to stress adaptation and ferroptosis resistance, POSTN to activation and matrix remodelling, and MDK to paracrine effects on the vascular environment.",
+        "zh": "作者提出的机制包含不同分支：ATF4 关联应激适应和铁死亡抵抗，POSTN 关联细胞激活及基质重塑，MDK 则通过旁分泌作用影响血管微环境。"
+      },
+      {
+        "en": "Berberine was selected computationally as a candidate that might bind POSTN, then assessed in hypertrophic scar fibroblasts using proliferation, collagen gel contraction and markers of cellular stress.",
+        "zh": "小檗碱是计算筛选提出的潜在 POSTN 结合候选物，随后作者在增生性瘢痕成纤维细胞中检测了增殖、胶原凝胶收缩及细胞应激相关指标。"
+      },
+      {
+        "en": "In Figure 9, the cell viability assay gave an IC₅₀ of 90.87 μM, and the authors used 50 μM for subsequent mechanistic experiments.",
+        "zh": "图 9 的细胞活力测定给出 90.87 μM 的 IC₅₀，作者在随后的机制实验中使用 50 μM。"
+      },
+      {
+        "en": "RUNX1 overexpression partly restored proliferation and contraction after berberine treatment, which connects the phenotype to the pathway while leaving room for other molecular targets.",
+        "zh": "小檗碱处理后，过表达 RUNX1 可部分恢复增殖和凝胶收缩，这将表型与该通路联系起来，同时仍留下其他分子靶点参与的可能。"
+      },
+      {
+        "en": "A follow-up could combine a direct POSTN binding assay with a cellular target-dependence experiment, because the rabbit scar response and the docking prediction answer different questions.",
+        "zh": "后续可把 POSTN 直接结合测定与细胞靶点依赖性实验配套进行，因为兔耳瘢痕表型说明干预产生了体内效果，分子对接则仅提出可能的结合对象。"
+      }
+    ],
+    "corrections": {
+      "en": {
+        "thymol": "berberine"
+      },
+      "zh": {
+        "百里香酚": "小檗碱",
+        "翻译潜力": "转化潜力"
+      }
+    }
+  },
+  "10.1007/s10462-022-10306-1": {
+    "sentences": [
+      {
+        "en": "The review separates drug–target interaction prediction, drug similarity, response and adverse effects, which use different labels even when a compound occurs in all of the datasets.",
+        "zh": "综述将药物–靶点相互作用、药物相似性、用药反应及不良反应分开讨论，同一种化合物即使出现在所有数据集中，各任务要预测的标签也不同。"
+      },
+      {
+        "en": "A model that predicts a target interaction can help prioritize binding experiments, while a drug-response model additionally depends on the cellular or patient context in which the response was measured.",
+        "zh": "靶点相互作用模型可用来排定结合实验的优先级，而药物反应模型还依赖测量时的细胞背景或患者特征，因此训练数据中的上下文需要单独记录。"
+      },
+      {
+        "en": "When comparing models from the review, first inspect the split: a random split of drug–target pairs can put related compounds or repeated targets in both training and test sets.",
+        "zh": "比较综述中的模型时，可先查看数据集划分方式：随机划分药物–靶点配对可能让相近化合物或重复靶点同时出现在训练集与测试集。"
+      },
+      {
+        "en": "For a project on a new chemical series, a scaffold split probes extrapolation to new chemotypes, while a target-held-out split is more relevant when the intended application is a new protein family.",
+        "zh": "对一个新化学系列的研发项目，按分子骨架划分可检验模型对新化学型的外推能力，而需要迁移到新蛋白家族时，应考虑把整类目标靶点留在训练之外。"
+      },
+      {
+        "en": "An informative prospective comparison would fix the experimental budget and compare a simple similarity baseline with the deep model on the same set of untested molecules.",
+        "zh": "有说服力的前瞻比较可以固定实验预算，在同一批尚未测试的分子上比较简单相似性基线与深度模型，再用实际确认的命中数评价筛选收益。"
+      },
+      {
+        "en": "For a small laboratory, the useful deliverable is a reproducible shortlist with uncertainty and a defined assay, so model performance can be connected to a decision about which compounds to make or buy.",
+        "zh": "对于实验资源有限的团队，可把交付目标定为可复现的候选清单，附上不确定性与明确的验证方法，把模型表现与下一步合成或购买哪些分子的决定联系起来。"
+      }
+    ]
+  },
+  "10.1021/ci100244v": {
+    "sentences": [
+      {
+        "en": "NNScore converts a posed protein–ligand complex into 194 descriptors, including counts of atom-type contacts, so its output depends on the pose supplied by the docking pipeline.",
+        "zh": "NNScore 将给定构象的蛋白–配体复合物转为 194 个描述量，其中包括不同原子类型的接触计数，因此评分依赖对接流程提供的构象。"
+      },
+      {
+        "en": "Its training label divides complexes around a Kd of 25 μM, so the model score can be interpreted as a ranking signal for stronger binding under that training setup.",
+        "zh": "训练标签以 25 μM 的 Kd 为界区分结合较强和较弱的复合物，因此应把模型得分理解为这套训练设定下的强结合排序信号。"
+      },
+      {
+        "en": "The training collection contained more measured strong binders than measured weak binders, and the authors supplemented the weaker class with computationally generated docked complexes.",
+        "zh": "训练数据中实测强结合物多于实测弱结合物，作者使用计算对接生成的复合物补充弱结合类别，这种补充方式可能影响模型学到的区分特征。"
+      },
+      {
+        "en": "The best network reached 87.9% accuracy on its validation split, but a random split of complexes leaves open the question of performance on proteins and scaffolds absent from training.",
+        "zh": "表现最好的单个网络在当时的验证划分中达到 87.9% 准确率，但随机拆分复合物后，模型在训练中完全没见过的蛋白和分子骨架上表现如何，仍需额外验证。"
+      },
+      {
+        "en": "Figure 3 relates a smoothed network score to measured affinity, which is useful evidence for ranking but leaves compound-level affinity calibration as a separate test.",
+        "zh": "图 3 展示了平滑后的网络评分和实测亲和力之间的关系，这为排序提供依据，单个化合物的亲和力定量校准仍需单独测试。"
+      },
+      {
+        "en": "A useful modern re-evaluation would compare the original docking score and NNScore under identical poses, report enrichment among the compounds sent to assay, and split by protein family and scaffold.",
+        "zh": "现代复评可以在相同对接构象上比较原始对接评分与 NNScore，按蛋白家族和化学骨架划分数据，并报告送检候选中的活性分子富集程度。"
+      }
+    ]
+  },
+  "10.1021/ar500131v": {
+    "sentences": [
+      {
+        "en": "This account distinguishes total cross-linker content from the spatial distribution of cross-links, which helps explain why two microgels of similar hydrated size can deform differently.",
+        "zh": "这篇综述区分了交联剂总量与交联点在颗粒中的空间分布，这有助于解释为什么两种水合尺寸接近的微凝胶会呈现不同的形变能力。"
+      },
+      {
+        "en": "The authors discuss neutron-scattering evidence for a denser pNIPAm core and a softer periphery, consistent with the cross-linker reacting faster than the main monomer during synthesis.",
+        "zh": "作者讨论了中子散射支持的结构模型：pNIPAm 微凝胶的核心更致密、外围更柔软，这与合成时交联剂比主单体反应更快相符。"
+      },
+      {
+        "en": "Figure 4 compares deposited bare cores of 7 ± 1 nm in height with core–shell particles of 32 ± 5 nm and 30 ± 3 nm, showing why solution diameter alone is a poor proxy for spreading on glass.",
+        "zh": "图 4 中，沉积在玻璃上的裸核高度为 7 ± 1 nm，两种核壳颗粒则分别为 32 ± 5 nm 和 30 ± 3 nm，这说明仅用溶液中的粒径难以预测颗粒在表面的铺展。"
+      },
+      {
+        "en": "The review also describes how cleaving a degradable shell can increase spreading, illustrating a route to changing deformability after synthesis through network architecture.",
+        "zh": "综述还介绍了切断可降解壳层交联点后颗粒铺展增大的案例，说明借助网络结构设计，可以在合成之后继续调节微凝胶的形变能力。"
+      },
+      {
+        "en": "Pressure-driven passage through artificial pores is a useful mechanical comparison with rigid particles, while kidney clearance would also depend on biological barriers and particle fate in vivo.",
+        "zh": "通过人工孔道的压力驱动实验适合比较软颗粒和刚性颗粒的力学差异，实际肾清除还会受生理屏障和颗粒在体内去向的影响。"
+      },
+      {
+        "en": "For a delivery study, independently matching size and surface chemistry while varying shell cross-link density would help isolate mechanics from charge-dependent uptake or differences in drug loading.",
+        "zh": "设计载药实验时，可匹配粒径和表面化学，只改变壳层交联密度，并分别测量摄取与载药量，从而区分力学作用、表面电荷效应及载药差异。"
+      }
+    ]
+  },
+  "10.1021/jacs.5b02576": {
+    "sentences": [
+      {
+        "en": "The study simultaneously measures photoinduced absorption assigned to accumulated holes and photocurrent, linking the amount of reactive charge at the hematite surface to the rate readout.",
+        "zh": "研究同步测量归属于累积空穴的光诱导吸收信号和光电流，把赤铁矿表面参与反应的电荷积累与速率读数联系起来。"
+      },
+      {
+        "en": "The key comparison is made across hole populations under stepped illumination, so the relevant variable is the accumulated surface hole density and not simply the incoming light intensity.",
+        "zh": "关键比较是在阶跃照明下建立不同空穴积累水平，真正进入速率关系的是表面空穴密度，入射光强在这里是调控空穴积累的实验手段。"
+      },
+      {
+        "en": "Three analysis routes support a crossover from first-order to third-order behaviour as the accumulated hole population increases.",
+        "zh": "三种分析途径一致支持一个变化趋势：随着表面积累的空穴增多，水氧化对空穴密度的反应级数从一级转为三级。"
+      },
+      {
+        "en": "Water oxidation needs four holes overall to form an oxygen molecule, while the observed third-order dependence constrains the kinetically relevant steps under the conditions tested.",
+        "zh": "生成一个氧分子的水氧化总过程需要四个空穴，而实验中的三级依赖关系约束了该条件下决定速率的反应步骤，两者描述的是不同层面。"
+      },
+      {
+        "en": "The proposed mechanisms involve neighbouring oxidized surface sites, and the kinetic order narrows the possible mechanisms without uniquely identifying the oxygen–oxygen bond-forming intermediate.",
+        "zh": "候选机制涉及相邻的氧化表面位点，反应级数可以缩小机制范围，但单凭这项测量仍无法唯一确定形成氧–氧键的中间体。"
+      },
+      {
+        "en": "A follow-up could pair the same kinetic readout with surface-sensitive spectroscopy and oxygen quantification to test whether a proposed intermediate appears at the onset of the third-order regime.",
+        "zh": "后续可保留同样的动力学测量，同时加入表面敏感光谱和氧气定量，检验候选中间体是否恰好在进入三级动力学区间时出现。"
+      }
+    ]
+  },
+  "10.1021/acscentsci.7b00123": {
+    "sentences": [
+      {
+        "en": "The study changes the coordinating ability of the electrolyte to control which sulfur intermediates are stabilized in solution, a variable distinct from the total volume of electrolyte used.",
+        "zh": "研究通过改变电解液的配位和溶剂化能力，控制哪些硫中间体能够在溶液中稳定存在，这与单纯改变电解液总用量是两个不同变量。"
+      },
+      {
+        "en": "In the weakly solvating formulation, intermediate- and short-chain polysulfides appear early in discharge and disproportionation then yields crystalline Li₂S alongside a limited soluble fraction.",
+        "zh": "在弱溶剂化配方中，放电早期会出现中等链长和短链多硫化物，随后歧化生成晶态 Li₂S，同时保留少量可溶物种。"
+      },
+      {
+        "en": "That soluble fraction is reduced later in discharge, so the practical mechanism still allows some dissolution even though it reduces the role of freely solvated intermediates.",
+        "zh": "这部分可溶物种会在后续放电中继续还原，说明该反应路线仍允许有限溶解，只是降低了充分溶剂化中间体在反应中的作用。"
+      },
+      {
+        "en": "At room temperature the studied electrolyte showed substantial polarization, whereas warming promoted the solubility of key intermediates and improved the balance between transport and sulfur utilization.",
+        "zh": "所研究的电解液在室温下出现明显极化，而适当升温促进关键中间体溶解，有助于改善传质与硫利用率之间的平衡。"
+      },
+      {
+        "en": "A practical test would compare formulations at matched sulfur loading and electrolyte-to-sulfur ratio, recording polarization and usable capacity over a temperature range.",
+        "zh": "面向实用的验证可在相同硫负载和电解液与硫用量比下比较配方，测量不同温度下的极化与可用容量，以区分配方优势和测试条件带来的影响。"
+      },
+      {
+        "en": "The lithium-metal anode needs a separate compatibility assessment because a favorable sulfur conversion pathway alone leaves questions about crossover, interphase stability and cycle life.",
+        "zh": "锂金属负极还需单独评估相容性，因为改善硫转化路径后，仍需测量多硫化物跨界迁移、负极界面稳定性及循环寿命。"
+      }
+    ]
+  },
+  "10.1016/j.apmt.2022.101473": {
+    "sentences": [
+      {
+        "en": "This review follows the process from electrospun nanofibres to continuous yarns and then to textiles, identifying a distinct set of design choices at each scale.",
+        "zh": "这篇综述从静电纺纳米纤维讲到连续纱线，再讲到织物，分别梳理纤维、纱线和织物三个尺度上的设计变量。"
+      },
+      {
+        "en": "A wet-collection example uses a coagulation bath, a guide and a take-up cylinder, which makes fibre collection and continuous winding distinct parts of the manufacturing process.",
+        "zh": "其中的湿法收集示例使用凝固浴、导向部件和收卷筒，把纤维聚集与连续牵引收卷作为两个可分别调节的工艺环节。"
+      },
+      {
+        "en": "Dynamic liquid collection can introduce twist, but the cited routes still face problems such as yarn breakage, poor twist control and restrictions on polymers compatible with a water bath.",
+        "zh": "动态液体收集能够引入捻度，但综述引用的路线仍面临断纱、捻度难控，以及水浴条件对可选聚合物范围的限制。"
+      },
+      {
+        "en": "Once yarn is incorporated into a textile, the arrangement of yarns changes pore connectivity and anisotropy, so a tensile test on an isolated dry yarn cannot fully characterize a hydrated scaffold.",
+        "zh": "将纱线加工成织物后，纱线排列会改变孔隙连通性和各向异性，因此单根干态纱线的拉伸测试不足以描述水合支架的整体表现。"
+      },
+      {
+        "en": "For a tissue engineering comparison, keeping fibre chemistry fixed while changing twist or textile architecture would help identify which structural variable governs directional cell organization.",
+        "zh": "在组织工程比较实验中，可以固定纤维化学组成，只改变捻度或织物架构，观察哪一项结构变量最能解释细胞的定向组织。"
+      },
+      {
+        "en": "Before moving toward a biomedical product, a useful verification set would include hydrated mechanics, pore structure after sterilization and batch-to-batch reproducibility of the yarn.",
+        "zh": "面向生物医用产品时，可进一步验证水合力学性能、灭菌后的孔隙结构和纱线批间重现性，以判断实验室工艺能否稳定转移到实际制造。"
+      }
+    ]
+  },
+  "10.1039/d5ra09833e": {
+    "sentences": [
+      {
+        "en": "The review uses efficiency, stability, scalability and cost as a common framework for comparing photoelectrochemical cells, dye-sensitized solar cells and artificial photosynthesis.",
+        "zh": "综述以效率、稳定性、可放大性和成本为共同框架，比较光电化学电池、染料敏化太阳能电池与人工光合作用。"
+      },
+      {
+        "en": "These platforms deliver different outputs, so an electrical conversion efficiency and a solar-to-hydrogen efficiency need to be interpreted against their own system boundaries.",
+        "zh": "这些平台提供的输出不同，电能转换效率和太阳能制氢效率必须结合各自的系统边界解读，不能只比较两个百分比的大小。"
+      },
+      {
+        "en": "The molecular design discussion connects excited-state lifetime and charge transfer to device-level requirements, where interfaces must extract charges before they recombine.",
+        "zh": "分子设计部分把激发态寿命与电荷转移联系到器件要求：界面要在电荷复合之前及时提取它们，分子层面的改进才可能传递到整个器件。"
+      },
+      {
+        "en": "Earth-abundant catalysts may improve the materials supply outlook, but device durability also depends on support layers, interfaces and operating conditions.",
+        "zh": "使用地球丰度较高元素的催化剂有望改善原材料供给，但器件的使用寿命还取决于支撑层、界面状态与运行条件。"
+      },
+      {
+        "en": "A useful device comparison would disclose illuminated area, operating duration and whether external bias is required, then compare performance after ageing under the same conditions.",
+        "zh": "有可比性的器件实验应交代光照面积、运行时长和是否需要外加偏压，并在相同条件下测量老化后的性能，避免仅凭初始效率做判断。"
+      },
+      {
+        "en": "The editorial implication is to validate an integrated device in stages, measuring charge separation, product formation and durability separately so a gain in one metric can be traced to its actual source.",
+        "zh": "我的归纳是，应分阶段验证集成器件，分别测量电荷分离、产物形成和耐久性，从而查清某项指标的提高来自分子催化、界面工程还是器件条件。"
+      }
+    ]
+  }
+}

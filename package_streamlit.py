@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parent
 OUTPUT=ROOT/'dist'/'streamlit-reader'
 SOURCE_FILES=('app.py','app_branding.py','reading_library.py','reading_view.py','paper_library.py','reading_policy.py','cloud_bundle.py',
               'paper_classification.py','reviewed_classifications.json',
-              'bilingual_mail.py','reviewed_sentence_translations.json','author_roles.py','chemical_typography.py',
+              'bilingual_mail.py','reviewed_sentence_translations.json','reading_depth_notes.json','author_roles.py','chemical_typography.py',
               'requirements.txt','institution_names.json','department_names.json',
               'affiliation_countries.json')
 

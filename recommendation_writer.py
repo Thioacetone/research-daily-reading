@@ -114,7 +114,7 @@ class DeepReadingWriter:
         from affiliation_sources import units_complete
         if not units_complete(item):return self.reject('affiliation_detail_or_country')
         units=display_unit_names(item)
-        key=VERSION+'original-evidence-subject-v9'+item['doi']+item['fulltext_sha256']+json.dumps(units)
+        key=VERSION+'original-evidence-depth-v10'+item['doi']+item['fulltext_sha256']+json.dumps(units)
         cache=self.directory/(hashlib.sha256(key.encode()).hexdigest()+'.json')
         if cache.exists():
             try:result=json.loads(cache.read_text(encoding='utf-8'))
@@ -228,20 +228,20 @@ class DeepReadingWriter:
         if not classification_ready(result):return self.reject('classification_evidence_incomplete')
         result['institutions_zh']=checked_unit_translations(units,translated_units(header))
         instructions={
-            'action':'用650至900字分3至5段深入介绍：问题背景、关键设计、方法与结果、结论实际能支持什么。写成自洽的解读，不翻译摘要。研究论文交代关键对照，综述交代组织框架、不同证据的关系和争议。',
-            'research_logic':'用250至350字分析作者怎样提出假说、逐步验证及排除替代解释；综述分析怎样组织和比较证据。解释每一步为何必要。',
-            'own_synthesis':'用180至250字写编辑的综合解读，以“我的归纳是”开头。不要再次复述研究结果；提炼至少一个可迁移的实验设计或机制判断原则，说明它能用于什么其他问题以及适用边界。明确为编辑归纳，不能冒充作者结论。',
-            'selection_reason':'用300至400字充分说明推荐理由及对应标准，联系具体设计、机制或发现，解释怎样超越常规流水线工作，不凭期刊判定优秀、不虚构全球首次。',
-            'application_prospects':'用150至220字说明本文在其真实化学分支中的应用前景、实现条件和约束。可以是合成、检测、催化、材料、能源、环境、医药或交叉应用；不把普通化学工作强行套入药物或抑郁症。只有原文支持时才联系治疗，动物结果不能当作人体疗效。',
-            'future_directions':'用180至250字提出直接联系本文、可检验的未来问题与后续实验或计算设计；明确为编辑展望，不能声称作者已完成。'}
+            'action':'用950至1250字分4至6段详解研究问题、系统与变量、读数与对照、关键结果及结论边界。研究论文至少拆解两组不同的实验、图表或计算结果，说明每组比较了什么、观察到什么，以及结果如何支持主张；有明确数值时交代其对照和条件。综述分别介绍核心机制、代表性实例与证据分歧，注明实验属于被引用的研究。',
+            'research_logic':'用430至560字重建证据链。说明关键对照排除了什么，独立读数是否互相支持，哪种解释仍然成立。综述应比较不同证据的前提及可比性。',
+            'own_synthesis':'用300至420字写编辑的综合解读，以“我的归纳是”开头。提炼可迁移的实验设计原则，具体说明迁移时应保留的对照、需要重新验证的条件，以及最容易误判的环节。',
+            'selection_reason':'用400至520字说明推荐理由及对应标准，结合实际对照、机制或方法，比较论文解决的问题与此前方法的瓶颈，并指出创新的适用范围。',
+            'application_prospects':'用260至360字说明真实应用、实现条件、可衡量的性能指标及验证缺口。区分实验室演示、工程应用与临床证据，不把动物结果解释为人体疗效。',
+            'future_directions':'用320至430字提出两个互补的后续问题，分别写明比较对象、测量指标和何种结果会推翻原假说。明确这是编辑提出的方案。'}
         grounded=('WRITE THE text FIELD IN SIMPLIFIED CHINESE, not English. '
                   '必须用简体中文撰写完整正文，不能输出英文段落；仅化学式、人名和必要的专业术语可以保留英文。'
                   '只依据提供的全文段落，不添加事实、数字或临床疗效。区分实验、理论、综述引用和编辑判断。未找到事实应省略，不能凑字。')
-        minimums={'action':450,'research_logic':160,'own_synthesis':100,'selection_reason':200,
-                  'application_prospects':80,'future_directions':100}
+        minimums={'action':750,'research_logic':350,'own_synthesis':250,'selection_reason':320,
+                  'application_prospects':200,'future_directions':250}
         for key in NARRATIVES:
             def check_narrative(response):
-                issue=references(response)
+                issue=references(response,3 if key=='action' else 2 if key=='research_logic' else 1)
                 if issue:return issue
                 value=response.get('text','')
                 value=value.replace('\\n\\n','\n\n')
@@ -257,8 +257,8 @@ class DeepReadingWriter:
                 if missing:return '删除未被所提供原文支持的数字或编号：'+', '.join(sorted(missing))+'；不要为替代数字编造新的事实'
                 if not grounded_narrative(source,value):return '中文分析需要纯正文，去掉模型标记或代码围栏，长度不得超过3500字符'
                 return ''
-            response=stage(key,grounded+instructions[key]+' 同时输出支撑这段分析的evidence_ids。',source,
-                           {'text':{'type':'string'},'evidence_ids':reference_schema},2400 if key=='action' else 1300,check_narrative)
+            response=stage(key,grounded+instructions[key]+' 同时输出支撑这段分析的evidence_ids；内容概括至少引用三个不同的正文段落，证据链至少引用两个。',source,
+                           {'text':{'type':'string'},'evidence_ids':reference_schema},3400 if key=='action' else 1900,check_narrative)
             if response is None:return None
             result[key]=response['text']
         if not complete_item(result):
