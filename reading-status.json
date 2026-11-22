@@ -1,10 +1,10 @@
 {
-  "checked_at": "2026-11-22T23:41:44.327547+08:00",
-  "today": "2026-11-22",
+  "checked_at": "2026-11-23T02:46:56.017290+08:00",
+  "today": "2026-11-23",
   "today_ready": false,
   "published_now": [],
   "next_pending": {
-    "day": "2026-11-22",
+    "day": "2026-11-23",
     "run": "true",
     "generate": "true",
     "lanes": "[\"cadd-aidd\", \"drug-discovery\", \"neuropharmacology\", \"interdisciplinary\"]",
